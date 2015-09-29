@@ -4,10 +4,16 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.gwt.uibinder.UiBinder"/>
 	<inherits name="org.gwtbootstrap3.GwtBootstrap3Theme" />
+	
+	<source path="client" />
 	<public path='resource'>
 		<include name='css/*.css' />
 		<include name='js/*.js' />
 	</public>
-	<source path="client" />
+
+    <!--Add these style sheets last so that they are the most important!-->
+	<!-- 
+	<stylesheet src="css/main2.css"/>
+	 -->
 	<entry-point class="com.agritap.sisintegracao.client.MainApp"></entry-point>
 </module>
