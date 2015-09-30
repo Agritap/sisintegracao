@@ -18,4 +18,6 @@ public class BarracaoAlojamento {
 	private BigDecimal pesoAlojado;
 
 	private List<OrigemAlojamento> origens;
+	
+	private Barracao barracao;
 }
