@@ -37,5 +37,7 @@ public class Lote {
 	
 	private BigDecimal pesoMedioAlojado;
 	
+	private BigDecimal idadeMediaAlojada;
+	
 	private SexoLote sexo;
 }
