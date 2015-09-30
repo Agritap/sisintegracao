@@ -10,7 +10,7 @@
 	<b:Navbar >
 	
 		<b:NavbarHeader>
-		    <b:NavbarBrand>Brand</b:NavbarBrand>
+		    <b:NavbarBrand ui:field="rotuloPrincipal">Sisintegracao</b:NavbarBrand>
 		    <b:NavbarCollapseButton dataTarget="#navbar-collapse"/>
 	  </b:NavbarHeader>
 	<b:NavbarCollapse b:id="navbar-collapse">
