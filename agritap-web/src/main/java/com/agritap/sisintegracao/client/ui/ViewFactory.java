@@ -1,7 +1,7 @@
 package com.agritap.sisintegracao.client.ui;
 
-import com.agritap.sisintegracao.client.Sample;
 import com.agritap.sisintegracao.client.ViewEnum;
+import com.agritap.sisintegracao.client.ui.configuracao.ConfiguracaoLote;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 
@@ -32,19 +32,30 @@ public class ViewFactory {
 		if(view==null){
 			view=ViewEnum.INICIAL;
 		}
-		return openView(view);
+		StateHistory st = new StateHistory();
+		st.setView(view);
+		return openView(st);
 	}
 
-	private Composite openView(ViewEnum view) {
+	public MainWindow getMainWindow(){
+		if(mainWindow==null){
+			mainWindow=new MainWindow();
+		}
+		return mainWindow;
+	}
+
+	public Composite openView(StateHistory st) {
+		ViewEnum view = st.getView();
+		History.newItem(view.getUrl());
 		if(view.equals(ViewEnum.INICIAL)){
-			MainWindow mw = new MainWindow();
+			return getMainWindow();
+		}
+		MainWindow mw = getMainWindow();
+		if(view.equals(ViewEnum.CONFIGURACAO_LOTE)){
+			mw.addConteudo(new ConfiguracaoLote());
 			return mw;
 		}
-		if(view.equals(ViewEnum.INICIAL)){
-			Sample sample = new Sample();
-			return sample;
-		}
-		return openView(ViewEnum.ERRO);
+		return null;
 	}
 
 }

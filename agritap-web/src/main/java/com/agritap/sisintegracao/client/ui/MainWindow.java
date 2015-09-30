@@ -1,15 +1,14 @@
 package com.agritap.sisintegracao.client.ui;
 
-import org.gwtbootstrap3.client.ui.AnchorListItem;
-import org.gwtbootstrap3.client.ui.Container;
-import org.gwtbootstrap3.client.ui.Navbar;
-
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -18,29 +17,40 @@ public class MainWindow extends Composite  {
 	private static MainWindowUiBinder uiBinder = GWT.create(MainWindowUiBinder.class);
 
 	@UiField
-	AnchorListItem botao1;
+	SimplePanel conteudo;
+	
 	@UiField
-	Navbar navBarLateral;
-	@UiField
-	Navbar navBarTopo;
-	@UiField
-	SimplePanel corpo;
-	@UiField
-	Container containerGeral;
+	HTMLPanel sideBarMenu;
+	
 	interface MainWindowUiBinder extends UiBinder<Widget, MainWindow> {
+	}
+	
+	public void addConteudo(IsWidget w){
+		conteudo.clear();
+		conteudo.add(w);
 	}
 
 	public MainWindow() {
 		initWidget(uiBinder.createAndBindUi(this));
-		navBarTopo.addStyleName("nav-bar-topo");
-		navBarLateral.addStyleName("nav-bar-lateral");
-		containerGeral.addStyleName("container-geral");
+		conteudo.add(new LoginWindow());
+		sideBarMenu.add(new SideBarMenu());
+		History.addValueChangeHandler(new ValueChangeHandler<String>() {
+			
+			@Override
+			public void onValueChange(ValueChangeEvent<String> event) {
+				System.out.println(event.getValue());
+			}
+		});
+//		ScriptInjector.fromUrl("http://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.2.0/metisMenu.min.js")
+//		.setWindow(ScriptInjector.TOP_WINDOW)
+//		.inject();
+//		ScriptInjector.fromString(SisIntegracaoClientBundle.INSTANCE.sbAdmin2().getText())
+//        .setWindow(ScriptInjector.TOP_WINDOW)
+//        .inject();
+
+//		navBarTopo.addStyleName("navbar-static-top");
+//		sidebar.addStyleName("sidebar");
 	}
 	
-	@UiHandler("botao1")
-	public void onBota1Click(ClickEvent evt){
-		GWT.log("botao111");
-		corpo.add(new LoginWindow());
-	}
 
 }

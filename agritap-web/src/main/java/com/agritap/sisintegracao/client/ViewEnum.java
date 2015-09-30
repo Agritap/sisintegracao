@@ -2,7 +2,7 @@ package com.agritap.sisintegracao.client;
 
 public enum ViewEnum {
 
-	LOGIN("/login"),INICIAL("/inicial"),ERRO("/erro");
+	LOGIN("/login"),INICIAL("/inicial"),ERRO("/erro"),CONFIGURACAO_LOTE("/configuracaoLote");
 
 	public String url;
 	
