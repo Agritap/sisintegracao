@@ -19,9 +19,21 @@
 		                </ul>
                         <li >
                         	<g:Anchor><i class="fa fa-heartbeat fa-fw"></i> Controle de Mortalidade</g:Anchor>
+                        	
+                        	<ul class="sub-menu collapse" id="controle-mortalidade-collapse">
+		                    <li><a href="#">Morte no dia</a></li>
+		                    <li><a href="#">Morte na semana</a></li>
+		                    <li><a href="#">Morte no mês</a></li>
+		                </ul>
                         </li>
-                        <li >
+                        <li>
                         	<g:Anchor><i class="fa fa-table fa-fw"></i> Agenda</g:Anchor>
+                        	<ul class="sub-menu collapse" id="agenda-collapse">
+		                    <li><a href="#">Data de entrega</a></li>
+		                    <li><a href="#">Data de saida</a></li>
+		                    <li><a href="#">Data de reposição no lote</a></li>
+		                </ul>
+                        	
                         </li>
                         <li data-toggle="collapse" data-target="#controle-resultado-collapse" class="collapsed active">
                         	<g:Anchor><i class="fa fa-money fa-fw"></i> Resultado	 <span class="fa arrow"></span></g:Anchor>
