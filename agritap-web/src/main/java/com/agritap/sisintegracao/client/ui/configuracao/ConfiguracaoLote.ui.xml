@@ -15,7 +15,7 @@
 				    <b:Form>
 						  <b:FieldSet>
 						    <b:FormGroup>
-						      <b:FormLabel for="formProdutor">Produtor2</b:FormLabel>
+						      <b:FormLabel for="formProdutor">Produtor</b:FormLabel>
 						      <b:FormControlStatic b:id="formProdutor">Jose (pego a partir do usuario logado)</b:FormControlStatic>
 						    </b:FormGroup>
 						
@@ -39,7 +39,7 @@
 						      <b:FormLabel for="formQuantidade">Sexo</b:FormLabel>
 						      <b:TextBox placeholder="Número de animais alojados" b:id="formQuantidade"/>
 						    </b:FormGroup>
-						    <b:Button>Send</b:Button>
+						    <b:Button>Enviar</b:Button>
 						  </b:FieldSet>
 						</b:Form>
   				</b:PanelBody>
