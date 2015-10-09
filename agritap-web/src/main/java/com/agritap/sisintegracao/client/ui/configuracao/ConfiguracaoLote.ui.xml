@@ -16,7 +16,7 @@
 						  <b:FieldSet>
 						    <b:FormGroup>
 						      <b:FormLabel for="formProdutor">Produtor2</b:FormLabel>
-						      <b:FormControlStatic b:id="formProdutor">Ze Ruela (pego a partir do usuario logado)</b:FormControlStatic>
+						      <b:FormControlStatic b:id="formProdutor">Jose (pego a partir do usuario logado)</b:FormControlStatic>
 						    </b:FormGroup>
 						
 						    <b:FormGroup>

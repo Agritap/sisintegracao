@@ -17,9 +17,11 @@
 		                    <li><a href="#">Pedidos</a></li>
 		                    <li><a href="#">Recebimento</a></li>
 		                </ul>
-                        <li >
-                        	<g:Anchor><i class="fa fa-heartbeat fa-fw"></i> Controle de Mortalidade</g:Anchor>
-                        	
+                        <li>
+                        
+                         <li data-toggle="collapse" data-target="#controle-mortalidade-collapse" class="collapsed active">
+                        	<g:Anchor><i class="fa fa-heartbeat fa-fw"></i> Controle de mortalidade <span class="fa arrow"></span></g:Anchor>
+                        	</li>
                         	<ul class="sub-menu collapse" id="controle-mortalidade-collapse">
 		                    <li><a href="#">Morte no dia</a></li>
 		                    <li><a href="#">Morte na semana</a></li>
@@ -27,16 +29,21 @@
 		                </ul>
                         </li>
                         <li>
-                        	<g:Anchor><i class="fa fa-table fa-fw"></i> Agenda</g:Anchor>
-                        	<ul class="sub-menu collapse" id="agenda-collapse">
+                        <li data-toggle="collapse" data-target="#controle-agenda-collapse" class="collapsed active">
+                        	<g:Anchor><i class="fa fa-table fa-fw"></i> Agenda <span class="fa arrow"></span></g:Anchor>
+                        	</li>
+                        	<ul class="sub-menu collapse" id="controle-agenda-collapse">
 		                    <li><a href="#">Data de entrega</a></li>
 		                    <li><a href="#">Data de saida</a></li>
 		                    <li><a href="#">Data de reposição no lote</a></li>
+		                    
 		                </ul>
                         	
                         </li>
+                        
+                        
                         <li data-toggle="collapse" data-target="#controle-resultado-collapse" class="collapsed active">
-                        	<g:Anchor><i class="fa fa-money fa-fw"></i> Resultado	 <span class="fa arrow"></span></g:Anchor>
+                        	<g:Anchor><i class="fa fa-money fa-fw"></i> Resultado<span class="fa arrow"></span></g:Anchor>
                         </li>
 		                <ul class="sub-menu collapse" id="controle-resultado-collapse">
 		                    <li><a href="#">Simulação</a></li>
