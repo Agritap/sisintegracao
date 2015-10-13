@@ -17,6 +17,8 @@ public class SideBarMenu extends Composite  {
 
 	@UiField
 	Anchor configuracaoLote;
+	Anchor controleMortalidade;
+
 	
 	interface SideBarUiBinder extends UiBinder<Widget, SideBarMenu> {
 	}
@@ -33,4 +35,14 @@ public class SideBarMenu extends Composite  {
 		ViewFactory vf = ViewFactory.getInstance();
 		vf.openView(state);
 	}
+	
+	@UiHandler("controleMortalidade")
+	public void controleMortalidadeClick(ClickEvent evt){
+		ViewEnum v = ViewEnum.CONTROLE_MORTALIDADE;
+		StateHistory state = new StateHistory(v);
+		ViewFactory vf = ViewFactory.getInstance();
+		vf.openView(state);
+	}	
+	
 }
+

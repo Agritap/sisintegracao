@@ -3,7 +3,9 @@
 <module rename-to='sisintegracao'>
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.gwt.uibinder.UiBinder"/>
-	<inherits name="org.gwtbootstrap3.GwtBootstrap3" />
+	<inherits name="org.gwtbootstrap3.GwtBootstrap3" />´
+	<inherits name="org.gwtbootstrap3.extras.datepicker.DatePicker"/>
+
 	
 	<source path="client" />
 	<inherits name="com.agritap.sisintegracao.client.Resources" />
@@ -14,3 +16,5 @@
 	 -->
 	<entry-point class="com.agritap.sisintegracao.client.MainApp"></entry-point>
 </module>
+
+
