@@ -24,5 +24,4 @@ public class MainApp implements EntryPoint {
 //		}
 		RootPanel.get().add(c);
 	}
-
 }

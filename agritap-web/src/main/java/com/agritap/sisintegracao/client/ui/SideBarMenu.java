@@ -18,6 +18,8 @@ public class SideBarMenu extends Composite  {
 	@UiField
 	Anchor configuracaoLote;
 	Anchor controleMortalidade;
+	Anchor reposicaoLote;
+	
 
 	
 	interface SideBarUiBinder extends UiBinder<Widget, SideBarMenu> {
@@ -43,6 +45,13 @@ public class SideBarMenu extends Composite  {
 		ViewFactory vf = ViewFactory.getInstance();
 		vf.openView(state);
 	}	
+	@UiHandler("reposicaoLote")
+	public void reposicaoLoteClick(ClickEvent evt){
+		ViewEnum v = ViewEnum.REPOSICAO_LOTE;
+		StateHistory state = new StateHistory(v);
+		ViewFactory vf = ViewFactory.getInstance();
+		vf.openView(state);
+	}
 	
 }
 

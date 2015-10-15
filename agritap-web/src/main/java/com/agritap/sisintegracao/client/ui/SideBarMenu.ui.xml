@@ -37,14 +37,13 @@
                         	<g:Anchor><i class="fa fa-table fa-fw"></i> Agenda <span class="fa arrow"></span></g:Anchor>
                         	</li>
                         	<ul class="sub-menu collapse" id="controle-agenda-collapse">
-		                    <li><a href="#">Reposição do lote</a></li>
+		                    <li><g:Anchor ui:field="reposicaoLote">Reposição do lote</g:Anchor></li>
 		                    <li><a href="#">Vacinação</a></li>
 		                    <li><a href="#">Visitações</a></li>
 		                    <li><a href="#">Eventos</a></li>
-
 		                    <li><a href="#">Data de entrega</a></li>
 		                    <li><a href="#">Data de saida</a></li>
-		                    <li><a href="#">Data de reposição no lote</a></li>
+		                    
 		                    
 		                </ul>
                         	

@@ -20,7 +20,7 @@
       <b:AnchorListItem>Item 3</b:AnchorListItem>
 
       <b:ListDropDown>
-        <b:AnchorButton dataToggle="DROPDOWN">Dropdown</b:AnchorButton>
+        <b:AnchorButton dataToggle="DROPDOWN">Menu</b:AnchorButton>
         <b:DropDownMenu>
           <b:AnchorListItem>Dropdown 1</b:AnchorListItem>
           <b:AnchorListItem>Dropdown 2</b:AnchorListItem>

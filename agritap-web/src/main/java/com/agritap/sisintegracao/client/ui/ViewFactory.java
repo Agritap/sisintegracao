@@ -3,6 +3,7 @@ package com.agritap.sisintegracao.client.ui;
 import com.agritap.sisintegracao.client.ViewEnum;
 import com.agritap.sisintegracao.client.ui.configuracao.ConfiguracaoLote;
 import com.agritap.sisintegracao.client.ui.configuracao.ControleMortalidade;
+import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 
@@ -60,6 +61,12 @@ public class ViewFactory {
 		if(view.equals(ViewEnum.CONTROLE_MORTALIDADE)){
 			mwcm.addConteudo(new ControleMortalidade());
 			return mwcm;
+		}
+		
+		MainWindow mwc = getMainWindow ();
+		if(view.equals(ViewEnum.REPOSICAO_LOTE)){
+			mwcm.addConteudo(new ReposicaoLote());
+			return mwc;
 		}
 		
 		return null;
