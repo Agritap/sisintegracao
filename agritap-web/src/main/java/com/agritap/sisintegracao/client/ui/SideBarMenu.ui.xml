@@ -9,6 +9,7 @@
                         <li >
                         	<g:Anchor ui:field="configuracaoLote"><i class="fa fa-wrench fa-fw"></i> Configuração do Lote</g:Anchor>
                         </li>
+                        
                         <li data-toggle="collapse" data-target="#controle-racao-collapse" class="collapsed active">
                         	<g:Anchor><i class="fa fa-truck fa-fw"></i> Controle de Ração <span class="fa arrow"></span></g:Anchor>
                         </li>
@@ -17,6 +18,9 @@
 		                    <li><a href="#">Pedidos</a></li>
 		                    <li><a href="#">Recebimento</a></li>
 		                </ul>
+		                <li >
+                        	<g:Anchor ui:field="controleMortalidade"><i class="fa fa-wrench fa-fw"></i> Controle de Mortalidade</g:Anchor>
+                        </li>
                         <li>
                         
                          <li data-toggle="collapse" data-target="#controle-mortalidade-collapse" class="collapsed active">
@@ -33,9 +37,13 @@
                         	<g:Anchor><i class="fa fa-table fa-fw"></i> Agenda <span class="fa arrow"></span></g:Anchor>
                         	</li>
                         	<ul class="sub-menu collapse" id="controle-agenda-collapse">
+		                    <li><g:Anchor ui:field="reposicaoLote">Reposição do lote</g:Anchor></li>
+		                    <li><a href="#">Vacinação</a></li>
+		                    <li><a href="#">Visitações</a></li>
+		                    <li><a href="#">Eventos</a></li>
 		                    <li><a href="#">Data de entrega</a></li>
 		                    <li><a href="#">Data de saida</a></li>
-		                    <li><a href="#">Data de reposição no lote</a></li>
+		                    
 		                    
 		                </ul>
                         	
