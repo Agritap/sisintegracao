@@ -72,7 +72,7 @@
 		</b:Column>
 		
 		<b:Column size="XS_12">
-			    	<b:Button>Send</b:Button>
+			    	<b:Button>Confirmar</b:Button>
 	    			</b:Column>
 		
 	</b:Row>

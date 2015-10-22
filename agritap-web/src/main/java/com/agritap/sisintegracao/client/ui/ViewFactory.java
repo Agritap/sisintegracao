@@ -4,6 +4,7 @@ import com.agritap.sisintegracao.client.ViewEnum;
 import com.agritap.sisintegracao.client.ui.configuracao.ConfiguracaoLote;
 import com.agritap.sisintegracao.client.ui.configuracao.ControleMortalidade;
 import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;
+import com.agritap.sisintegracao.client.ui.configuracao.VacinacaoAnimais;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 
@@ -65,8 +66,15 @@ public class ViewFactory {
 		
 		MainWindow mwc = getMainWindow ();
 		if(view.equals(ViewEnum.REPOSICAO_LOTE)){
-			mwcm.addConteudo(new ReposicaoLote());
+			mwc.addConteudo(new ReposicaoLote());
 			return mwc;
+		}
+		
+
+		MainWindow mwcy = getMainWindow ();
+		if(view.equals(ViewEnum.VACINACAO_ANIMAIS)){
+			mwcy.addConteudo(new VacinacaoAnimais());
+			return mwcy;
 		}
 		
 		return null;

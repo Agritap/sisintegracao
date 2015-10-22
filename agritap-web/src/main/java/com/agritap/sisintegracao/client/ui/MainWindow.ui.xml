@@ -6,6 +6,8 @@
 		<div id="wrapper">
 
 			<!-- Navigation -->
+			<nav class="navbar navbar-inverse">
+</nav>
 			<nav class="navbar navbar-default navbar-static-top" role="navigation"
 				style="margin-bottom: 0">
 				<div class="navbar-header">
@@ -16,7 +18,9 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<g:Anchor styleName="navbar-brand">Sis Integração</g:Anchor>
+					<g:Anchor styleName="navbar-brand">Integration System</g:Anchor>
+					
+					
 				</div>
 				<!-- /.navbar-header -->
 

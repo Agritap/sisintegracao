@@ -8,20 +8,20 @@
 
 	<b:Row>
 		<b:Column size="XS_12">
-				<b:Heading size="H1" styleName="page-header" text="Reposição Lote" />
+				<b:Heading size="H1" styleName="page-header" text="Vacinação dos animais" />
 			<b:Panel >
 				<b:PanelBody>
 				    <b:Form>
 						<b:FieldSet>
 						    <b:FormGroup>
 						      <b:FormLabel for="formProdutor">Produtor</b:FormLabel>
-						      <b:FormControlStatic b:id="formProdutor">Chaves (pego a partir do usuario logado)</b:FormControlStatic>
+						      <b:FormControlStatic b:id="formProdutor">Mauro (pego a partir do usuario logado)</b:FormControlStatic>
 					        </b:FormGroup>
 					        
 					        
 						
 						    <b:FormGroup>  
-						      <b:FormLabel for="formQuantidade"> Data da reposição </b:FormLabel>
+						      <b:FormLabel for="formQuantidade"> Data da Vacinação </b:FormLabel>
 		                      <b2:DatePicker autoClose="true"/>
                               <b:Modal title="DatePicker in Modal" closable="true" fade="true" dataBackdrop="STATIC" dataKeyboard="true" b:id="myModal" ui:field="modal1">  
                               <b:ModalBody>
@@ -36,20 +36,13 @@
 						     
 						     
 						     <b:FormGroup>
-						      <b:FormLabel for="formQuantidade"> Quantidade de ração </b:FormLabel>					    
-						        <b:ButtonGroup>
-                                <b:Button dataToggle="DROPDOWN"> Quilograma </b:Button>
-                                  <b:DropDownMenu>
-                                   <b:AnchorListItem> 50 Quilos </b:AnchorListItem>
-                                   <b:AnchorListItem> 100 Quilos </b:AnchorListItem>
-                                   <b:AnchorListItem> 200 Quilos </b:AnchorListItem>
-                                  </b:DropDownMenu>
-                                </b:ButtonGroup>
+						      <b:FormLabel for="formQuantidade"> Quantidade de animais que serão vacinados</b:FormLabel>	
+						      			
+						      <b:TextBox placeholder="" b:id="formQuantidade">  </b:TextBox>
                             </b:FormGroup>
                             
 						    <b:FormGroup> 
-						      <b:FormLabel for="formQuantidade"> Quantidade Extra </b:FormLabel>
-						      <b:TextBox placeholder="" b:id="formQuantidade"> Digite quanto irá colocar no lote. </b:TextBox>
+						      
 						      
 						      
 						      
@@ -64,7 +57,6 @@
           </b:Column>
                         
 		<b:Column size="XS_12">
-		
 			    	<b:Button>Confirmar</b:Button>
 	    			</b:Column>	
 	</b:Row>

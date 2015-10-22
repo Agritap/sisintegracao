@@ -6,9 +6,14 @@ public enum ViewEnum {
 	ERRO("/erro"),
 	CONFIGURACAO_LOTE("/configuracaoLote"), 
 	CONTROLE_MORTALIDADE("/controleMortalidade"),
-	REPOSICAO_LOTE("/reposicaoLote");
+	REPOSICAO_LOTE("/reposicaoLote"),
+	VACINACAO_ANIMAIS("/vacinacaoAnimais");
+	
+	
 
-	public String url;
+
+
+ public String url;
 	
 	private  ViewEnum (String url){
 		this.url=url;

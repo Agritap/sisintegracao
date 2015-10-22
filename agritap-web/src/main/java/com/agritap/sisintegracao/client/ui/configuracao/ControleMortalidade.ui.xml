@@ -7,7 +7,7 @@
 	xmlns:b2="urn:import:org.gwtbootstrap3.extras.datepicker.client.ui">
 
 	<b:Row>
-		<b:Column size="XS_12">
+		<b:Column size="XS_0">
 				<b:Heading size="H1" styleName="page-header" text="Controle Mortalidade" />
 			<b:Panel >
 				<b:PanelBody>
@@ -81,7 +81,9 @@
           </b:Column>
                         
 		<b:Column size="XS_12">
-			    	<b:Button>Send</b:Button>
+			    	<b:Button>Confirmar</b:Button>
+			    	
 	    			</b:Column>	
+	    			
 	</b:Row>
 </ui:UiBinder> 
