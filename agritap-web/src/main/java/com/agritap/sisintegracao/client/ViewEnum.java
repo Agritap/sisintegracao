@@ -6,7 +6,8 @@ public enum ViewEnum {
 	ERRO("/erro"),
 	CONFIGURACAO_LOTE("/configuracaoLote"), 
 	CONTROLE_MORTALIDADE("/controleMortalidade"),
-	REPOSICAO_LOTE("/reposicaoLote");
+	REPOSICAO_LOTE("/reposicaoLote"),
+	PRODUTORES("/produtores");
 
 	public String url;
 	

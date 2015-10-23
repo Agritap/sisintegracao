@@ -3,9 +3,12 @@ package com.agritap.sisintegracao.client.ui;
 import com.agritap.sisintegracao.client.ViewEnum;
 import com.agritap.sisintegracao.client.ui.configuracao.ConfiguracaoLote;
 import com.agritap.sisintegracao.client.ui.configuracao.ControleMortalidade;
+import com.agritap.sisintegracao.client.ui.configuracao.Produtores;
 import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 
 public class ViewFactory {
 
@@ -17,6 +20,8 @@ public class ViewFactory {
 	private MainWindow mainWindow;
 	
 	private LoginWindow loginWindow;
+	
+	private EventBus eventBus = new SimpleEventBus();
 
 	public static ViewFactory getInstance(){
 		if(instance==null){
@@ -54,21 +59,23 @@ public class ViewFactory {
 		}
 		MainWindow mw = getMainWindow();
 		if(view.equals(ViewEnum.CONFIGURACAO_LOTE)){
-			mw.addConteudo(new ConfiguracaoLote());
+			mw.addConteudo(new ConfiguracaoLote(eventBus));
 			return mw;
 		}
-		MainWindow mwcm = getMainWindow ();
 		if(view.equals(ViewEnum.CONTROLE_MORTALIDADE)){
-			mwcm.addConteudo(new ControleMortalidade());
-			return mwcm;
+			mw.addConteudo(new ControleMortalidade());
+			return mw;
 		}
 		
-		MainWindow mwc = getMainWindow ();
 		if(view.equals(ViewEnum.REPOSICAO_LOTE)){
-			mwcm.addConteudo(new ReposicaoLote());
-			return mwc;
+			mw.addConteudo(new ReposicaoLote());
+			return mw;
 		}
 		
+		if(view.equals(ViewEnum.PRODUTORES)){
+			mw.addConteudo(new Produtores(eventBus));
+			return mw;
+		}
 		return null;
 	}
 

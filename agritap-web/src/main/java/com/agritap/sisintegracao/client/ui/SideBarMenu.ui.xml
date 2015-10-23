@@ -7,6 +7,10 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav in" id="side-menu">
                         <li >
+                        	<g:Anchor ui:field="produtores"><i class="fa fa-wrench fa-fw"></i> Produtores</g:Anchor>
+                        </li>
+
+                        <li >
                         	<g:Anchor ui:field="configuracaoLote"><i class="fa fa-wrench fa-fw"></i> Configuração do Lote</g:Anchor>
                         </li>
                         
