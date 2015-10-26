@@ -59,7 +59,7 @@ public class ViewFactory {
 		}
 		MainWindow mw = getMainWindow();
 		if(view.equals(ViewEnum.CONFIGURACAO_LOTE)){
-			mw.addConteudo(new ConfiguracaoLote(eventBus));
+			mw.addConteudo(new ConfiguracaoLote());
 			return mw;
 		}
 		if(view.equals(ViewEnum.CONTROLE_MORTALIDADE)){
@@ -73,7 +73,7 @@ public class ViewFactory {
 		}
 		
 		if(view.equals(ViewEnum.PRODUTORES)){
-			mw.addConteudo(new Produtores(eventBus));
+			mw.addConteudo(new Produtores());
 			return mw;
 		}
 		return null;

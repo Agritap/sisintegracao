@@ -11,27 +11,18 @@ import com.google.inject.Singleton;
 import com.google.inject.persist.PersistFilter;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.ServletModule;
-import com.google.web.bindery.requestfactory.server.RequestFactoryServlet;
 import com.googlecode.injectlet.jersey.GuiceContainer;
 import com.sun.jersey.api.core.PackagesResourceConfig;
-import com.trycatchsoft.gwt.requestfactory.InjectedRequestFactoryModule;
-import com.trycatchsoft.gwt.requestfactory.InjectedRequestFactoryServlet;
 
 public class SisIntegracaoGuiceConfig extends ServletModule {
 	
 	@Override
 	protected void configureServlets() {
-		install(new InjectedRequestFactoryModule());
+//		install(new InjectedRequestFactoryModule());
 		
 
 		bind(InjectorHelper.class).in(Singleton.class);
 		
-		bind(RequestFactoryServlet.class).in(Singleton.class);
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("symbolMapsDirectory", "WEB-INF/classes/symbolMaps/");
-		serve("/gwtRequest").with(InjectedRequestFactoryServlet.class);
-//		serve("/gwtRequest").with(RequestFactoryServlet.class, params);
-
 		JpaPersistModule module = new JpaPersistModule("sisIntegracaoUnit");
 		install(module);
 		filter("/*").through(PersistFilter.class);
