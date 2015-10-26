@@ -9,9 +9,11 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 
+import com.agritap.sisintegracao.client.request.Callback;
 import com.agritap.sisintegracao.client.request.beans.ProdutorI;
 import com.agritap.sisintegracao.client.request.beans.ProdutorIAdapter;
 import com.agritap.sisintegracao.client.request.clients.ProdutorClient;
+import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
@@ -26,10 +28,13 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Widget;
 
-public class Produtores extends Composite {
+public class ProdutoresView extends Composite {
 
 	private static ProdutoresUiBinder uiBinder = GWT.create(ProdutoresUiBinder.class);
 
+	ProdutorClient client = new ProdutorClient();
+	
+	ClientFactory factory;
 	@UiField
 	CellTable<ProdutorI> tabelaProdutores;
 
@@ -56,20 +61,23 @@ public class Produtores extends Composite {
 	
 	ProdutorI produtorEditado;
 	
-	interface ProdutoresUiBinder extends UiBinder<Widget, Produtores> {
+	interface ProdutoresUiBinder extends UiBinder<Widget, ProdutoresView> {
 	}
 
-	public Produtores() {
+	public ProdutoresView(ClientFactory factory) {
 		initWidget(uiBinder.createAndBindUi(this));
 		init();
+		this.factory=factory;
 
 	}
 
 	private void init() {
 		preparaTabela();
+		loadTabela();
+	}
 
-		ProdutorClient client = new ProdutorClient(1);
-		client.todos(new com.agritap.sisintegracao.client.request.Callback<ProdutorIAdapter>() {
+	private void loadTabela() {
+		client.todos(new Callback<ProdutorIAdapter>() {
 			
 			@Override
 			public void ok(ProdutorIAdapter response) {
@@ -134,24 +142,41 @@ public class Produtores extends Composite {
 	
 	@UiHandler("salvarBtn")
 	public void salvarClick(ClickEvent evt){
-//		try{
-//		ProdutorRequest produtorRequest=requestFactory.produtorRequest();
-//
-//		produtorEditado = produtorRequest.edit(produtorEditado);
-//		produtorEditado.setNome(nomeField.getValue());
-//		produtorEditado.setEmail(emailField.getValue());
-//		produtorEditado.setAtivo(ativoField.getValue());
-//		produtorEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
-//		produtorRequest.persist(produtorEditado).using(produtorEditado).fire();
-//		formRow.setVisible(false);
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
+		produtorEditado.setNome(nomeField.getValue());
+		produtorEditado.setEmail(emailField.getValue());
+		produtorEditado.setAtivo(ativoField.getValue());
+		produtorEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
+		client.update(produtorEditado, new Callback<ProdutorI>() {
+
+			@Override
+			public void ok(ProdutorI to) {
+				loadTabela();
+				produtorEditado=null;
+				formRow.setVisible(false);
+			}
+		});
 	}
+
+	@UiHandler("excluirBtn")
+	public void excluirClick(ClickEvent evt){
+		produtorEditado.setNome(nomeField.getValue());
+		produtorEditado.setEmail(emailField.getValue());
+		produtorEditado.setAtivo(ativoField.getValue());
+		produtorEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
+		client.delete(produtorEditado.getId(), new Callback<Void>() {
+
+			@Override
+			public void ok(Void to) {
+				loadTabela();
+				produtorEditado=null;
+				formRow.setVisible(false);
+			}
+		});
+	}
+//	
 
 	public void loadForm(ProdutorI produtor) {
 		this.produtorEditado=produtor;
-//		integradoraField.setSelectedIndex(index);
 		nomeField.setValue(produtor.getNome());
 		emailField.setValue(produtor.getEmail());
 		codigoIntegradoraField.setValue(produtor.getCodigoIntegradora());

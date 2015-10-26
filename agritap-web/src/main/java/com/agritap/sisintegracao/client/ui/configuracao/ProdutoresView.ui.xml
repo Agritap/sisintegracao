@@ -46,15 +46,14 @@
 								</b:FormGroup>
 
 								<b:FormGroup>
-									<b:FormLabel for="integradora" addStyleNames="col-lg-2">Integradora</b:FormLabel>
+									<b:FormLabel for="integradora" >Integradora</b:FormLabel>
 									<g:FlowPanel>
 										<b:ListBox b:id="integradora" ui:field="integradoraField">
 										</b:ListBox>
 									</g:FlowPanel>
 								</b:FormGroup>
-								<b:FormGroup>
-										<b:Button type="PRIMARY" ui:field="salvarBtn">Salvar</b:Button>
-								</b:FormGroup>
+								<b:Button type="PRIMARY" ui:field="salvarBtn">Salvar</b:Button>
+								<b:Button type="DANGER" addStyleNames="col-sm-offset-2" ui:field="excluirBtn">Excluir</b:Button>
 							</b:FieldSet>
 						</b:Form>
 					</b:PanelBody>

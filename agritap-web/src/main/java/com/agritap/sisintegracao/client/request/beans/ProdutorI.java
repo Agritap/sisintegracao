@@ -28,5 +28,7 @@ public interface ProdutorI {
 
 	public void setCodigoIntegradora(String codigoIntegradora);
 
+	public Integer getVersion() ;
 
+	public void setVersion(Integer version) ;
 }

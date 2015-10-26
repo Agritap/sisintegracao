@@ -7,13 +7,11 @@ import com.agritap.sisintegracao.client.request.beans.ProdutorIAdapter;
 
 public class ProdutorClient extends RESTClient {
 
-	Integer id;
 	
-	public ProdutorClient(Integer id){
-		this.id=id;
+	public ProdutorClient(){
 	}
 	
-	public void get(Callback<ProdutorI> cb) {
+	public void get(Integer id,Callback<ProdutorI> cb) {
 		GET("produtores",id.toString()).withCustomReturn(ProdutorI.TYPE).go(cb);
 	}
 
@@ -21,11 +19,11 @@ public class ProdutorClient extends RESTClient {
 		GET("produtores","todos").withCustomReturn(ProdutorIAdapter.TYPE).go(cb);
 	}
 
-	public void update(ProdutorI course, Callback<ProdutorI> cb) {
-		PUT("produtores").withCustomReturn(ProdutorI.TYPE).withJsonContentType().withEntityBody(course).go(cb);
+	public void update(ProdutorI produtor, Callback<ProdutorI> cb) {
+		PUT("produtores").withCustomReturn(ProdutorI.TYPE).withJsonContentType().withEntityBody(produtor).go(cb);
 	}
 
-	public void delete(Callback<ProdutorI> cb) {
+	public void delete(Integer id,Callback<Void> cb) {
 		DELETE("produtores",id.toString()).go(cb);
 	}
 	
