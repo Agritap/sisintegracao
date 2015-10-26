@@ -104,6 +104,7 @@ public abstract class Callback<T> implements RequestCallback {
 				ok(Callback.parseJson(responseText));
 
 		} else if (contentType.contains("application/octet-stream")) {
+			@SuppressWarnings("unchecked")
 			T txt = (T) responseText;
 			ok(txt);
 		} else

@@ -6,7 +6,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 
+ * Vergonhosamente copiado de 
+ * https://github.com/Craftware/Kornell
+ * 
+ *
+ */
 public class StringUtils {
 	
 //	private static final Sha1 sha1 = new Sha1();
@@ -174,7 +180,7 @@ public class StringUtils {
 		return result;
 	}
 
-	private static final String HASH_SEP = "|#|";
+//	private static final String HASH_SEP = "|#|";
 //	public static String hash(String... args) {
 //		StringBuilder builder = new StringBuilder();
 //		for (String arg : args) {

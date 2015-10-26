@@ -62,7 +62,7 @@ public class ExceptionalRequestBuilder extends RequestBuilder {
 		return this;
 	}
 
-	public void go(Callback callback) {
+	public void go(Callback<?> callback) {
 		if(callback != null){
 			setCallback(callback);
 		}
@@ -96,7 +96,18 @@ public class ExceptionalRequestBuilder extends RequestBuilder {
 		//TODO: Fix and automate
 		return MediaTypes.get().typeOf(o.getClass());
 	}
-
+	public ExceptionalRequestBuilder withCustomReturn(String customReturn) {
+		if(customReturn != null){
+			setHeader("agritap-custom-type", customReturn);
+		}else
+			throw new NullPointerException("Header value ");
+		return this;
+	}
+	public ExceptionalRequestBuilder withJsonContentType() {
+		setHeader("Content-Type", "application/json");
+		return this;
+	}
+	
 	public ExceptionalRequestBuilder withContentType(String contentType) {
 		if(contentType != null)
 			setHeader("Content-Type", contentType);
