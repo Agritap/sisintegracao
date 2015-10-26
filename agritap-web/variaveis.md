@@ -1,0 +1,1 @@
+-DdbUrl=jdbc:mysql://<HOST>:3306/<DB> -DdbUser=<USER> -DdbPass=<PASS>
