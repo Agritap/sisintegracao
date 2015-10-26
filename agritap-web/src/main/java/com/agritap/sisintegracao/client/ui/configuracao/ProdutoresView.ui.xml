@@ -53,7 +53,8 @@
 									</g:FlowPanel>
 								</b:FormGroup>
 								<b:Button type="PRIMARY" ui:field="salvarBtn">Salvar</b:Button>
-								<b:Button type="DANGER" addStyleNames="col-sm-offset-2" ui:field="excluirBtn">Excluir</b:Button>
+								<b:Button  addStyleNames="col-xs-offset-1" ui:field="cancelarBtn">Cancelar</b:Button>
+								<b:Button type="DANGER" addStyleNames="col-xs-offset-1" ui:field="excluirBtn">Excluir</b:Button>
 							</b:FieldSet>
 						</b:Form>
 					</b:PanelBody>
@@ -68,6 +69,8 @@
 				</gwt:CellTable>
 			</b:Column>
 		</b:Row>
+		<g:HTMLPanel ui:field="addProdutor" styleName="addButton"><span>+</span>
+		</g:HTMLPanel>
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

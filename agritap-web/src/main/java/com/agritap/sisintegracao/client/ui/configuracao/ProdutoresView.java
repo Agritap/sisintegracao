@@ -18,6 +18,7 @@ import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -25,6 +26,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -37,6 +39,8 @@ public class ProdutoresView extends Composite {
 	ClientFactory factory;
 	@UiField
 	CellTable<ProdutorI> tabelaProdutores;
+	@UiField
+	HTMLPanel addProdutor;
 
 	@UiField
 	Row formRow;
@@ -68,12 +72,24 @@ public class ProdutoresView extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		init();
 		this.factory=factory;
-
 	}
 
 	private void init() {
 		preparaTabela();
 		loadTabela();
+		bindAddEvent();
+	}
+
+	private void bindAddEvent() {
+		
+		addProdutor.addDomHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				produtorEditado = factory.getEntityfactory().newProdutor().as();
+				loadForm(produtorEditado);
+				 formRow.setVisible(true);
+			}
+		}, ClickEvent.getType());
 	}
 
 	private void loadTabela() {
@@ -155,6 +171,11 @@ public class ProdutoresView extends Composite {
 				formRow.setVisible(false);
 			}
 		});
+	}
+	@UiHandler("cancelarBtn")
+	public void cancelarClick(ClickEvent evt){
+		formRow.setVisible(false);
+		produtorEditado=null;
 	}
 
 	@UiHandler("excluirBtn")
