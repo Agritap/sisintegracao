@@ -2,55 +2,73 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<g:HTMLPanel>
-		
+
+            
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav in" id="side-menu">
+                    <ul class="nav in" id="side-menu">      
+           <p></p>         
+           
+           <li>
+            <div id="divBusca">
+               <input type="text" id="txtBusca" placeholder="Pesquisar"/>
+            </div>
+           <p></p>
+           </li> 
                         <li >
                         	<g:Anchor ui:field="configuracaoLote"><i class="fa fa-wrench fa-fw"></i>     Configuração do Lote  </g:Anchor>
                         </li>
+                        
                         <li >
                         	<g:Anchor ui:field="controleMortalidade"><i class="fa fa-heartbeat fa-fw"></i>  Controle de Mortalidade  </g:Anchor>
                         </li>
                         
-                        
                         <li data-toggle="collapse" data-target="#controle-racao-collapse" class="collapsed active">
                         	<g:Anchor><i class="fa fa-truck fa-fw"></i>  Controle de Ração  <span class="fa arrow"></span></g:Anchor>
                         </li>
-		                <ul class="sub-menu collapse" id="controle-racao-collapse">
-		                    <li><a href="#">  Consumo  </a></li>
-		                    <li><a href="#">  Pedidos  </a></li>
-		                    <li><a href="#">  Recebimento  </a></li>
-		                </ul>
-		                
                         
-                         
                         <li>
+		                    <ul class="sub-menu collapse" id="controle-racao-collapse">
+		                    <a href="#">  Consumo  </a>
+		                    <p></p>
+		                    <a href="#">  Pedidos  </a>
+		                    <p></p>
+		                    <a href="#">  Recebimento  </a>
+		                    </ul>
+                         </li> 
+                         
                         <li data-toggle="collapse" data-target="#controle-agenda-collapse" class="collapsed active">
                         	<g:Anchor><i class="fa fa-table fa-fw"></i> Agenda <span class="fa arrow"></span></g:Anchor>
-                        	</li>
-                        	<ul class="sub-menu collapse" id="controle-agenda-collapse">
-		                    <li><g:Anchor ui:field="reposicaoLote">  Reposição do lote  </g:Anchor></li>
-		                    <li><g:Anchor ui:field="vacinacaoAnimais">  Vacinação dos animais  </g:Anchor></li>
-		                    <li><a href="#">  Visitações  </a></li>
-		                    <li><a href="#">  Eventos  </a></li>
-		                    <li><a href="#">  Data de entrega  </a></li>
-		                    <li><a href="#">  Data de saida  </a></li>
-		                    
-		                    
-		                </ul>
-                        	
                         </li>
                         
+                        <li>
+                        	<ul class="sub-menu collapse" id="controle-agenda-collapse">
+		                    <g:Anchor ui:field="reposicaoLote">  Reposição do lote  </g:Anchor>
+		                    <p></p>
+		                    <g:Anchor ui:field="vacinacaoAnimais">  Vacinação dos animais  </g:Anchor>
+		                    <p></p>
+		                    <a href="#">  Visitações  </a>
+		                    <p></p>
+		                    <a href="#">  Eventos  </a>
+		                    <p></p>
+		                    <a href="#">  Data de entrega  </a>
+		                    <p></p>
+		                    <a href="#">  Data de saida  </a>
+		                    </ul>
+		                 </li>	
                         
                         <li data-toggle="collapse" data-target="#controle-resultado-collapse" class="collapsed active">
                         	<g:Anchor><i class="fa fa-money fa-fw"></i>  Resultado  <span class="fa arrow"></span></g:Anchor>
                         </li>
-		                <ul class="sub-menu collapse" id="controle-resultado-collapse">
-		                    <li><a href="#">  Simulação  </a></li>
-		                    <li><a href="#"> Fechamento do Lote  </a></li>
-		                </ul>
-                        
+                       
+		                <li>
+		                    <ul class="sub-menu collapse" id="controle-resultado-collapse">
+		                    <a href="#">  Simulação  </a>
+		                    <p></p>
+		                    <a href="#"> Fechamento do Lote  </a>
+		                    </ul>
+		                 </li>
+
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
