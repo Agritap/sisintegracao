@@ -7,11 +7,22 @@
 	<inherits name="org.gwtbootstrap3.extras.datepicker.DatePicker"/>
  	<inherits name="com.google.gwt.inject.Inject"/>
 	<inherits name='com.google.web.bindery.requestfactory.RequestFactory' />
-	<inherits  name="com.google.gwt.activity.Activity" />
 	<replace-with class="com.agritap.sisintegracao.client.ClientFactoryImpl">
    	 <when-type-is class="com.agritap.sisintegracao.client.ui.ClientFactory"/>
     </replace-with>
 	
+	<!-- Loggin -->
+	<inherits name="com.google.gwt.logging.Logging" />
+	<set-property name="gwt.logging.logLevel" value="FINEST"/>
+	<set-property name="gwt.logging.enabled" value="TRUE"/>
+	
+	<set-property name="gwt.logging.consoleHandler" value="ENABLED"/>
+	<set-property name="gwt.logging.systemHandler" value="ENABLED"/>
+	<set-property name="gwt.logging.developmentModeHandler" value="ENABLED"/>
+	<set-property name="gwt.logging.consoleHandler" value="ENABLED"/>
+<!-- 
+	<set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" />
+	 -->
 	<source path="client" />
 	<inherits name="com.agritap.sisintegracao.client.Resources" />
     <!--Add these style sheets last so that they are the most important!-->

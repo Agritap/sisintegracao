@@ -12,10 +12,10 @@
    			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 
 			  <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-	         <property name="javax.persistence.jdbc.user" value="root"/>
-	         <property name="javax.persistence.jdbc.password" value="sicsadm"/>
+	         <property name="javax.persistence.jdbc.user" value="${dbUser}"/>
+	         <property name="javax.persistence.jdbc.password" value="${dbPass}"/>
 	         
-	         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agritap"/>
+	         <property name="javax.persistence.jdbc.url" value="${dbUrl}"/>
 	         <property name="hibernate.max_fetch_depth" value="3"/>
          
 			<property name="javax.persistence.validation.mode" value="none" />
