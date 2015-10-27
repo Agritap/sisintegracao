@@ -8,14 +8,12 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SideBarMenu extends Composite  {
+public class SideBarMenu extends Composite {
 
 	private static SideBarUiBinder uiBinder = GWT.create(SideBarUiBinder.class);
 
-	
 	private ClientFactory factory;
 
-	
 	interface SideBarUiBinder extends UiBinder<Widget, SideBarMenu> {
 	}
 
@@ -23,7 +21,6 @@ public class SideBarMenu extends Composite  {
 		this.factory=clientFactory;
 		initWidget(uiBinder.createAndBindUi(this));
 	}
-
 
 	@UiHandler("configuracaoLote")
 	public void configuracaoLoteClick(ClickEvent evt){
@@ -33,9 +30,9 @@ public class SideBarMenu extends Composite  {
 	public void produtoresClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.PRODUTORES);
 	}
-	
+
 	@UiHandler("controleMortalidade")
-	public void controleMortalidadeClick(ClickEvent evt){
+	public void controleMortalidadeClick(ClickEvent evt) {
 		factory.getAppController().goTo(ViewEnum.CONTROLE_MORTALIDADE);
 	}	
 	@UiHandler("reposicaoLote")
@@ -46,5 +43,5 @@ public class SideBarMenu extends Composite  {
 	public void vacinacaoAnimaisClick(ClickEvent evt) {
 		factory.getAppController().goTo(ViewEnum.VACINACAO_ANIMAIS);
 	}
-}
 
+}

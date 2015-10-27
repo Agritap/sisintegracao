@@ -10,7 +10,9 @@ public enum ViewEnum {
 	PRODUTORES("/produtores"),
 	VACINACAO_ANIMAIS("/vacinacaoAnimais");
 
-	public String url;
+
+
+ public String url;
 	
 	private  ViewEnum (String url){
 		this.url=url;
