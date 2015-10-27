@@ -7,6 +7,10 @@ agritap-web/.settings/com.google.gdt.eclipse.core.prefs
 agritap-web/.settings/com.google.gwt.eclipse.core.prefs
 agritap-web/.settings/org.eclipse.core.resources.prefs
 agritap-web/.settings/org.eclipse.m2e.core.prefs
+agritap-web/.factorypath
+agritap-web/.settings/
+agritap-web/target/
+agritap-web/war/WEB-INF/classes/
 *.class
 # Package Files #
 *.jar

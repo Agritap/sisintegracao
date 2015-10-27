@@ -1,27 +1,21 @@
 package com.agritap.sisintegracao.client;
 
-import com.agritap.sisintegracao.client.ui.ViewFactory;
+import java.util.logging.Logger;
+
+import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.ScriptInjector;
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class MainApp implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
-//		<stylesheet src="css/sb-admin-2.css"/>
-//		<stylesheet src="css/timeline.css"/>
-//		<script src="js/sb-admin-2.js"/>
-		ViewFactory vf = ViewFactory.getInstance();
-		Composite c = vf.init();
-//		if(autenticado){
-			//abre a tela de login
-//		}else{
-			//abre a tela menu
-			//pega o usuario.
-			//descobre quais permissoes ele
-//		}
-		RootPanel.get().add(c);
+		ClientFactory clientFactory = GWT.create(ClientFactory.class);
+		AppController appViewer = new AppController(clientFactory);
+	    appViewer.go(RootPanel.get());
+	    Logger log=Logger.getLogger(MainApp.class.getName());
+	    log.info("Teste info");
+	    log.warning("Teste warn");
 	}
 }

@@ -1,14 +1,14 @@
-package com.agritap.sisintegracao.client.model;
+package com.agritap.sisintegracao.server.model;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.List;
 
-public class OrigemAlojamento {
-
+public class BarracaoAlojamento {
 	private Integer id;
-	
-	private Produtor produtor;
-	
+
+	private Lote lote;
+
 	private Integer quantidade;
 	
 	private Calendar dataAlojamento;
@@ -16,6 +16,8 @@ public class OrigemAlojamento {
 	private Integer idadeAlojamento;
 	
 	private BigDecimal pesoAlojado;
+
+	private List<OrigemAlojamento> origens;
 	
-	private SexoLote sexo;
+	private Barracao barracao;
 }
