@@ -42,6 +42,9 @@ public class SideBarMenu extends Composite  {
 	public void reposicaoLoteClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.REPOSICAO_LOTE);
 	}
-	
+	@UiHandler("vacinacaoAnimais")
+	public void vacinacaoAnimaisClick(ClickEvent evt) {
+		factory.getAppController().goTo(ViewEnum.VACINACAO_ANIMAIS);
+	}
 }
 

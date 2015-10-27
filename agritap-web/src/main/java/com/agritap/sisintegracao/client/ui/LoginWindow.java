@@ -22,6 +22,10 @@ public class LoginWindow extends Composite implements HasText {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
+	
+	
+	// github +proxy
+	
 	@UiField
 	Button button;
 

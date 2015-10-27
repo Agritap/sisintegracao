@@ -19,7 +19,7 @@ public class ConfiguracaoLote extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	@UiHandler("Send")
+//	@UiHandler("Send")
 	public void clickButton(ClickEvent evt){
 		
 	}
