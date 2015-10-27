@@ -1,4 +1,4 @@
-package com.agritap.sisintegracao.server.model;
+package com.agritap.sisintegracao.model;
 
 public class Granjeiro {
 

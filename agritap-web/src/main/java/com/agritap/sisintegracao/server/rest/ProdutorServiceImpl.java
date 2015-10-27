@@ -11,7 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.agritap.sisintegracao.server.model.Produtor;
+import com.agritap.sisintegracao.model.Produtor;
 import com.agritap.sisintegracao.server.to.ListAdapter;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;

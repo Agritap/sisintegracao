@@ -1,4 +1,4 @@
-package com.agritap.sisintegracao.server.model;
+package com.agritap.sisintegracao.model;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
