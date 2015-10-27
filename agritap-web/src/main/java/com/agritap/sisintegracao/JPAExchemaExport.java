@@ -12,7 +12,7 @@ public class JPAExchemaExport {
 
 	public static void main(String[] args) throws IOException {
 //		execute(args[0], args[1]);
-		execute("sisIntegracaoUnit", "target/sql/create-schema.sql");
+		execute("sisIntegracaoUnit", "target/sql/create-schema2.sql");
 //		System.exit(0);
 	}
 
