@@ -1,4 +1,4 @@
-package com.agritap.sisintegracao.client.model;
+package com.agritap.sisintegracao.model;
 
 import java.math.BigDecimal;
 

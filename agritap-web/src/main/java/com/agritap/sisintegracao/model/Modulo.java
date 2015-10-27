@@ -1,4 +1,4 @@
-package com.agritap.sisintegracao.client.model;
+package com.agritap.sisintegracao.model;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ public class Modulo {
 	
 	private Integer id;
 	
-	Animal tipoAnimal;
+	TipoAnimal tipoAnimal;
 	
 	Produtor produtor;
 	

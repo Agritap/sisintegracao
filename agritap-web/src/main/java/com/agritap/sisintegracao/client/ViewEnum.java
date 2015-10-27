@@ -7,9 +7,8 @@ public enum ViewEnum {
 	CONFIGURACAO_LOTE("/configuracaoLote"), 
 	CONTROLE_MORTALIDADE("/controleMortalidade"),
 	REPOSICAO_LOTE("/reposicaoLote"),
+	PRODUTORES("/produtores"),
 	VACINACAO_ANIMAIS("/vacinacaoAnimais");
-	
-	
 
 
 

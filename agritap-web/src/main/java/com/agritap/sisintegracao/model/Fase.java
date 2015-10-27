@@ -1,4 +1,4 @@
-package com.agritap.sisintegracao.client.model;
+package com.agritap.sisintegracao.model;
 
 public enum Fase {
    CRECHE,UPL,TERMINACAO;
