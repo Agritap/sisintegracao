@@ -6,7 +6,7 @@ public class Modulo {
 	
 	private Integer id;
 	
-	Animal tipoAnimal;
+	TipoAnimal tipoAnimal;
 	
 	Produtor produtor;
 	

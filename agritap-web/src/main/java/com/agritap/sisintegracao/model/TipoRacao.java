@@ -3,6 +3,8 @@ package com.agritap.sisintegracao.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,6 +31,12 @@ public class TipoRacao {
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataFim;
+	
+	@Enumerated(EnumType.STRING)
+	private TipoAnimal tipoAnimal;
+	
+	@Enumerated(EnumType.STRING)
+	private Fase fase;
 
 	public Integer getId() {
 		return id;
@@ -76,6 +84,22 @@ public class TipoRacao {
 
 	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
+	}
+
+	public TipoAnimal getTipoAnimal() {
+		return tipoAnimal;
+	}
+
+	public void setTipoAnimal(TipoAnimal tipoAnimal) {
+		this.tipoAnimal = tipoAnimal;
+	}
+
+	public Fase getFase() {
+		return fase;
+	}
+
+	public void setFase(Fase fase) {
+		this.fase = fase;
 	}
 
 }
