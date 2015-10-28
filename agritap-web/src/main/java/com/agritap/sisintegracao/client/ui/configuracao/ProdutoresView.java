@@ -116,6 +116,17 @@ public class ProdutoresView extends Composite {
 				return produtor.getEmail();
 			}
 		};
+		
+		TextColumn<ProdutorI> telefoneColumn = new TextColumn<ProdutorI> (){
+			@Override
+			public String getValue(ProdutorI produtor){
+				return produtor.getTelefone();
+				
+						
+			}
+			
+		};
+		
 		TextColumn<ProdutorI> ativo2Column = new TextColumn<ProdutorI>() {
 			@Override
 			public String getValue(ProdutorI produtor) {
@@ -152,6 +163,7 @@ public class ProdutoresView extends Composite {
 		ativo2Column.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		tabelaProdutores.addColumn(nomeColumn, "Nome");
 		tabelaProdutores.addColumn(emailColumn, "Email");
+		tabelaProdutores.addColumn(telefoneColumn, "Telefone");
 		tabelaProdutores.addColumn(ativo2Column, "Ativo");
 		tabelaProdutores.addColumn(click, "Ações");
 	}
@@ -160,6 +172,7 @@ public class ProdutoresView extends Composite {
 	public void salvarClick(ClickEvent evt){
 		produtorEditado.setNome(nomeField.getValue());
 		produtorEditado.setEmail(emailField.getValue());
+		produtorEditado.setTelefone(telefoneField.getValue());
 		produtorEditado.setAtivo(ativoField.getValue());
 		produtorEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
 		client.update(produtorEditado, new Callback<ProdutorI>() {
@@ -182,6 +195,7 @@ public class ProdutoresView extends Composite {
 	public void excluirClick(ClickEvent evt){
 		produtorEditado.setNome(nomeField.getValue());
 		produtorEditado.setEmail(emailField.getValue());
+		produtorEditado.setTelefone(telefoneField.getValue());
 		produtorEditado.setAtivo(ativoField.getValue());
 		produtorEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
 		client.delete(produtorEditado.getId(), new Callback<Void>() {
