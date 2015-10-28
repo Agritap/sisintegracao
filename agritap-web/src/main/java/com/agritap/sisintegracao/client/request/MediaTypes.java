@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.agritap.sisintegracao.client.request.beans.ProdutorI;
 import com.agritap.sisintegracao.client.request.beans.ProdutorIAdapter;
+import com.agritap.sisintegracao.client.request.beans.TabelaRacaoI;
+import com.agritap.sisintegracao.client.request.beans.TabelaRacaoIAdapter;
 /**
  * 
  * Vergonhosamente copiado de 
@@ -27,10 +29,13 @@ public class MediaTypes {
 
 	private void registerEntities() {
 		register(ProdutorI.TYPE, ProdutorI.class);
+		register(TabelaRacaoI.TYPE, TabelaRacaoI.class);
 	}
+
 
 	private void registerTOs() {
 		register(ProdutorIAdapter.TYPE, ProdutorIAdapter.class);
+		register(TabelaRacaoIAdapter.TYPE, TabelaRacaoIAdapter.class);
 //		register(EnrollmentLaunchTO.TYPE, EnrollmentLaunchTO.class);
 //		// When auth filter sends 401, it adds the charset and we can't do
 //		// anything about it
