@@ -163,7 +163,7 @@ public class ProdutoresView extends Composite {
 		ativo2Column.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		tabelaProdutores.addColumn(nomeColumn, "Nome");
 		tabelaProdutores.addColumn(emailColumn, "Email");
-		tabelaProdutores.addColumn(telefoneColumn, "Telefone");
+		tabelaProdutores.addColumn(telefoneColumn, "Telefone");	
 		tabelaProdutores.addColumn(ativo2Column, "Ativo");
 		tabelaProdutores.addColumn(click, "Ações");
 	}

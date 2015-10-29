@@ -26,10 +26,17 @@ public class SideBarMenu extends Composite {
 	public void configuracaoLoteClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.CONFIGURACAO_LOTE);
 	}
+	
 	@UiHandler("produtores")
 	public void produtoresClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.PRODUTORES);
 	}
+	
+	@UiHandler("pedidos")
+	public void pedidosClick(ClickEvent evt){
+		factory.getAppController().goTo(ViewEnum.PEDIDOS);
+	}
+	
 
 	@UiHandler("controleMortalidade")
 	public void controleMortalidadeClick(ClickEvent evt) {

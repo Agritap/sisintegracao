@@ -18,7 +18,7 @@
 
 					<li data-toggle="collapse" data-target="#configuracoes-collapse"
 						class="collapsed active">
-						<a href="#"> 
+						<a href="#">
 							<i class="fa fa-wrench fa-fw"></i>
 							Configurações
 						</a>
@@ -26,11 +26,12 @@
 							<li>
 
 								<g:Anchor ui:field="produtores"> Produtores  </g:Anchor>
-								</li>
-								<li>
-								<a href="#"> Pedidos  </a>
-								</li>
-								<li>
+							</li>
+							<li>
+								<g:Anchor ui:field="pedidos"> Pedidos  </g:Anchor>
+								
+							</li>
+							<li>
 								<a href="#"> Recebimento  </a>
 
 							</li>
