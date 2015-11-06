@@ -32,9 +32,13 @@ public class SideBarMenu extends Composite {
 		factory.getAppController().goTo(ViewEnum.PRODUTORES);
 	}
 	
-	@UiHandler("pedidos")
+	@UiHandler("tipoRacao")
 	public void pedidosClick(ClickEvent evt){
-		factory.getAppController().goTo(ViewEnum.PEDIDOS);
+		factory.getAppController().goTo(ViewEnum.TIPORACAO);
+	}
+	@UiHandler("recebimentos")
+	public void recebimentosClick(ClickEvent evt){
+		factory.getAppController().goTo(ViewEnum.RECEBIMENTOS);
 	}
 	
 

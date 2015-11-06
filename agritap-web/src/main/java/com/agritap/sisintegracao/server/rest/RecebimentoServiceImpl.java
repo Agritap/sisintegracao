@@ -10,23 +10,23 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import com.agritap.sisintegracao.model.Pedido;
+import com.agritap.sisintegracao.model.Recebimento;
 import com.agritap.sisintegracao.server.to.ListAdapter;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
-@Path("/pedidos")
+@Path("/recebimentos")
 @Produces(MediaType.APPLICATION_JSON)
-public class PedidoServiceImpl {
+public class RecebimentoServiceImpl {
 
 	@Inject
 	transient EntityManager em;
 
 	@GET
 	@Path("{id}")
-	// application/vnd.agritap.v1.entity.produtor+json
-	public Pedido get(@PathParam("id") Integer id) {
-		Pedido p = new Pedido();
+	// application/vnd.agritap.v1.entity.recebimento+json
+	public Recebimento get(@PathParam("id") Integer id) {
+		Recebimento p = new Recebimento();
 		p.setNumero("125896");
 		p.setId(id);
 		return p;
@@ -34,23 +34,23 @@ public class PedidoServiceImpl {
 
 	@GET
 	@Path("/todos")
-	public ListAdapter<Pedido> todos() {
-		List<Pedido> pedidos = em.createNamedQuery("pedido.todos", Pedido.class).getResultList();
-		return new ListAdapter<Pedido>(pedidos);
+	public ListAdapter<Recebimento> todos() {
+		List<Recebimento> recebimento = em.createNamedQuery("recebimento.todos", Recebimento.class).getResultList();
+		return new ListAdapter<Recebimento>(recebimento);
 	}
 
 	@PUT
 	@Transactional
-	public Pedido save(Pedido pedido) {
-		em.merge(pedido);
-		return pedido;
+	public Recebimento save(Recebimento recebimento) {
+		em.merge(recebimento);
+		return recebimento;
 	}
 
 	@DELETE
 	@Transactional
 	@Path("{id}")
 	public void delete(@PathParam("id") Integer id) {
-		Pedido p = em.find(Pedido.class, id);
+		Recebimento p = em.find(Recebimento.class, id);
 		em.remove(p);
 	}
 }

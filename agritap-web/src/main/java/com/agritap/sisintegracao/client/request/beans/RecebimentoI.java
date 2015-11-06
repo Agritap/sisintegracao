@@ -2,9 +2,9 @@ package com.agritap.sisintegracao.client.request.beans;
 
 import com.agritap.sisintegracao.client.request.EntityFactory;
 
-public interface PedidosI {
+public interface RecebimentoI {
 	
-public static String TYPE = EntityFactory.PREFIX + "pedidos+json";
+	public static String TYPE = EntityFactory.PREFIX + "recebimento+json";
 	
 	public Integer getId();
 
@@ -32,5 +32,3 @@ public static String TYPE = EntityFactory.PREFIX + "pedidos+json";
 
 	public void setVersion(Integer version) ;
 }
-
-

@@ -102,4 +102,9 @@ public class TipoRacao {
 		this.fase = fase;
 	}
 
+	public void setNome(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

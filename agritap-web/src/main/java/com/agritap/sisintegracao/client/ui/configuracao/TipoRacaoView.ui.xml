@@ -8,7 +8,7 @@
 	<g:HTMLPanel>
 		<b:Row>
 			<b:Column size="XS_12">
-				<b:Heading size="H1" styleName="page-header" text="Pedidos" />
+				<b:Heading size="H1" styleName="page-header" text="Tipo Ração" />
 			</b:Column>
 		</b:Row>
 
@@ -21,13 +21,33 @@
 
 
 								<b:FormGroup>
-									<b:FormLabel for="formQuantidade"> Numero Pedido </b:FormLabel>
-									<b:TextBox placeholder="Nome" ui:field="nomeField" />
+									<b:FormLabel for="formQuantidade"> Carencia</b:FormLabel>
+									<b:TextBox placeholder="Carencia" ui:field="carenciaField" />
 								</b:FormGroup>
 
 								<b:FormGroup>
-									<b:FormLabel for="formQuantidade"> Responsavel </b:FormLabel>
-									<b:TextBox placeholder="Email" ui:field="emailField" />
+									<b:FormLabel for="formQuantidade"> Data fim  </b:FormLabel>
+									<b:TextBox placeholder="DataFim" ui:field="dataFimField" />
+								</b:FormGroup>
+								
+								<b:FormGroup>
+									<b:FormLabel for="formQuantidade"> Data inicio </b:FormLabel>
+									<b:TextBox placeholder="DataInicio" ui:field="dataInicioField" />
+								</b:FormGroup>
+								
+								<b:FormGroup>
+									<b:FormLabel for="formQuantidade"> Medicada </b:FormLabel>
+									<b:TextBox placeholder="Medicada" ui:field="medicadaField" />
+								</b:FormGroup>
+								
+								<b:FormGroup>
+									<b:FormLabel for="formQuantidade"> Nome </b:FormLabel>
+									<b:TextBox placeholder="Nome" ui:field="nomeField" />
+								</b:FormGroup>
+								
+								<b:FormGroup>
+									<b:FormLabel for="formQuantidade"> Tipo Animal </b:FormLabel>
+									<b:TextBox placeholder="TipoAnimal" ui:field="tipoAnimalField" />
 								</b:FormGroup>
 
 								<b:FormGroup>
@@ -63,13 +83,13 @@
 		</b:Row>
 		<b:Row>
 			<b:Column size="XS_12">
-				<gwt:CellTable ui:field="tabelaPedidos" bordered="true"
+				<gwt:CellTable ui:field="tabelaTipoRacao" bordered="true"
 					condensed="true" striped="true" hover="true">
 
 				</gwt:CellTable>
 			</b:Column>
 		</b:Row>
-		<g:HTMLPanel ui:field="addPedidos" styleName="addButton"><span>+</span>
+		<g:HTMLPanel ui:field="addTipoRacao" styleName="addButton"><span>+</span>
 		</g:HTMLPanel>
 	</g:HTMLPanel>
 

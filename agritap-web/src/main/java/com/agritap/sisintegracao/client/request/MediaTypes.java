@@ -3,6 +3,8 @@ package com.agritap.sisintegracao.client.request;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.agritap.sisintegracao.client.request.beans.TipoRacaoI;
+import com.agritap.sisintegracao.client.request.beans.TipoRacaoIAdapter;
 import com.agritap.sisintegracao.client.request.beans.ProdutorI;
 import com.agritap.sisintegracao.client.request.beans.ProdutorIAdapter;
 /**
@@ -27,10 +29,12 @@ public class MediaTypes {
 
 	private void registerEntities() {
 		register(ProdutorI.TYPE, ProdutorI.class);
+		register(TipoRacaoI.TYPE, TipoRacaoI.class);
 	}
 
 	private void registerTOs() {
 		register(ProdutorIAdapter.TYPE, ProdutorIAdapter.class);
+		register(TipoRacaoIAdapter.TYPE, TipoRacaoIAdapter.class);
 //		register(EnrollmentLaunchTO.TYPE, EnrollmentLaunchTO.class);
 //		// When auth filter sends 401, it adds the charset and we can't do
 //		// anything about it

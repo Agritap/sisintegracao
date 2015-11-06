@@ -12,8 +12,8 @@ import javax.persistence.Version;
 
 @Entity
 @NamedQueries(
-		{@NamedQuery(name="pedido.todos",query="select p from Pedido p")})
-public class Pedido {
+		{@NamedQuery(name="recebimento.todos",query="select p from Recebimento p")})
+public class Recebimento {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Pedido {
 	@Enumerated(EnumType.STRING)
 	private Integradora integradora;
 	
-	private Integer numero;
+	private int numero;
 	
 	private String codigoIntegradora;
 	
@@ -51,11 +51,11 @@ public class Pedido {
 		this.integradora = integradora;
 	}
 
-	public Integer getNumero() {
+	public int getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
@@ -99,4 +99,8 @@ public class Pedido {
 		this.version = version;
 	}
 
+	public void setNumero(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }
