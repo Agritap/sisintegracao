@@ -34,9 +34,9 @@ public interface TipoRacaoI {
 
 	public void setDataFim(Date dataFim) ;
 
-	public String getTipoAnimal();
+	public TipoAnimal getTipoAnimal();
 	
-	public void setTipoAnimal(String tipoAnimal);
+	public void setTipoAnimal(TipoAnimal tipoAnimal);
 	
 	public Fase getFase();
 

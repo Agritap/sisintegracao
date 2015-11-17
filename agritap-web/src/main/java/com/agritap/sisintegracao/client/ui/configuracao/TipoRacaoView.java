@@ -1,7 +1,6 @@
 package com.agritap.sisintegracao.client.ui.configuracao;
 
 import org.gwtbootstrap3.client.ui.CheckBox;
-import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.TextBox;
@@ -17,6 +16,7 @@ import com.agritap.sisintegracao.client.request.beans.TipoRacaoI;
 import com.agritap.sisintegracao.client.request.beans.TipoRacaoIAdapter;
 import com.agritap.sisintegracao.client.request.clients.TipoRacaoClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
+import com.agritap.sisintegracao.model.TipoAnimal;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -37,7 +37,7 @@ public class TipoRacaoView extends Composite {
 	TipoRacaoClient client = new TipoRacaoClient();
 
 	ClientFactory factory;
-	
+
 	@UiField
 	CellTable<TipoRacaoI> tabelaTipoRacao;
 	@UiField
@@ -45,9 +45,6 @@ public class TipoRacaoView extends Composite {
 
 	@UiField
 	Row formRow;
-
-	@UiField
-	ListBox integradoraField;
 
 	@UiField
 	TextBox carenciaField;
@@ -65,16 +62,7 @@ public class TipoRacaoView extends Composite {
 	TextBox nomeField;
 
 	@UiField
-	TextBox tipoAnimalField;
-
-	@UiField
-	TextBox codigoIntegradoraField;
-
-	@UiField
-	InlineCheckBox ativoField;
-
-	@UiField
-	TextBox telefoneField;
+	ListBox tipoAnimalField;
 
 	TipoRacaoI TipoRacaoEditado;
 
@@ -88,6 +76,10 @@ public class TipoRacaoView extends Composite {
 	}
 
 	private void init() {
+		int i = 0;
+		for (TipoAnimal t : TipoAnimal.values()) {
+			tipoAnimalField.addItem(t.name());
+		}
 		preparaTabela();
 		loadTabela();
 		bindAddEvent();
@@ -162,7 +154,10 @@ public class TipoRacaoView extends Composite {
 		TextColumn<TipoRacaoI> tipoAnimalColumn = new TextColumn<TipoRacaoI>() {
 			@Override
 			public String getValue(TipoRacaoI tipoRacao) {
-				return tipoRacao.getTipoAnimal();
+				if (tipoRacao.getTipoAnimal() == null) {
+					return null;
+				}
+				return tipoRacao.getTipoAnimal().name();
 
 			}
 
@@ -242,14 +237,6 @@ public class TipoRacaoView extends Composite {
 		this.formRow = formRow;
 	}
 
-	public ListBox getIntegradoraField() {
-		return integradoraField;
-	}
-
-	public void setIntegradoraField(ListBox integradoraField) {
-		this.integradoraField = integradoraField;
-	}
-
 	public TextBox getCarenciaField() {
 		return carenciaField;
 	}
@@ -264,38 +251,6 @@ public class TipoRacaoView extends Composite {
 
 	public void setNomeField(TextBox nomeField) {
 		this.nomeField = nomeField;
-	}
-
-	public TextBox getTipoAnimalField() {
-		return tipoAnimalField;
-	}
-
-	public void setTipoAnimalField(TextBox tipoAnimalField) {
-		this.tipoAnimalField = tipoAnimalField;
-	}
-
-	public TextBox getCodigoIntegradoraField() {
-		return codigoIntegradoraField;
-	}
-
-	public void setCodigoIntegradoraField(TextBox codigoIntegradoraField) {
-		this.codigoIntegradoraField = codigoIntegradoraField;
-	}
-
-	public InlineCheckBox getAtivoField() {
-		return ativoField;
-	}
-
-	public void setAtivoField(InlineCheckBox ativoField) {
-		this.ativoField = ativoField;
-	}
-
-	public TextBox getTelefoneField() {
-		return telefoneField;
-	}
-
-	public void setTelefoneField(TextBox telefoneField) {
-		this.telefoneField = telefoneField;
 	}
 
 	public TipoRacaoI getTipoRacaoEditado() {
@@ -316,7 +271,8 @@ public class TipoRacaoView extends Composite {
 		TipoRacaoEditado.setMedicada(medicadaField.getValue());
 
 		TipoRacaoEditado.setNome(nomeField.getValue());
-		TipoRacaoEditado.setTipoAnimal(tipoAnimalField.getValue());
+
+		TipoRacaoEditado.setTipoAnimal(TipoAnimal.values()[tipoAnimalField.getSelectedIndex()]);
 		// TipoRacaoEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
 		client.update(TipoRacaoEditado, new Callback<TipoRacaoI>() {
 
@@ -359,8 +315,45 @@ public class TipoRacaoView extends Composite {
 		dataInicioField.setValue(tipoRacao.getDataInicio());
 		medicadaField.setValue(tipoRacao.getMedicada());
 		nomeField.setValue(tipoRacao.getNome());
-		tipoAnimalField.setValue(tipoRacao.getTipoAnimal());
 
+		if (tipoRacao.getTipoAnimal() != null) {
+
+			tipoAnimalField.setSelectedIndex(tipoRacao.getTipoAnimal().ordinal());
+
+		}
+
+	}
+
+	public DatePicker getDataFimField() {
+		return dataFimField;
+	}
+
+	public void setDataFimField(DatePicker dataFimField) {
+		this.dataFimField = dataFimField;
+	}
+
+	public DatePicker getDataInicioField() {
+		return dataInicioField;
+	}
+
+	public void setDataInicioField(DatePicker dataInicioField) {
+		this.dataInicioField = dataInicioField;
+	}
+
+	public CheckBox getMedicadaField() {
+		return medicadaField;
+	}
+
+	public void setMedicadaField(CheckBox medicadaField) {
+		this.medicadaField = medicadaField;
+	}
+
+	public ListBox getTipoAnimalField() {
+		return tipoAnimalField;
+	}
+
+	public void setTipoAnimalField(ListBox tipoAnimalField) {
+		this.tipoAnimalField = tipoAnimalField;
 	}
 
 }
