@@ -18,8 +18,8 @@ public class TipoRacaoClient extends RESTClient {
 		GET("tipoRacao", "todos").withCustomReturn(TipoRacaoIAdapter.TYPE).go(cb);
 	}
 
-	public void update(TipoRacaoI TipoRacao, Callback<TipoRacaoI> cb) {
-		PUT("tipoRacao").withCustomReturn(TipoRacaoI.TYPE).withJsonContentType().withEntityBody(TipoRacao).go(cb);
+	public void update(TipoRacaoI tipoRacao, Callback<TipoRacaoI> cb) {
+		PUT("tipoRacao").withCustomReturn(TipoRacaoI.TYPE).withJsonContentType().withEntityBody(tipoRacao).go(cb);
 	}
 
 	public void delete(Integer id, Callback<Void> cb) {

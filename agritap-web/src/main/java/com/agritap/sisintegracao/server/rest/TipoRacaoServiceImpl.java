@@ -27,7 +27,7 @@ public class TipoRacaoServiceImpl {
 	// application/vnd.agritap.v1.entity.TipoRacao+json
 	public TipoRacao get(@PathParam("id") Integer id) {
 		TipoRacao t = new TipoRacao();
-		t.setNome(125896);
+		t.setNome("");
 		t.setId(id);
 		return t;
 	}
@@ -45,6 +45,8 @@ public class TipoRacaoServiceImpl {
 		em.merge(tipoRacao);
 		return tipoRacao;
 	}
+	
+	
 
 	@DELETE
 	@Transactional

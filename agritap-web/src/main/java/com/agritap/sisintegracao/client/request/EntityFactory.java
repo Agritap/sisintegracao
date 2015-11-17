@@ -16,9 +16,9 @@ public interface EntityFactory extends AutoBeanFactory {
 
 	AutoBean<ProdutorIAdapter> newProdutores();
 
-	AutoBean<TipoRacaoI> newTipoRacao1();
+	AutoBean<TipoRacaoI> newTipoRacao();
 
-	AutoBean<TipoRacaoIAdapter> newTipoRacao();
+	AutoBean<TipoRacaoIAdapter> newTipoRacoes();
 
 	AutoBean<RecebimentoI> newRecebimento1();
 

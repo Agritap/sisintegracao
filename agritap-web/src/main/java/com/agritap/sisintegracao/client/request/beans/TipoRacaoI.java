@@ -1,59 +1,49 @@
 package com.agritap.sisintegracao.client.request.beans;
 
-import org.gwtbootstrap3.client.ui.TextBox;
+import java.util.Date;
 
 import com.agritap.sisintegracao.client.request.EntityFactory;
+import com.agritap.sisintegracao.model.Fase;
+import com.agritap.sisintegracao.model.TipoAnimal;
 
 public interface TipoRacaoI {
 
 	public static String TYPE = EntityFactory.PREFIX + "tipoRacao+json";
 
-	public Integer getId();
+	public Integer getId() ;
 
-	public String getNome();
+	public void setId(Integer id) ;
+
+	public String getNome() ;
 
 	public void setNome(String nome);
 
-	public String getEmail();
+	public Boolean getMedicada() ;
 
-	public void setEmail(String email);
+	public void setMedicada(Boolean medicada);
 
-	public Boolean getAtivo();
+	public Integer getCarencia() ;
 
-	public void setAtivo(Boolean ativo);
+	public void setCarencia(Integer carencia);
 
-	public String getTelefone();
+	public Date getDataInicio();
 
-	public void setTelefone(String telefone);
+	public void setDataInicio(Date dataInicio);
 
-	public String getCodigoIntegradora();
+	public Date getDataFim();
 
-	public void setCodigoIntegradora(String codigoIntegradora);
-
-	public Integer getVersion();
-
-	public void setVersion(Integer version);
-
-	public String getDataInicio();
-
-	public String getDataFim();
-
-	public String getCarencia();
-
-	public String getPorco();
-
-	public String getMedicada();
+	public void setDataFim(Date dataFim) ;
 
 	public String getTipoAnimal();
+	
+	public void setTipoAnimal(String tipoAnimal);
+	
+	public Fase getFase();
 
-	public void setCarencia(String value);
+	public void setFase(Fase fase) ;
 
-	public void setDataFim(String value);
+	
 
-	public void setDataInicio(String value);
-
-	public void setMedicada(String value);
-
-	public void setTipoAnimal(String value);
+	
 
 }

@@ -29,12 +29,10 @@
 							</li>
 							<li>
 								<g:Anchor ui:field="tipoRacao"> Tipo Ração  </g:Anchor>
-								
+
 							</li>
-							<li>
-								<g:Anchor ui:field="recebimentos"> Recebimentos  </g:Anchor>
-								
-							</li>
+
+
 						</ul>
 					</li>
 					<li>
@@ -78,17 +76,25 @@
 							<span class="fa arrow"></span>
 						</g:Anchor>
 						<ul class="sub-menu collapse" id="controle-agenda-collapse">
-							<g:Anchor ui:field="reposicaoLote"> Reposição do lote  </g:Anchor>
-							<p></p>
-							<g:Anchor ui:field="vacinacaoAnimais"> Vacinação dos animais  </g:Anchor>
-							<p></p>
-							<a href="#"> Visitações  </a>
-							<p></p>
-							<a href="#"> Eventos  </a>
-							<p></p>
-							<a href="#"> Data de entrega  </a>
-							<p></p>
-							<a href="#"> Data de saida  </a>
+
+							<li>
+								<g:Anchor ui:field="reposicaoLote"> Reposição do lote  </g:Anchor>
+							</li>
+							<li>
+								<g:Anchor ui:field="vacinacaoAnimais"> Vacinação dos animais  </g:Anchor>
+							</li>
+							<li>
+								<a href="#"> Visitações  </a>
+							</li>
+							<li>
+								<a href="#"> Eventos  </a>
+							</li>
+							<li>
+								<a href="#"> Data de entrega  </a>
+							</li>
+							<li>
+								<a href="#"> Data de saida  </a>
+							</li>
 						</ul>
 					</li>
 
