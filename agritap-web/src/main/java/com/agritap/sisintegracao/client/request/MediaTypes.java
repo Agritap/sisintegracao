@@ -4,11 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.agritap.sisintegracao.client.request.beans.TipoRacaoI;
 import com.agritap.sisintegracao.client.request.beans.TipoRacaoIAdapter;
 import com.agritap.sisintegracao.client.request.beans.ProdutorI;
 import com.agritap.sisintegracao.client.request.beans.ProdutorIAdapter;
 =======
+=======
+import com.agritap.sisintegracao.client.request.beans.TipoRacaoI;
+import com.agritap.sisintegracao.client.request.beans.TipoRacaoIAdapter;
+>>>>>>> Merge do MediaTypes e do EntityFactory
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
 import com.agritap.sisintegracao.client.request.beans.PessoaI;
 import com.agritap.tsisintegracao.client.request.beans.PessoaIAdapter;
@@ -54,7 +59,12 @@ public class MediaTypes {
 	private void registerTOs() {
 		register(PessoaIAdapter.TYPE, PessoaIAdapter.class);
 		register(ErrosI.TYPE,ErrosI.class);
+<<<<<<< HEAD
 >>>>>>> Adiciona tela de login.
+=======
+		register(TipoRacaoIAdapter.TYPE, TipoRacaoIAdapter.class);
+
+>>>>>>> Merge do MediaTypes e do EntityFactory
 	}
 
 	private void register(String type, Class<?> clazz) {

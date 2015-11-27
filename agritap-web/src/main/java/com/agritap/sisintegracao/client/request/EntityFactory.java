@@ -41,6 +41,15 @@ public interface EntityFactory extends AutoBeanFactory {
 	AutoBean<PedidosIAdapter> newPedidosAdapter();
 	AutoBean<ErrosI> newErros();
 	AutoBean<UsuarioI> newUsuario();
+
+	AutoBean<TipoRacaoI> newTipoRacao();
+
+	AutoBean<TipoRacaoIAdapter> newTipoRacoes();
+
+	AutoBean<RecebimentoI> newRecebimento1();
+
+	AutoBean<RecebimentoIAdapter> newRecebimentos();
+
 	
 >>>>>>> Adiciona tela de login.
 }
