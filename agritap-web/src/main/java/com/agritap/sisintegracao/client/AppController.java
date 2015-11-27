@@ -8,9 +8,13 @@ import com.agritap.sisintegracao.client.ui.StateHistory;
 import com.agritap.sisintegracao.client.ui.configuracao.ConfiguracaoLote;
 import com.agritap.sisintegracao.client.ui.configuracao.ControleMortalidade;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.agritap.sisintegracao.client.ui.configuracao.TipoRacaoView;
 import com.agritap.sisintegracao.client.ui.configuracao.ProdutoresView;
 =======
+=======
+import com.agritap.sisintegracao.client.ui.configuracao.TipoRacaoView;
+>>>>>>> Tela de login, Merge do AppController
 import com.agritap.sisintegracao.client.ui.configuracao.PessoasView;
 >>>>>>> Adiciona tela de login.
 import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;

@@ -11,7 +11,7 @@ import com.agritap.sisintegracao.client.request.beans.ProdutorIAdapter;
 =======
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
 import com.agritap.sisintegracao.client.request.beans.PessoaI;
-import com.agritap.sisintegracao.client.request.beans.PessoaIAdapter;
+import com.agritap.tsisintegracao.client.request.beans.PessoaIAdapter;
 import com.agritap.sisintegracao.client.request.beans.UsuarioI;
 >>>>>>> Adiciona tela de login.
 /**
