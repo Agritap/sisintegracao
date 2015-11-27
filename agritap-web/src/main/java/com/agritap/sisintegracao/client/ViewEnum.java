@@ -17,8 +17,13 @@ public enum ViewEnum {
 	INICIAL("/inicial"), ERRO("/erro"), 
 	CONFIGURACAO_LOTE("/configuracaoLote"), CONTROLE_MORTALIDADE("/controleMortalidade"), 
 	REPOSICAO_LOTE("/reposicaoLote"), PRODUTORES("/produtores"), 
+<<<<<<< HEAD
 	PEDIDOS("/pedidos"), VACINACAO_ANIMAIS("/vacinacaoAnimais");
 >>>>>>> Adiciona tela de login.
+=======
+	PEDIDOS("/pedidos"),TIPORACAO("/tipoRacao"),
+	RECEBIMENTOS("/recebimentos"), VACINACAO_ANIMAIS("/vacinacaoAnimais");
+>>>>>>> Merge do ViewEnum
 
 	public String url;
 
