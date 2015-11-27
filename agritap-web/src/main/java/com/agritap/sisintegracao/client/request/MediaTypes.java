@@ -3,10 +3,17 @@ package com.agritap.sisintegracao.client.request;
 import java.util.HashMap;
 import java.util.Map;
 
+<<<<<<< HEAD
 import com.agritap.sisintegracao.client.request.beans.TipoRacaoI;
 import com.agritap.sisintegracao.client.request.beans.TipoRacaoIAdapter;
 import com.agritap.sisintegracao.client.request.beans.ProdutorI;
 import com.agritap.sisintegracao.client.request.beans.ProdutorIAdapter;
+=======
+import com.agritap.sisintegracao.client.request.beans.ErrosI;
+import com.agritap.sisintegracao.client.request.beans.PessoaI;
+import com.agritap.sisintegracao.client.request.beans.PessoaIAdapter;
+import com.agritap.sisintegracao.client.request.beans.UsuarioI;
+>>>>>>> Adiciona tela de login.
 /**
  * 
  * Vergonhosamente copiado de 
@@ -28,6 +35,7 @@ public class MediaTypes {
 	}
 
 	private void registerEntities() {
+<<<<<<< HEAD
 		register(ProdutorI.TYPE, ProdutorI.class);
 		register(TipoRacaoI.TYPE, TipoRacaoI.class);
 	}
@@ -38,6 +46,15 @@ public class MediaTypes {
 //		register(EnrollmentLaunchTO.TYPE, EnrollmentLaunchTO.class);
 //		// When auth filter sends 401, it adds the charset and we can't do
 //		// anything about it
+=======
+		register(PessoaI.TYPE, PessoaI.class);
+		register(UsuarioI.TYPE, UsuarioI.class);
+	}
+
+	private void registerTOs() {
+		register(PessoaIAdapter.TYPE, PessoaIAdapter.class);
+		register(ErrosI.TYPE,ErrosI.class);
+>>>>>>> Adiciona tela de login.
 	}
 
 	private void register(String type, Class<?> clazz) {

@@ -1,5 +1,12 @@
 package com.agritap.sisintegracao.client.ui.configuracao;
 
+import java.util.Iterator;
+import java.util.Set;
+import java.util.logging.Logger;
+
+import org.gwtbootstrap3.client.ui.FieldSet;
+import org.gwtbootstrap3.client.ui.Form;
+import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.Row;
@@ -10,9 +17,10 @@ import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 
 import com.agritap.sisintegracao.client.request.Callback;
-import com.agritap.sisintegracao.client.request.beans.ProdutorI;
-import com.agritap.sisintegracao.client.request.beans.ProdutorIAdapter;
-import com.agritap.sisintegracao.client.request.clients.ProdutorClient;
+import com.agritap.sisintegracao.client.request.beans.ErrosI;
+import com.agritap.sisintegracao.client.request.beans.PessoaI;
+import com.agritap.sisintegracao.client.request.beans.PessoaIAdapter;
+import com.agritap.sisintegracao.client.request.clients.PessoaClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.cell.client.FieldUpdater;
@@ -30,20 +38,26 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ProdutoresView extends Composite {
+public class PessoasView extends Composite {
 
-	private static ProdutoresUiBinder uiBinder = GWT.create(ProdutoresUiBinder.class);
+	private static PessoasUiBinder uiBinder = GWT.create(PessoasUiBinder.class);
+	Logger log = Logger.getLogger(PessoasView.class.getName());
 
-	ProdutorClient client = new ProdutorClient();
+	PessoaClient client = new PessoaClient();
 	
 	ClientFactory factory;
+	
 	@UiField
-	CellTable<ProdutorI> tabelaProdutores;
+	CellTable<PessoaI> tabelaProdutores;
+	
 	@UiField
 	HTMLPanel addProdutor;
 
 	@UiField
 	Row formRow;
+	
+	@UiField
+	Form form;
 
 	@UiField
 	ListBox integradoraField;
@@ -63,12 +77,12 @@ public class ProdutoresView extends Composite {
 	@UiField
 	TextBox telefoneField;
 	
-	ProdutorI produtorEditado;
+	PessoaI produtorEditado;
 	
-	interface ProdutoresUiBinder extends UiBinder<Widget, ProdutoresView> {
+	interface PessoasUiBinder extends UiBinder<Widget, PessoasView> {
 	}
 
-	public ProdutoresView(ClientFactory factory) {
+	public PessoasView(ClientFactory factory) {
 		initWidget(uiBinder.createAndBindUi(this));
 		init();
 		this.factory=factory;
@@ -93,10 +107,10 @@ public class ProdutoresView extends Composite {
 	}
 
 	private void loadTabela() {
-		client.todos(new Callback<ProdutorIAdapter>() {
+		client.todos(new Callback<PessoaIAdapter>() {
 			
 			@Override
-			public void ok(ProdutorIAdapter response) {
+			public void ok(PessoaIAdapter response) {
 				tabelaProdutores.setRowData(response.getResultado());
 				tabelaProdutores.redraw();
 			}
@@ -104,22 +118,22 @@ public class ProdutoresView extends Composite {
 	}
 
 	private void preparaTabela() {
-		TextColumn<ProdutorI> nomeColumn = new TextColumn<ProdutorI>() {
+		TextColumn<PessoaI> nomeColumn = new TextColumn<PessoaI>() {
 			@Override
-			public String getValue(ProdutorI produtor) {
+			public String getValue(PessoaI produtor) {
 				return produtor.getNome();
 			}
 		};
-		TextColumn<ProdutorI> emailColumn = new TextColumn<ProdutorI>() {
+		TextColumn<PessoaI> emailColumn = new TextColumn<PessoaI>() {
 			@Override
-			public String getValue(ProdutorI produtor) {
+			public String getValue(PessoaI produtor) {
 				return produtor.getEmail();
 			}
 		};
 		
-		TextColumn<ProdutorI> telefoneColumn = new TextColumn<ProdutorI> (){
+		TextColumn<PessoaI> telefoneColumn = new TextColumn<PessoaI> (){
 			@Override
-			public String getValue(ProdutorI produtor){
+			public String getValue(PessoaI produtor){
 				return produtor.getTelefone();
 				
 						
@@ -127,9 +141,9 @@ public class ProdutoresView extends Composite {
 			
 		};
 		
-		TextColumn<ProdutorI> ativo2Column = new TextColumn<ProdutorI>() {
+		TextColumn<PessoaI> ativo2Column = new TextColumn<PessoaI>() {
 			@Override
-			public String getValue(ProdutorI produtor) {
+			public String getValue(PessoaI produtor) {
 				if(produtor.getAtivo() == null || produtor.getAtivo()){
 					return "true";
 				}else{
@@ -137,7 +151,7 @@ public class ProdutoresView extends Composite {
 				}
 			}
 			@Override
-			public void render(Context context, ProdutorI produtor, SafeHtmlBuilder sb) {
+			public void render(Context context, PessoaI produtor, SafeHtmlBuilder sb) {
 				if(produtor.getAtivo() == null || produtor.getAtivo()){
 					sb.appendHtmlConstant("<i class=\"fa fa-check-square-o\"></i>");
 				}else{
@@ -145,16 +159,16 @@ public class ProdutoresView extends Composite {
 				}
 			}
 		};
-		 final Column<ProdutorI, String> click = new Column<ProdutorI, String>(new ButtonCell(ButtonType.PRIMARY, IconType.EDIT)) {
+		 final Column<PessoaI, String> click = new Column<PessoaI, String>(new ButtonCell(ButtonType.PRIMARY, IconType.EDIT)) {
 	            @Override
-	            public String getValue(ProdutorI object) {
+	            public String getValue(PessoaI object) {
 	                return "";
 	            }
 	        };
 	        
-	        click.setFieldUpdater(new FieldUpdater<ProdutorI, String>() {
+	        click.setFieldUpdater(new FieldUpdater<PessoaI, String>() {
             @Override
-            public void update(int index, ProdutorI produtor, String value) {
+            public void update(int index, PessoaI produtor, String value) {
             	loadForm(produtor);
                 formRow.setVisible(true);
             }
@@ -175,13 +189,27 @@ public class ProdutoresView extends Composite {
 		produtorEditado.setTelefone(telefoneField.getValue());
 		produtorEditado.setAtivo(ativoField.getValue());
 		produtorEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
-		client.update(produtorEditado, new Callback<ProdutorI>() {
+		client.update(produtorEditado, new Callback<PessoaI>() {
 
 			@Override
-			public void ok(ProdutorI to) {
+			public void ok(PessoaI to) {
 				loadTabela();
 				produtorEditado=null;
 				formRow.setVisible(false);
+			}
+			@Override
+			public void onValidation(ErrosI erro) {
+				Set<String> fields=erro.getErrosFields().keySet();
+				Iterator<Widget> widgetIt=form.iterator();
+				while(widgetIt.hasNext()){
+					Widget w =widgetIt.next();
+					if(w instanceof FieldSet){
+						log.info("FieldSet");
+					}
+					if(w instanceof FormGroup){
+						log.info("FormGroup");
+					}
+				}
 			}
 		});
 	}
@@ -210,7 +238,7 @@ public class ProdutoresView extends Composite {
 	}
 //	
 
-	public void loadForm(ProdutorI produtor) {
+	public void loadForm(PessoaI produtor) {
 		this.produtorEditado=produtor;
 		nomeField.setValue(produtor.getNome());
 		emailField.setValue(produtor.getEmail());

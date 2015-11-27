@@ -10,6 +10,7 @@ import static com.google.gwt.http.client.Response.SC_UNAUTHORIZED;
 
 import java.util.logging.Logger;
 
+import com.agritap.sisintegracao.client.request.beans.ErrosI;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestCallback;
@@ -38,21 +39,26 @@ public abstract class Callback<T> implements RequestCallback {
 			ok(response);
 			break;
 		case SC_FORBIDDEN:
+			logger.warning("Erro no request:"+SC_FORBIDDEN);
 //			forbidden(unwrapError(response));
 			break;
 		case SC_UNAUTHORIZED:
+			logger.warning("Erro no request:"+SC_UNAUTHORIZED);
 //			unauthorized(unwrapError(response));
 			break;
 		case SC_CONFLICT:
-//			conflict(unwrapError(response));
+			ErrosI erro = unwrapConflict(response);
+			onValidation(erro);
 			break;
 		case SC_NOT_FOUND:
+			logger.warning("Erro no request:"+SC_NOT_FOUND);
 //			notFound(unwrapError(response));
 			break;
 		case SC_NO_CONTENT:
 			ok((T) null);
 			break;
 		case SC_INTERNAL_SERVER_ERROR:
+			logger.warning("Erro no request:"+SC_INTERNAL_SERVER_ERROR);
 //			internalServerError(unwrapError(response));
 			break;
 		case 0:
@@ -62,6 +68,22 @@ public abstract class Callback<T> implements RequestCallback {
 			logger.fine("Got a response, but don't know what to do about it");
 			break;
 		}
+	}
+
+	private ErrosI unwrapConflict(Response response) {
+		String responseText = response.getText();
+		if (responseText == null || responseText.trim().equals("")) {
+			throw new RuntimeException("Response text was blank");
+		}
+		String contentType = response.getHeader("Content-Type").toLowerCase();
+		AutoBean<ErrosI> bean = null;
+		AutoBeanFactory factory = factoryFor(contentType);
+		if(factory != null){
+			bean = AutoBeanCodex.decode(factory, ErrosI.class, responseText);
+			return bean.as();
+		}
+		logger.warning("Erro tratando erro 409");
+		throw new RuntimeException("Erro tratando erro 409");
 	}
 
 	protected void ok(Response response) {
@@ -100,8 +122,10 @@ public abstract class Callback<T> implements RequestCallback {
 							+ "] to this callback. Please check that your callback type mapping matches the response ContentType and you are hitting the correct URL.";
 					throw new RuntimeException(message, ex);
 				}
-			} else
+			} else{
+				logger.warning("Mime Type não encontrado:"+contentType);
 				ok(Callback.parseJson(responseText));
+			}
 
 		} else if (contentType.contains("application/octet-stream")) {
 			@SuppressWarnings("unchecked")
@@ -167,6 +191,9 @@ public abstract class Callback<T> implements RequestCallback {
 //		else
 //			return null;
 
+	}
+	public void onValidation(ErrosI erro){
+		logger.info("Informado erro de validacao");
 	}
 
 	public abstract void ok(T to);

@@ -7,6 +7,7 @@
 	<inherits name="org.gwtbootstrap3.extras.datepicker.DatePicker"/>
  	<inherits name="com.google.gwt.inject.Inject"/>
 	<inherits name='com.google.web.bindery.requestfactory.RequestFactory' />
+	<inherits name="com.google.api.gwt.oauth2.OAuth2" />
 	<replace-with class="com.agritap.sisintegracao.client.ClientFactoryImpl">
    	 <when-type-is class="com.agritap.sisintegracao.client.ui.ClientFactory"/>
     </replace-with>

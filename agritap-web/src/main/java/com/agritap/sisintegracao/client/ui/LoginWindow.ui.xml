@@ -1,13 +1,44 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:gwt="urn:import:org.gwtbootstrap3.client.ui.gwt"
+	xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
+	xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
+	>
+
 	<ui:style>
-	.important {
-		font-weight: bold;
-	}
+	
 	</ui:style>
-	<g:HTMLPanel>
-		SEJA BEM VINDO AO INTEGRATION SYSTEM !!
-		<g:Button styleName="{style.important}" ui:field="button" />
+
+
+	<g:HTMLPanel styleName="login-body">
+		<b:Form styleName="form-signin" ui:field="formSign">
+		<g:HTMLPanel>
+			<h2 class="form-signin-heading">Faça Login</h2>
+			
+			<label for="inputEmail" class="sr-only">Email</label>
+			<b:TextBox  ui:field="emailField" placeholder="Email" ></b:TextBox>
+			
+			<label for="inputPassword" class="sr-only">Senha</label>
+			<b:Input type="PASSWORD" b:id="formPassword" ui:field="passwordField" placeholder="Senha" />
+			
+
+			<gwt:HTMLPanel styleName="alert alert-warning alert-dismissible" ui:field="mensagemErroBox" visible="false">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <strong>
+			  <g:Label ui:field="mensagemErro"></g:Label>
+			  </strong>
+			</gwt:HTMLPanel>			
+			
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" value="Lembrar de mim" />
+					Lembrar de mim
+				</label>
+			</div>
+			<g:Button ui:field="loginBtn" styleName="btn btn-lg btn-primary btn-block">Login</g:Button>
+		</g:HTMLPanel>
+		</b:Form>
+		
 	</g:HTMLPanel>
 </ui:UiBinder> 

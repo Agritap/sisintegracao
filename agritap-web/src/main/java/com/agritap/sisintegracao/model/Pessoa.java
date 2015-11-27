@@ -1,5 +1,8 @@
 package com.agritap.sisintegracao.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,25 +15,42 @@ import javax.persistence.Version;
 
 @Entity
 @NamedQueries(
-		{@NamedQuery(name="produtor.todos",query="select p from Produtor p")})
-public class Produtor {
+		{@NamedQuery(name="pessoa.todos",query="select p from Pessoa p")})
+public class Pessoa implements Serializable{
 	
+	private static final long serialVersionUID = -3216625491090034548L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
 	@Enumerated(EnumType.STRING)
 	private Integradora integradora;
-	
+
+	@Column(length=14)
+	private String cpf;
+
+	@Column(length=255)
 	private String nome;
 	
+	@Column(length=30)
+	private String apelido;
+	
+	@Column(length=30)
 	private String codigoIntegradora;
 	
+	@Column(length=250)
 	private String email;
 	
 	private Boolean ativo;
 	
 	private String telefone;
+	
+	private Boolean granjeiro;
+	
+	private Boolean tecnico;
+	
+	private Boolean produtor;
 
 	@Version
 	private Integer version;
@@ -97,5 +117,45 @@ public class Produtor {
 
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public Boolean getGranjeiro() {
+		return granjeiro;
+	}
+
+	public void setGranjeiro(Boolean granjeiro) {
+		this.granjeiro = granjeiro;
+	}
+
+	public Boolean getProdutor() {
+		return produtor;
+	}
+
+	public void setProdutor(Boolean produtor) {
+		this.produtor = produtor;
+	}
+
+	public Boolean getTecnico() {
+		return tecnico;
+	}
+
+	public void setTecnico(Boolean tecnico) {
+		this.tecnico = tecnico;
+	}
+
+	public String getApelido() {
+		return apelido;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
 	}
 }

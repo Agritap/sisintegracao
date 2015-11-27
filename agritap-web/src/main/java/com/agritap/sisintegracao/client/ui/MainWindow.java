@@ -34,7 +34,7 @@ public class MainWindow extends Composite  {
 	}
 	
 	public void open(){
-		addConteudo(new LoginWindow());
+//		addConteudo(new LoginWindow());
 	}
 	
 	public MainWindow(ClientFactory clientFactory) {

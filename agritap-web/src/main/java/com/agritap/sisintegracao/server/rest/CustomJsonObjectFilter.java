@@ -9,7 +9,9 @@ public class CustomJsonObjectFilter implements ContainerResponseFilter {
 	@Override
 	public ContainerResponse filter(ContainerRequest requestContext, ContainerResponse responseContext) {
 		if(requestContext.getHeaderValue("agritap-custom-type")!=null){
-			responseContext.getHttpHeaders().add("agritap-custom-type", requestContext.getHeaderValue("agritap-custom-type"));
+			if(!responseContext.getHttpHeaders().containsKey("agritap-custom-type")){
+				responseContext.getHttpHeaders().add("agritap-custom-type", requestContext.getHeaderValue("agritap-custom-type"));
+			}
 		}
 		return responseContext;
 	}

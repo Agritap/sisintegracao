@@ -2,9 +2,9 @@ package com.agritap.sisintegracao.client.request.beans;
 
 import com.agritap.sisintegracao.client.request.EntityFactory;
 
-public interface ProdutorI {
+public interface PessoaI {
 	
-	public static String TYPE = EntityFactory.PREFIX + "produtor+json";
+	public static String TYPE = EntityFactory.PREFIX + "pessoa+json";
 	
 	public Integer getId();
 
