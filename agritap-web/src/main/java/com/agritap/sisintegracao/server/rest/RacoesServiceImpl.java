@@ -8,10 +8,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-<<<<<<< HEAD
-=======
-import com.agritap.sisintegracao.model.Pessoa;
->>>>>>> Adiciona tela de login.
 import com.agritap.sisintegracao.model.TipoRacao;
 import com.agritap.sisintegracao.server.to.ListAdapter;
 import com.google.inject.Inject;

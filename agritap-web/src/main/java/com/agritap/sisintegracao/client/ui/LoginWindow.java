@@ -52,6 +52,7 @@ public class LoginWindow extends Composite {
 	PessoaClient pessoaClient = new PessoaClient();
 	
 	public LoginWindow(ClientFactory clientFactory, StateHistory st) {
+		log.warning("passou aqui kct");
 		initWidget(uiBinder.createAndBindUi(this));
 		emailField.addStyleName("email");
 		passwordField.addStyleName("password");

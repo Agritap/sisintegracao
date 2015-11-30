@@ -2,28 +2,15 @@ package com.agritap.sisintegracao.client;
 
 public enum ViewEnum {
 
-<<<<<<< HEAD
-	LOGIN("/login"),INICIAL("/inicial"),
+	LOGIN("/login",false),INICIAL("/inicial"),
 	ERRO("/erro"),
 	CONFIGURACAO_LOTE("/configuracaoLote"), 
 	CONTROLE_MORTALIDADE("/controleMortalidade"),
 	REPOSICAO_LOTE("/reposicaoLote"),
-	PRODUTORES("/produtores"),
+	PESSOAS("/pessoas"),
 	TIPORACAO("/tipoRacao"),
 	RECEBIMENTOS("/recebimentos"),
 	VACINACAO_ANIMAIS("/vacinacaoAnimais");
-=======
-	LOGIN("/login",false), 
-	INICIAL("/inicial"), ERRO("/erro"), 
-	CONFIGURACAO_LOTE("/configuracaoLote"), CONTROLE_MORTALIDADE("/controleMortalidade"), 
-	REPOSICAO_LOTE("/reposicaoLote"), PRODUTORES("/produtores"), 
-<<<<<<< HEAD
-	PEDIDOS("/pedidos"), VACINACAO_ANIMAIS("/vacinacaoAnimais");
->>>>>>> Adiciona tela de login.
-=======
-	PEDIDOS("/pedidos"),TIPORACAO("/tipoRacao"),
-	RECEBIMENTOS("/recebimentos"), VACINACAO_ANIMAIS("/vacinacaoAnimais");
->>>>>>> Merge do ViewEnum
 
 	public String url;
 

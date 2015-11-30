@@ -84,7 +84,7 @@ public class RecebimentoView extends Composite {
 		addRecebimento.addDomHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				recebimentoEditado = factory.getEntityfactory().newRecebimento1().as();
+				recebimentoEditado = factory.getEntityfactory().newRecebimento().as();
 				loadForm(recebimentoEditado);
 				 formRow.setVisible(true);
 			}

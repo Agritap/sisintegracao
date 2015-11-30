@@ -29,7 +29,7 @@ public class SideBarMenu extends Composite {
 	
 	@UiHandler("produtores")
 	public void produtoresClick(ClickEvent evt){
-		factory.getAppController().goTo(ViewEnum.PRODUTORES);
+		factory.getAppController().goTo(ViewEnum.PESSOAS);
 	}
 	
 	@UiHandler("tipoRacao")

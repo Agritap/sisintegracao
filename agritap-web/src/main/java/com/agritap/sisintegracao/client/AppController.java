@@ -7,17 +7,9 @@ import com.agritap.sisintegracao.client.ui.MainWindow;
 import com.agritap.sisintegracao.client.ui.StateHistory;
 import com.agritap.sisintegracao.client.ui.configuracao.ConfiguracaoLote;
 import com.agritap.sisintegracao.client.ui.configuracao.ControleMortalidade;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.agritap.sisintegracao.client.ui.configuracao.TipoRacaoView;
-import com.agritap.sisintegracao.client.ui.configuracao.ProdutoresView;
-=======
-=======
-import com.agritap.sisintegracao.client.ui.configuracao.TipoRacaoView;
->>>>>>> Tela de login, Merge do AppController
 import com.agritap.sisintegracao.client.ui.configuracao.PessoasView;
->>>>>>> Adiciona tela de login.
 import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;
+import com.agritap.sisintegracao.client.ui.configuracao.TipoRacaoView;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
@@ -90,6 +82,7 @@ public class AppController implements ValueChangeHandler<String>{
 			MainWindow mw = factory.getMainWindow(container);
 			if(view.equals(ViewEnum.INICIAL)){
 				mw.open();
+				return mw;
 			}
 			if(view.equals(ViewEnum.CONFIGURACAO_LOTE)){
 				mw.addConteudo(new ConfiguracaoLote());
@@ -99,11 +92,9 @@ public class AppController implements ValueChangeHandler<String>{
 				mw.addConteudo(new ControleMortalidade());
 				return mw;
 			}
-			if(view.equals(ViewEnum.PRODUTORES)){
+			if(view.equals(ViewEnum.PESSOAS)){
 				mw.addConteudo(new PessoasView(factory));
 				return mw;
-				
-				
 			}
 			if(view.equals(ViewEnum.TIPORACAO)){
 				mw.addConteudo(new TipoRacaoView(factory));
@@ -117,21 +108,5 @@ public class AppController implements ValueChangeHandler<String>{
 			
 			return null;
 		}
-//		    if (token != null) {
-//		      Presenter presenter = null;
-//
-//		      if (token.equals("list")) {
-//		        presenter = new ContactsPresenter(rpcService, eventBus, new ContactView());
-//		      }
-//		      else if (token.equals("add")) {
-//		        presenter = new EditContactPresenter(rpcService, eventBus, new EditContactView());
-//		      }
-//		      else if (token.equals("edit")) {
-//		        presenter = new EditContactPresenter(rpcService, eventBus, new EditContactView());
-//		      }
-//
-//		      if (presenter != null) {
-//		        presenter.go(container);
-//		      }
-//		    }
+//		    
 }
