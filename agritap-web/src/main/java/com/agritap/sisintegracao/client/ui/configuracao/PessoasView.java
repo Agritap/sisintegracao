@@ -1,12 +1,8 @@
 package com.agritap.sisintegracao.client.ui.configuracao;
 
-import java.util.Iterator;
-import java.util.Set;
 import java.util.logging.Logger;
 
-import org.gwtbootstrap3.client.ui.FieldSet;
 import org.gwtbootstrap3.client.ui.Form;
-import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.ListGroup;

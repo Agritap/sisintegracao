@@ -46,12 +46,16 @@ public class ClientFactoryImpl implements ClientFactory {
 
 	
 	@Override
-	public LoginWindow getLoginWindow(HasWidgets panel,StateHistory st) {
+	public LoginWindow openLoginWindow(HasWidgets panel,StateHistory st) {
 		if (loginWindow == null) {
 			loginWindow = new LoginWindow(this,st);
 			panel.clear();
 			panel.add(loginWindow);
+		}else{
+			panel.clear();
+			panel.add(loginWindow);
 		}
+		mainWindow=null;
 		return loginWindow;
 	}
 

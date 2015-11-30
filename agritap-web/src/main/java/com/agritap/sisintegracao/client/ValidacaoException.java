@@ -14,6 +14,10 @@ public class ValidacaoException extends RuntimeException {
 
 	private List<String> errosGenericos=new LinkedList<>();
 
+	public ValidacaoException(){}
+	public ValidacaoException(String msg){
+		addErro(msg);
+	}
 	public void addErro(String campo,String erro){
 		errosFields.put(campo, erro);
 	}

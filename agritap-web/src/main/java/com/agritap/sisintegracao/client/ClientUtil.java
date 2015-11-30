@@ -1,26 +1,27 @@
 package com.agritap.sisintegracao.client;
 
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.logging.Logger;
 
-import org.gwtbootstrap3.client.ui.FieldSet;
-import org.gwtbootstrap3.client.ui.Form;
-import org.gwtbootstrap3.client.ui.FormGroup;
-import org.gwtbootstrap3.client.ui.FormLabel;
 import org.gwtbootstrap3.client.ui.ListGroup;
 import org.gwtbootstrap3.client.ui.ListGroupItem;
 import org.gwtbootstrap3.client.ui.constants.ListGroupItemType;
-import org.gwtbootstrap3.client.ui.constants.ValidationState;
 
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.Cookies;
 
 public class ClientUtil {
 	static Logger log = Logger.getLogger(ClientUtil.class.getName());
 	static DateTimeFormat dateFormat = DateTimeFormat.getFormat("dd/MM/yyyy");
+	
+	public static final String COOKIE_TOKEN_NAME = "agritapweb_token";
+	
+	
+	
+	public static void clearToken() {
+		Cookies.removeCookie(COOKIE_TOKEN_NAME);
+	}
 	public static String formatDate(Date data){
 		if(data==null){
 			return null;
@@ -81,5 +82,12 @@ public class ClientUtil {
 		}
 		errorBox.setVisible(true);
 		
+	}
+
+	public static boolean isEmpty(Object str) {
+		if(str==null){
+			return true;
+		}
+		return str.toString().trim().equals("");
 	}
 }

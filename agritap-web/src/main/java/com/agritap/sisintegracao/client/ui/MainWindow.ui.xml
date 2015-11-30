@@ -89,10 +89,10 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="login.html">
+								<g:Anchor ui:field="sair" >
 									<i class="fa fa-sign-out fa-fw"></i>
 									Sair
-								</a>
+								</g:Anchor>
 							</li>
 						</ul>
 						<!-- /.dropdown-user -->

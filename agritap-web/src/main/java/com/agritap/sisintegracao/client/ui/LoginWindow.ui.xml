@@ -32,8 +32,7 @@
 			
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" value="Lembrar de mim" />
-					Lembrar de mim
+					<b:InlineCheckBox ui:field="lembrarField" text="Lembrar de mim"/> 
 				</label>
 			</div>
 			<g:Button ui:field="loginBtn" styleName="btn btn-lg btn-primary btn-block">Login</g:Button>

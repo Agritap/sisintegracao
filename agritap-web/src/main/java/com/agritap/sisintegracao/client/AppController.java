@@ -76,7 +76,7 @@ public class AppController implements ValueChangeHandler<String>{
 				}
 			}
 			if(view.equals(ViewEnum.LOGIN)){
-				return factory.getLoginWindow(container,st);
+				return factory.openLoginWindow(container,st);
 			}
 //			History.newItem(view.getUrl());
 			MainWindow mw = factory.getMainWindow(container);

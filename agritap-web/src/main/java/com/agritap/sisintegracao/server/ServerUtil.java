@@ -6,4 +6,8 @@ public class ServerUtil {
 		return pass;
 	}
 
+	public static String decrypt(String authToken) {
+		return authToken;
+	}
+
 }

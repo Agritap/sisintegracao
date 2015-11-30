@@ -3,10 +3,12 @@ package com.agritap.sisintegracao.client.ui;
 import java.util.logging.Logger;
 
 import org.gwtbootstrap3.client.ui.Form;
+import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.Input;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.gwt.HTMLPanel;
 
+import com.agritap.sisintegracao.client.ClientUtil;
 import com.agritap.sisintegracao.client.ViewEnum;
 import com.agritap.sisintegracao.client.request.Callback;
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
@@ -19,6 +21,7 @@ import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
@@ -35,6 +38,8 @@ public class LoginWindow extends Composite {
 
 	@UiField
 	TextBox emailField;
+	@UiField
+	InlineCheckBox lembrarField;
 	
 	@UiField
 	Input passwordField;
@@ -54,12 +59,30 @@ public class LoginWindow extends Composite {
 	PessoaClient pessoaClient = new PessoaClient();
 	
 	public LoginWindow(ClientFactory clientFactory, StateHistory st) {
-		log.warning("passou aqui kct");
 		initWidget(uiBinder.createAndBindUi(this));
 		emailField.addStyleName("email");
 		passwordField.addStyleName("password");
 		this.clientFactory = clientFactory;
 		stateHistory = st;
+		verifyToken();
+	}
+
+
+	private void verifyToken() {
+		String cookie = Cookies.getCookie(ClientUtil.COOKIE_TOKEN_NAME);
+		if(!ClientUtil.isEmpty(cookie)){
+			pessoaClient.auth(cookie, new Callback<UsuarioI>(){
+				@Override
+				public void ok(UsuarioI to) {
+					login(to);
+				}
+			});
+		}
+	}
+	
+
+	private void geraToken(UsuarioI to) {
+		Cookies.setCookie(ClientUtil.COOKIE_TOKEN_NAME,to.getToken());
 	}
 
 
@@ -69,20 +92,29 @@ public class LoginWindow extends Composite {
             onClick(null);
       }
 	}
+	
+	private void login(UsuarioI to) {
+		clientFactory.setAutenticado(to);
+		String retorno = stateHistory.getParameter("st_retorno");
+		if(lembrarField.getValue()!=null && lembrarField.getValue()){
+			geraToken(to);
+		}
+		if(retorno==null){
+			History.newItem(ViewEnum.INICIAL.getUrl());
+		}else{
+			History.newItem(retorno);
+		}
+	}
+	
 	@UiHandler("loginBtn")
 	void onClick(ClickEvent e) {
 		pessoaClient.auth(emailField.getText(),passwordField.getText(),new Callback<UsuarioI>() {
 			
 			@Override
 			public void ok(UsuarioI to) {
-				clientFactory.setAutenticado(to);
-				String retorno = stateHistory.getParameter("st_retorno");
-				if(retorno==null){
-					History.newItem(ViewEnum.INICIAL.getUrl());
-				}else{
-					History.newItem(retorno);
-				}
+				login(to);
 			}
+			
 			@Override
 			public void onValidation(ErrosI erro) {
 				mensagemErroBox.setVisible(true);

@@ -21,5 +21,9 @@ public interface UsuarioI {
 	public Boolean getAlteraSenha();
 
 	public void setAlteraSenha(Boolean alteraSenha) ;
+
+	public String getToken() ;
+
+	public void setToken(String permissoes);
 	
 }

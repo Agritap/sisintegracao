@@ -25,12 +25,6 @@ public class PessoaClient extends RESTClient {
 		GET("pessoas", id.toString()).withCustomReturn(PessoaI.TYPE).go(cb);
 	}
 
-	public void getUsuario(String token, Callback<UsuarioI> cb) {
-		ExceptionalRequestBuilder reqB = POST("pessoas", "usuario").withCustomReturn(UsuarioI.TYPE);
-		reqB.setRequestData(token);
-		reqB.go(cb);
-	}
-
 	public void todos(Callback<PessoaIAdapter> cb) {
 		GET("pessoas", "todos").withCustomReturn(PessoaIAdapter.TYPE).go(cb);
 	}
@@ -41,6 +35,13 @@ public class PessoaClient extends RESTClient {
 
 	public void delete(Integer id, Callback<Void> cb) {
 		DELETE("pessoas", id.toString()).go(cb);
+	}
+
+	public void auth(String cookie, Callback<UsuarioI> callback) {
+		String formBody = "token=" + cookie;
+		ExceptionalRequestBuilder reqB = POST("pessoas", "authToken").withCustomReturn(UsuarioI.TYPE);
+		reqB.setRequestData(formBody );
+		reqB.go(callback);
 	}
 
 }
