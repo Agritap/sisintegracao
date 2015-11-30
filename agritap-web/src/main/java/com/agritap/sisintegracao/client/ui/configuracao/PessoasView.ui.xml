@@ -8,7 +8,7 @@
 	<g:HTMLPanel>
 		<b:Row>
 			<b:Column size="XS_12">
-				<b:Heading size="H1" styleName="page-header" text="Produtores" />
+				<b:Heading size="H1" styleName="page-header" text="Pessoas" />
 			</b:Column>
 		</b:Row>
 
@@ -16,39 +16,46 @@
 			<b:Column size="XS_12">
 				<b:Panel>
 					<b:PanelBody>
+						
+						<b:ListGroup ui:field="errorBox" visible="false">
+						  <b:ListGroupItem type="SUCCESS" text=""/>
+						  <b:ListGroupItem type="INFO" text=""/>
+						  <b:ListGroupItem type="WARNING" text=""/>
+						  <b:ListGroupItem type="DANGER" text=""/>
+						</b:ListGroup>
 						<b:Form ui:field="form">
 							<b:FieldSet>
 
 
-								<b:FormGroup>
-									<b:FormLabel for="formQuantidade"> Nome </b:FormLabel>
+								<b:FormGroup >
+									<b:FormLabel for="nomeField"> Nome </b:FormLabel>
 									<b:TextBox placeholder="Nome" ui:field="nomeField" />
 								</b:FormGroup>
 
-								<b:FormGroup>
-									<b:FormLabel for="formQuantidade"> Email </b:FormLabel>
+								<b:FormGroup >
+									<b:FormLabel for="emailField"> Email </b:FormLabel>
 									<b:TextBox placeholder="Email" ui:field="emailField" />
 								</b:FormGroup>
 
-								<b:FormGroup>
-									<b:FormLabel for="formQuantidade"> Código da Integradora </b:FormLabel>
+								<b:FormGroup   >
+									<b:FormLabel for="codigoIntegradoraField"> Código da Integradora </b:FormLabel>
 									<b:TextBox placeholder="Código da Integradora"
 										ui:field="codigoIntegradoraField" />
 								</b:FormGroup>
 
-								<b:FormGroup>
+								<b:FormGroup >
 									<b:InlineCheckBox ui:field="ativoField" text="Ativo" />
 								</b:FormGroup>
 
 								<b:FormGroup>
-									<b:FormLabel for="formQuantidade"> Telefone </b:FormLabel>
+									<b:FormLabel for="telefoneField"> Telefone </b:FormLabel>
 									<b:TextBox placeholder="Telefone" ui:field="telefoneField" />
 								</b:FormGroup>
 
-								<b:FormGroup>
-									<b:FormLabel for="integradora" >Integradora</b:FormLabel>
+								<b:FormGroup >
+									<b:FormLabel for="integradoraField" >Integradora</b:FormLabel>
 									<g:FlowPanel>
-										<b:ListBox b:id="integradora" ui:field="integradoraField">
+										<b:ListBox ui:field="integradoraField">
 										</b:ListBox>
 									</g:FlowPanel>
 								</b:FormGroup>

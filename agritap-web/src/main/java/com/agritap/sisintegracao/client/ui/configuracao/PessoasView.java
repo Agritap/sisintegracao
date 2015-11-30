@@ -9,6 +9,7 @@ import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
 import org.gwtbootstrap3.client.ui.ListBox;
+import org.gwtbootstrap3.client.ui.ListGroup;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
@@ -16,6 +17,7 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 
+import com.agritap.sisintegracao.client.ClientUtil;
 import com.agritap.sisintegracao.client.request.Callback;
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
 import com.agritap.sisintegracao.client.request.beans.PessoaI;
@@ -65,6 +67,9 @@ public class PessoasView extends Composite {
 	@UiField
 	TextBox nomeField;
 	
+	@UiField
+	ListGroup errorBox;
+
 	@UiField
 	TextBox emailField;
 
@@ -184,6 +189,9 @@ public class PessoasView extends Composite {
 	
 	@UiHandler("salvarBtn")
 	public void salvarClick(ClickEvent evt){
+		errorBox.setVisible(false);
+		errorBox.clear();
+		
 		produtorEditado.setNome(nomeField.getValue());
 		produtorEditado.setEmail(emailField.getValue());
 		produtorEditado.setTelefone(telefoneField.getValue());
@@ -199,23 +207,15 @@ public class PessoasView extends Composite {
 			}
 			@Override
 			public void onValidation(ErrosI erro) {
-				Set<String> fields=erro.getErrosFields().keySet();
-				Iterator<Widget> widgetIt=form.iterator();
-				while(widgetIt.hasNext()){
-					Widget w =widgetIt.next();
-					if(w instanceof FieldSet){
-						log.info("FieldSet");
-					}
-					if(w instanceof FormGroup){
-						log.info("FormGroup");
-					}
-				}
+				ClientUtil.printValidation(erro,errorBox);
 			}
 		});
 	}
 	@UiHandler("cancelarBtn")
 	public void cancelarClick(ClickEvent evt){
 		formRow.setVisible(false);
+		errorBox.setVisible(false);
+		errorBox.clear();
 		produtorEditado=null;
 	}
 
@@ -239,6 +239,8 @@ public class PessoasView extends Composite {
 //	
 
 	public void loadForm(PessoaI produtor) {
+		errorBox.setVisible(false);
+		errorBox.clear();
 		this.produtorEditado=produtor;
 		nomeField.setValue(produtor.getNome());
 		emailField.setValue(produtor.getEmail());

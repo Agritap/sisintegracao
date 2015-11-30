@@ -14,6 +14,8 @@ import com.agritap.sisintegracao.client.request.beans.UsuarioI;
 import com.agritap.sisintegracao.client.request.clients.PessoaClient;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -61,6 +63,12 @@ public class LoginWindow extends Composite {
 	}
 
 
+	@UiHandler("passwordField")
+	void onEnter(KeyDownEvent event) {
+		if(event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+            onClick(null);
+      }
+	}
 	@UiHandler("loginBtn")
 	void onClick(ClickEvent e) {
 		pessoaClient.auth(emailField.getText(),passwordField.getText(),new Callback<UsuarioI>() {

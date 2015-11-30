@@ -52,7 +52,7 @@ public class PessoaServiceImpl {
 	public Pessoa save(Pessoa produtor){
 		if(produtor.getEmail()==null || produtor.getEmail()==""){
 			ValidacaoException v = new ValidacaoException();
-			v.addErro("emailField","Informe o email do usuário");
+			v.addErro("email","Informe o email do usuário");
 			throw v;
 		}
 		em.merge(produtor);
