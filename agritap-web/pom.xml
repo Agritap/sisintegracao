@@ -37,9 +37,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<!-- <dependency> <groupId>org.glassfish.jersey</groupId> <artifactId>jersey-bom</artifactId> 
-				<version>${jersey.version}</version> <type>pom</type> <scope>import</scope> 
-				</dependency> -->
 		</dependencies>
 
 
@@ -86,9 +83,6 @@
 			<version>0.9.1</version>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- <dependency> <groupId>net.ltgt.gwt.maven</groupId> <artifactId>gwt-maven-plugin</artifactId> 
-			<version>1.0-beta-1</version> </dependency> -->
 		<dependency>
 			<groupId>com.google.gwt.inject</groupId>
 			<artifactId>gin</artifactId>
@@ -125,9 +119,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency> <groupId>com.trycatchsoft.gwt.requestfactory</groupId> 
-			<artifactId>injected-requestfactory</artifactId> <version>1.2.1-SNAPSHOT</version> 
-			</dependency> -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -172,12 +163,10 @@
 	            <groupId>org.testng</groupId>
 	            <artifactId>testng</artifactId>
 			 </exclusion>
-			 <!-- 
 			 <exclusion>
                     <groupId>junit</groupId>
                     <artifactId>junit</artifactId>
 			 </exclusion>
-			  -->
 			 <exclusion>
 		            <groupId>httpunit</groupId>
 		            <artifactId>httpunit</artifactId>
@@ -186,53 +175,13 @@
 		 </dependency>
 			 
 			 
-			 
-			
-			<!-- Oauth -->
-			<!--  
-			<dependency>
-   			  <groupId>com.google.api</groupId>
-			  <artifactId>gwt-oauth2</artifactId>
-			  <version>0.2-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>com.google.api-client</groupId>
-				<artifactId>google-api-client</artifactId>
-				<version>1.20.0</version>
-			</dependency>
-			<dependency>
-			  <groupId>com.google.oauth-client</groupId>
-			  <artifactId>google-oauth-client-servlet</artifactId>
-			  <version>1.20.0</version>
-			</dependency>
-			<dependency>
-			  <groupId>com.google.oauth-client</groupId>
-			  <artifactId>google-oauth-client</artifactId>
-			  <version>1.20.0</version>
-			  
-		 	  
-			  <exclusions>
-			    <exclusion>
-			      <artifactId>xpp3</artifactId>
-			      <groupId>xpp3</groupId>
-			    </exclusion>
-			    <exclusion>
-			      <artifactId>httpclient</artifactId>
-			      <groupId>org.apache.httpcomponents</groupId>
-			    </exclusion>
-			    <exclusion>
-			      <artifactId>junit</artifactId>
-			      <groupId>junit</groupId>
-			    </exclusion>
-			    <exclusion>
-			      <artifactId>android</artifactId>
-			      <groupId>com.google.android</groupId>
-			    </exclusion>
-			  </exclusions>
-						  
->>>>>>> Adiciona tela de login.
-		</dependency>
-		-->
+		
+		<dependency>
+	<groupId>junit</groupId>
+	<artifactId>junit</artifactId>
+	<version>4.11</version>
+</dependency>
+		
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-bundle</artifactId>
@@ -248,6 +197,7 @@
 	</dependencies>
 
 	<build>
+		<outputDirectory>war/WEB-INF/classes</outputDirectory>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -289,10 +239,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin> <artifactId>maven-compiler-plugin</artifactId> <version>3.3</version> 
-				<configuration> </configuration> <dependencies> <dependency> <groupId>com.google.web.bindery</groupId> 
-				<artifactId>requestfactory-apt</artifactId> <version>${gwtVersion}</version> 
-				</dependency> </dependencies> </plugin> -->
 		</plugins>
 	</build>
 </project> 

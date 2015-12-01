@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class ServerUtilTest {
 
-//	@Test
+	@Test
 	public void test() {
 		// 01/01/2015
 		Calendar janeiro = Calendar.getInstance();
@@ -75,10 +75,23 @@ public class ServerUtilTest {
 				junho.getTime());
 		assertTrue(deveriaSerTrue);
 
+		deveriaSerTrue = ServerUtil.isPeriodosIntercecao(fevereiro.getTime(), null, janeiro.getTime(),
+				junho.getTime());
+		assertTrue(deveriaSerTrue);
+
+		deveriaSerTrue = ServerUtil.isPeriodosIntercecao(fevereiro.getTime(), junho.getTime(), janeiro.getTime(),
+				agosto.getTime());
+		assertTrue(deveriaSerTrue);
+
 		deveriaSerTrue = ServerUtil.isPeriodosIntercecao(fevereiro.getTime(), agosto.getTime(), null, junho.getTime());
 		assertTrue(deveriaSerTrue);
 
 		deveriaSerTrue = ServerUtil.isPeriodosIntercecao(fevereiro.getTime(), null, null, junho.getTime());
+		assertTrue(deveriaSerTrue);
+
+
+		deveriaSerTrue = ServerUtil.isPeriodosIntercecao(janeiro.getTime(),
+				agosto.getTime(),fevereiro.getTime(), junho.getTime());
 		assertTrue(deveriaSerTrue);
 
 		deveriaSerTrue = ServerUtil.isPeriodosIntercecao(null, null, null, junho.getTime());
