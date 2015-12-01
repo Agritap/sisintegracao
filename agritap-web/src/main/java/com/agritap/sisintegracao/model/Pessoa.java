@@ -52,6 +52,8 @@ public class Pessoa implements Serializable{
 	
 	private Boolean produtor;
 
+	private Boolean administrador;
+
 	@Version
 	private Integer version;
 
@@ -157,5 +159,13 @@ public class Pessoa implements Serializable{
 
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
+	}
+
+	public Boolean getAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(Boolean administrador) {
+		this.administrador = administrador;
 	}
 }

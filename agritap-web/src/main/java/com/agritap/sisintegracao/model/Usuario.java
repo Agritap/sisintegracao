@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 @Entity
 @NamedQueries(@NamedQuery(name="usuario.porEmail",query="select u from Usuario u where u.usuario.email=:email "))
@@ -34,8 +33,6 @@ public class Usuario {
 	
 	private Boolean alteraSenha;
 	
-	@Transient
-	private transient String token;
 
 	public Integer getId() {
 		return id;
@@ -85,13 +82,4 @@ public class Usuario {
 		this.alteraSenha = alteraSenha;
 	}
 
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-	
-	
 }

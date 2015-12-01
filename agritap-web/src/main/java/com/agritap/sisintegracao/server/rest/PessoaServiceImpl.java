@@ -2,6 +2,7 @@ package com.agritap.sisintegracao.server.rest;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -22,8 +23,10 @@ import javax.ws.rs.core.MediaType;
 import com.agritap.sisintegracao.client.ValidacaoException;
 import com.agritap.sisintegracao.model.Pessoa;
 import com.agritap.sisintegracao.model.Usuario;
+import com.agritap.sisintegracao.model.UsuarioProdutor;
 import com.agritap.sisintegracao.server.ServerUtil;
 import com.agritap.sisintegracao.server.to.ListAdapter;
+import com.agritap.sisintegracao.server.to.UsuarioTO;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
@@ -70,7 +73,7 @@ public class PessoaServiceImpl {
 	}
 	@POST
 	@Path("/authToken")
-	public Usuario getUsuario(@FormParam("token")String authToken){
+	public UsuarioTO getUsuario(@FormParam("token")String authToken){
 		try{
 		String token = ServerUtil.decrypt(authToken);
 		StringTokenizer buf = new StringTokenizer(token,"|");
@@ -81,8 +84,7 @@ public class PessoaServiceImpl {
 		if(agora.compareTo(exp)<0){
 			//wheee. ta valido
 			Usuario user = em.find(Usuario.class, id);
-			geraToken(user);
-			return user;
+			return geraUsuarioTO(user);
 		}
 		}catch(Exception e){
 			log.log(Level.WARNING,"Erro validando token",e);
@@ -92,7 +94,7 @@ public class PessoaServiceImpl {
 	}
 	@POST
 	@Path("/auth")
-	public Usuario getUsuario(@FormParam("login")String email,@FormParam("password")String pass){
+	public UsuarioTO getUsuario(@FormParam("login")String email,@FormParam("password")String pass){
 		TypedQuery<Usuario> query  = em.createNamedQuery("usuario.porEmail",Usuario.class).setParameter("email", email);
 		List<Usuario> usuarios = query.getResultList();
 		if(usuarios.size()==0){
@@ -112,8 +114,7 @@ public class PessoaServiceImpl {
 			throw ex;
 		}
 		if(user.getSenha().equals(ServerUtil.crypt(pass))){
-			geraToken(user);
-			return user;
+			return geraUsuarioTO(user);
 		}else{
 			ValidacaoException ex =new ValidacaoException();
 			ex.addErro("Senha de acesso inválida");
@@ -121,11 +122,31 @@ public class PessoaServiceImpl {
 		}
 	}
 
-	private void geraToken(Usuario user) {
+	private UsuarioTO geraUsuarioTO(Usuario user) {
 		Integer id = user.getId();
 		Calendar agora= Calendar.getInstance();
 		agora.add(Calendar.DAY_OF_MONTH, 30);
 		String token = id+"|"+agora.getTimeInMillis();
-		user.setToken(ServerUtil.crypt(token));
+		UsuarioTO to = new UsuarioTO();
+		to.setToken(ServerUtil.crypt(token));
+		to.setPermissoes(user.getPermissoes());
+		to.setUsuario(user.getUsuario());
+		to.setAlteraSenha(user.getAlteraSenha());
+		to.setId(user.getId());
+		
+		List<Pessoa> produtoresPermitidos = new LinkedList<>();
+		to.setProdutores(produtoresPermitidos);
+		if(user.getUsuario().getProdutor()!=null && user.getUsuario().getProdutor()){
+			produtoresPermitidos.add(user.getUsuario());
+		}
+		if(user.getProdutores()!=null){
+			for(UsuarioProdutor u:user.getProdutores()){
+				if(ServerUtil.isPeriodosIntercecao(u.getDataInicio(), u.getDataFim(), new Date(), new Date())){
+					produtoresPermitidos.add(u.getProdutor());
+				}
+			}
+		}
+		
+		return to;
 	}
 }

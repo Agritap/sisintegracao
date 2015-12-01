@@ -2,8 +2,6 @@ package com.agritap.sisintegracao.server;
 
 import java.util.Date;
 
-import com.agritap.sisintegracao.client.ValidacaoException;
-
 public class ServerUtil {
 
 	public static String crypt(String pass) {
