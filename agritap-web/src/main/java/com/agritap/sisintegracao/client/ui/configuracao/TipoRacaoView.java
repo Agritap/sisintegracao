@@ -77,13 +77,9 @@ public class TipoRacaoView extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		init();
 		this.factory = factory;
-		
-//		factory.getUsuarioAutenticado().getProdutores()
-//		factory.getUsuarioAutenticado().getUsuario()
 	}
 
 	private void init() {
-		int i = 0;
 		for (TipoAnimal t : TipoAnimal.values()) {
 			tipoAnimalField.addItem(t.name());
 		}
@@ -136,7 +132,6 @@ public class TipoRacaoView extends Composite {
 			@Override
 			public String getValue(TipoRacaoI tipoRacao) {
 				return ClientUtil.formatDate(tipoRacao.getDataInicio());
-
 			}
 
 		};
@@ -187,12 +182,12 @@ public class TipoRacaoView extends Composite {
 
 		});
 
-		tabelaTipoRacao.addColumn(carenciaColumn, "Carencia");
-		tabelaTipoRacao.addColumn(dataFimColumn, "Data Fim");
-		tabelaTipoRacao.addColumn(dataInicioColumn, "Data Inicio");
-		tabelaTipoRacao.addColumn(medicadaColumn, "Medicada");
 		tabelaTipoRacao.addColumn(nomeColumn, "Nome");
-		tabelaTipoRacao.addColumn(tipoAnimalColumn, "Tipp Animal");
+		tabelaTipoRacao.addColumn(dataInicioColumn, "Data Inicio");
+		tabelaTipoRacao.addColumn(dataFimColumn, "Data Fim");
+		tabelaTipoRacao.addColumn(carenciaColumn, "Carência");
+		tabelaTipoRacao.addColumn(medicadaColumn, "Medicada");
+		tabelaTipoRacao.addColumn(tipoAnimalColumn, "Tipo de Animal");
 		tabelaTipoRacao.addColumn(click, "Ações");
 	}
 

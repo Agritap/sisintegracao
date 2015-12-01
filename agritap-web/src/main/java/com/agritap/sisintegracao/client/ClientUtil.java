@@ -58,7 +58,7 @@ public class ClientUtil {
 
 
 	public static Integer parseInteger(String value) {
-		if(value==null){
+		if(isEmpty(value)){
 			return null;
 		}
 		//TODO gtratar problema de numberformatexception
