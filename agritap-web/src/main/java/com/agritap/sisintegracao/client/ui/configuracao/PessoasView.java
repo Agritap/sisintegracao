@@ -122,7 +122,11 @@ public class PessoasView extends Composite {
 		TextColumn<PessoaI> nomeColumn = new TextColumn<PessoaI>() {
 			@Override
 			public String getValue(PessoaI produtor) {
-				return produtor.getNome();
+				if(ClientUtil.isEmpty(produtor.getApelido())){
+					return produtor.getNome();
+				}else{
+					return produtor.getNome()+" ("+produtor.getApelido()+")";
+				}
 			}
 		};
 		TextColumn<PessoaI> emailColumn = new TextColumn<PessoaI>() {
@@ -154,9 +158,19 @@ public class PessoasView extends Composite {
 			@Override
 			public void render(Context context, PessoaI produtor, SafeHtmlBuilder sb) {
 				if(produtor.getAtivo() == null || produtor.getAtivo()){
-					sb.appendHtmlConstant("<i class=\"fa fa-check-square-o\"></i>");
+					sb.appendHtmlConstant("<i title=\"Ativo\" class=\"fa fa-check-square-o\"></i>");
 				}else{
-					sb.appendHtmlConstant("<i class=\"fa fa-square-o\"></i>");
+					sb.appendHtmlConstant("<i title=\"Inativo\" class=\"fa fa-square-o\"></i>");
+				}
+				if(produtor.getProdutor()!=null && produtor.getProdutor() )	{
+					sb.appendHtmlConstant(" <i title=\"Produtor\" class=\"fa fa-star\"></i>");
+				}
+				if(produtor.getTecnico()!=null && produtor.getTecnico() )	{
+					sb.appendHtmlConstant(" <i title=\"Técnico\" class=\"fa fa-suitcase\"></i>");
+					
+				}
+				if(produtor.getGranjeiro()!=null && produtor.getGranjeiro() )	{
+					sb.appendHtmlConstant(" <i title=\"Granjeiro\" class=\"fa fa-spinner\"></i>");
 				}
 			}
 		};
