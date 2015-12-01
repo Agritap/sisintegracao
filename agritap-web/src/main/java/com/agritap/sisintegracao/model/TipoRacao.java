@@ -8,12 +8,16 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@NamedQuery(name="tipoRacao.todos",query="select t from TipoRacao t")
+@NamedQueries({@NamedQuery(name="tipoRacao.todos",query="select t from TipoRacao t"),
+	
+	@NamedQuery(name="tipoRacao.porNome",query="select t from TipoRacao t where t.nome = :nome ")})
+
 public class TipoRacao {
 
 	@Id

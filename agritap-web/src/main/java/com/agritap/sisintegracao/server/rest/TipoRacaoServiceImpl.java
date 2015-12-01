@@ -10,7 +10,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import com.agritap.sisintegracao.client.ClientUtil;
+import com.agritap.sisintegracao.client.ValidacaoException;
 import com.agritap.sisintegracao.model.TipoRacao;
+import com.agritap.sisintegracao.server.ServerUtil;
 import com.agritap.sisintegracao.server.to.ListAdapter;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -42,7 +46,22 @@ public class TipoRacaoServiceImpl {
 	@PUT
 	@Transactional
 	public TipoRacao save(TipoRacao tipoRacao) {
+		
+		if(ServerUtil.isEmpty(tipoRacao.getNome())){
+			throw new ValidacaoException("Informe um nome para esta ração");
+		}
+		List<TipoRacao> racoes = em.createNamedQuery("tipoRacao.porNome",TipoRacao.class).setParameter("nome", tipoRacao.getNome()).getResultList();
+		for(TipoRacao r:racoes){
+			if(tipoRacao.getId()!=null && tipoRacao.getId().equals(r.getId())){
+//			tudo bem, eh a mesma
+			}else{
+				if(ServerUtil.isPeriodosIntercecao(tipoRacao.getDataInicio(),tipoRacao.getDataFim(),r.getDataInicio(),r.getDataFim())){
+					throw new ValidacaoException("O nome deve ser único dentro do período de validade");
+				}
+			}
+		}
 		em.merge(tipoRacao);
+		//Nao posso ter nomes repetidos no mesmo p[eriodo
 		return tipoRacao;
 	}
 	

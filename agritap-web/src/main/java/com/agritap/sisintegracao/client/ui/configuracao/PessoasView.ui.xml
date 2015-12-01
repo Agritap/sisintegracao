@@ -18,10 +18,6 @@
 					<b:PanelBody>
 						
 						<b:ListGroup ui:field="errorBox" visible="false">
-						  <b:ListGroupItem type="SUCCESS" text=""/>
-						  <b:ListGroupItem type="INFO" text=""/>
-						  <b:ListGroupItem type="WARNING" text=""/>
-						  <b:ListGroupItem type="DANGER" text=""/>
 						</b:ListGroup>
 						<b:Form ui:field="form">
 							<b:FieldSet>

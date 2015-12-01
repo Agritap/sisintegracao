@@ -2,6 +2,7 @@ package com.agritap.sisintegracao.client.ui.configuracao;
 
 import org.gwtbootstrap3.client.ui.CheckBox;
 import org.gwtbootstrap3.client.ui.ListBox;
+import org.gwtbootstrap3.client.ui.ListGroup;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
@@ -12,6 +13,7 @@ import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 
 import com.agritap.sisintegracao.client.ClientUtil;
 import com.agritap.sisintegracao.client.request.Callback;
+import com.agritap.sisintegracao.client.request.beans.ErrosI;
 import com.agritap.sisintegracao.client.request.beans.TipoRacaoI;
 import com.agritap.sisintegracao.client.request.beans.TipoRacaoIAdapter;
 import com.agritap.sisintegracao.client.request.clients.TipoRacaoClient;
@@ -53,6 +55,8 @@ public class TipoRacaoView extends Composite {
 	DatePicker dataFimField;
 
 	@UiField
+	ListGroup errorBox;
+	@UiField
 	DatePicker dataInicioField;
 
 	@UiField
@@ -73,6 +77,9 @@ public class TipoRacaoView extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		init();
 		this.factory = factory;
+		
+//		factory.getUsuarioAutenticado().getProdutores()
+//		factory.getUsuarioAutenticado().getUsuario()
 	}
 
 	private void init() {
@@ -281,6 +288,11 @@ public class TipoRacaoView extends Composite {
 				loadTabela();
 				TipoRacaoEditado = null;
 				formRow.setVisible(false);
+			}
+			@Override
+			public void onValidation(ErrosI erro) {
+				errorBox.setVisible(true);
+				ClientUtil.printValidation(erro, errorBox);
 			}
 		});
 	}

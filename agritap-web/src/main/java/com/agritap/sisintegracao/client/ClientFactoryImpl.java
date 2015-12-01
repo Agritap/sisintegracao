@@ -79,4 +79,9 @@ public class ClientFactoryImpl implements ClientFactory {
 		this.usuario=user;
 	}
 
+	@Override
+	public UsuarioI getUsuarioAutenticado() {
+		return usuario;
+	}
+
 }

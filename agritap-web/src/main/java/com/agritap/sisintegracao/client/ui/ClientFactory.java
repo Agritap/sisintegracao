@@ -24,6 +24,8 @@ public interface ClientFactory {
 
 	public void setAutenticado(UsuarioI token);
 
+	public UsuarioI getUsuarioAutenticado();
+
 	public LoginWindow openLoginWindow(HasWidgets panel,StateHistory st);
 
 }

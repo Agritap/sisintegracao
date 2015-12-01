@@ -19,6 +19,8 @@
 			<b:Column size="XS_12">
 				<b:Panel>
 					<b:PanelBody>
+						<b:ListGroup ui:field="errorBox" visible="false">
+						</b:ListGroup>
 						<b:Form>
 							<b:FieldSet>
 

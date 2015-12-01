@@ -1,5 +1,7 @@
 package com.agritap.sisintegracao.client.request.beans;
 
+import java.util.List;
+
 import com.agritap.sisintegracao.client.request.EntityFactory;
 
 public interface UsuarioI {
@@ -25,5 +27,9 @@ public interface UsuarioI {
 	public String getToken() ;
 
 	public void setToken(String permissoes);
-	
+
+	public List<PessoaI> getProdutores() ;
+
+	public void setProdutores(List<PessoaI> prod) ;
+
 }
