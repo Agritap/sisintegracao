@@ -7,41 +7,41 @@
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav in" id="side-menu">
-					<p></p>
 
 					<li>
 						<div id="divBusca">
 							<input type="text" id="txtBusca" placeholder="Pesquisar" />
 						</div>
-						<p></p>
-					</li>
+				    </li>
 
-					<li data-toggle="collapse" data-target="#configuracoes-collapse"
+				<li data-toggle="collapse" data-target="#configuracoes-collapse"
 						class="collapsed active">
-						<a href="#"> 
-							<i class="fa fa-wrench fa-fw"></i>
+						<g:Anchor>
+						    <i class="fa fa-wrench fa-fw"></i>
 							Configurações
-						</a>
-						<ul class="sub-menu collapse" id="configuracoes-collapse">
-							<li>
-
-								<g:Anchor ui:field="produtores"> Produtores  </g:Anchor>
-								</li>
-								<li>
-								<a href="#"> Pedidos  </a>
-								</li>
-								<li>
-								<a href="#"> Recebimento  </a>
-
-							</li>
-						</ul>
+							<span class="fa arrow"></span>
+						</g:Anchor>
 					</li>
+					
+					<li> 
+						<ul class="sub-menu collapse" id="configuracoes-collapse">
+							<g:Anchor ui:field="produtores"> Produtores  </g:Anchor>								
+						<p></p>
+							<g:Anchor ui:field="tecnicos"> Tecnicos  </g:Anchor>								
+						<p></p>
+						<a href="#"> Pedidos  </a>
+						<p></p>
+						<a href="#"> Recebimento  </a>
+					</ul>
+					</li>
+
 					<li>
 						<g:Anchor ui:field="configuracaoLote">
 							<i class="fa fa-wrench fa-fw"></i>
 							Configuração do Lote
 						</g:Anchor>
 					</li>
+					
 					<li>
 						<g:Anchor ui:field="controleMortalidade">
 							<i class="fa fa-heartbeat fa-fw"></i>
@@ -58,24 +58,29 @@
 							<span class="fa arrow"></span>
 						</g:Anchor>
 					</li>
+					
+					<li>
 					<ul class="sub-menu collapse" id="controle-racao-collapse">
+					    <g:Anchor ui:field="tabelaRacao"> Tabela Ração  </g:Anchor>			
 						<p></p>
 						<a href="#"> Consumo  </a>
 						<p></p>
 						<a href="#"> Pedidos  </a>
 						<p></p>
 						<a href="#"> Recebimento  </a>
-
 					</ul>
-
+					</li>
 
 					<li data-toggle="collapse" data-target="#controle-agenda-collapse"
 						class="collapsed active">
+						
 						<g:Anchor>
 							<i class="fa fa-table fa-fw"></i>
 							Agenda
 							<span class="fa arrow"></span>
 						</g:Anchor>
+					</li>
+						<li> 
 						<ul class="sub-menu collapse" id="controle-agenda-collapse">
 							<g:Anchor ui:field="reposicaoLote"> Reposição do lote  </g:Anchor>
 							<p></p>

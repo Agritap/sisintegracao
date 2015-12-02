@@ -27,10 +27,9 @@ public class ProdutorServiceImpl {
 	@Path("{id}")
 //	application/vnd.agritap.v1.entity.produtor+json
 	public Produtor get(@PathParam("id")Integer id){
-		Produtor p = new Produtor();
-		p.setNome("Lucas Alves");
-		p.setId(id);
-		return p;
+	
+		return em.find(Produtor.class, id);
+	
 	}
 	
 	@GET

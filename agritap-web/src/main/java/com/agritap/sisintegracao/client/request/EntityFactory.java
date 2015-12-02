@@ -4,6 +4,8 @@ import com.agritap.sisintegracao.client.request.beans.ProdutorI;
 import com.agritap.sisintegracao.client.request.beans.ProdutorIAdapter;
 import com.agritap.sisintegracao.client.request.beans.TabelaRacaoI;
 import com.agritap.sisintegracao.client.request.beans.TabelaRacaoIAdapter;
+import com.agritap.sisintegracao.client.request.beans.TecnicoI;
+import com.agritap.sisintegracao.client.request.beans.TecnicoIAdapter;
 import com.google.web.bindery.autobean.shared.AutoBean;
 import com.google.web.bindery.autobean.shared.AutoBeanFactory;
 
@@ -14,4 +16,7 @@ public interface EntityFactory extends AutoBeanFactory {
 	AutoBean<ProdutorIAdapter> newProdutores();
 	AutoBean<TabelaRacaoI> newTabelaRacao();
 	AutoBean<TabelaRacaoIAdapter> newTabelaRacaoAdapter();
+	AutoBean<TecnicoI> newTecnico();
+	AutoBean<TecnicoIAdapter> newTecnicoAdapter();
+	
 }

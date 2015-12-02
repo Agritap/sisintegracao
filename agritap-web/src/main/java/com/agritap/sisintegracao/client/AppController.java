@@ -7,6 +7,8 @@ import com.agritap.sisintegracao.client.ui.configuracao.ConfiguracaoLote;
 import com.agritap.sisintegracao.client.ui.configuracao.ControleMortalidade;
 import com.agritap.sisintegracao.client.ui.configuracao.ProdutoresView;
 import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;
+import com.agritap.sisintegracao.client.ui.configuracao.TabelaRacaoView;
+import com.agritap.sisintegracao.client.ui.configuracao.TecnicosView;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
@@ -78,8 +80,16 @@ public class AppController implements ValueChangeHandler<String>{
 				mw.addConteudo(new ProdutoresView(factory));
 				return mw;
 			}
+			if(view.equals(ViewEnum.TABELA_RACAO)){
+				mw.addConteudo(new TabelaRacaoView(factory));
+				return mw;
+			}
 			if(view.equals(ViewEnum.REPOSICAO_LOTE)){
 				mw.addConteudo(new ReposicaoLote());
+				return mw;
+			}
+			if(view.equals(ViewEnum.TECNICOS)){
+				mw.addConteudo(new TecnicosView(factory));
 				return mw;
 			}
 			

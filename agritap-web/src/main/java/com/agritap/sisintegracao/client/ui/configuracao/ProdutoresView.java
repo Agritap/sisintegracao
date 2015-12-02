@@ -101,6 +101,7 @@ public class ProdutoresView extends Composite {
 				tabelaProdutores.redraw();
 			}
 		});
+		
 	}
 
 	private void preparaTabela() {

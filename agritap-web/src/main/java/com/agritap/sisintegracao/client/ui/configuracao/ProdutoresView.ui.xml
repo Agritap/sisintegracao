@@ -52,6 +52,7 @@
 										</b:ListBox>
 									</g:FlowPanel>
 								</b:FormGroup>
+								
 								<b:Button type="PRIMARY" ui:field="salvarBtn">Salvar</b:Button>
 								<b:Button  addStyleNames="col-xs-offset-1" ui:field="cancelarBtn">Cancelar</b:Button>
 								<b:Button type="DANGER" addStyleNames="col-xs-offset-1" ui:field="excluirBtn">Excluir</b:Button>
