@@ -16,13 +16,8 @@
 
 				<li data-toggle="collapse" data-target="#configuracoes-collapse"
 						class="collapsed active">
-<<<<<<< HEAD
 						<g:Anchor>
 						    <i class="fa fa-wrench fa-fw"></i>
-=======
-						<a href="#">
-							<i class="fa fa-wrench fa-fw"></i>
->>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
 							Configurações
 							<span class="fa arrow"></span>
 						</g:Anchor>
@@ -30,7 +25,6 @@
 					
 					<li> 
 						<ul class="sub-menu collapse" id="configuracoes-collapse">
-<<<<<<< HEAD
 							<g:Anchor ui:field="produtores"> Produtores  </g:Anchor>								
 						<p></p>
 							<g:Anchor ui:field="tecnicos"> Tecnicos  </g:Anchor>								
@@ -38,21 +32,15 @@
 						<a href="#"> Pedidos  </a>
 						<p></p>
 						<a href="#"> Recebimento  </a>
-					</ul>
-=======
-							<li>
-
-								<g:Anchor ui:field="produtores"> Produtores  </g:Anchor>
-							</li>
-							<li>
-								<g:Anchor ui:field="tipoRacao"> Tipo Ração  </g:Anchor>
-
-							</li>
-
-
+						<p></p>
+						<g:Anchor ui:field="tipoRacao"> Tipo Ração  </g:Anchor>
+						
 						</ul>
->>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
-					</li>
+						</li>
+							<li>
+
+							</li>
+
 
 					<li>
 						<g:Anchor ui:field="configuracaoLote">

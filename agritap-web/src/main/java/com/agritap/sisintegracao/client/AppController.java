@@ -9,12 +9,9 @@ import com.agritap.sisintegracao.client.ui.configuracao.ConfiguracaoLote;
 import com.agritap.sisintegracao.client.ui.configuracao.ControleMortalidade;
 import com.agritap.sisintegracao.client.ui.configuracao.PessoasView;
 import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;
-<<<<<<< HEAD
 import com.agritap.sisintegracao.client.ui.configuracao.TabelaRacaoView;
 import com.agritap.sisintegracao.client.ui.configuracao.TecnicosView;
-=======
 import com.agritap.sisintegracao.client.ui.configuracao.TipoRacaoView;
->>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;

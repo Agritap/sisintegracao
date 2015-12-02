@@ -19,26 +19,33 @@
 					<b:PanelBody>
 						<b:Form>
 							<b:FieldSet>
-
+						<b:Row>
+							<b:Column size="XS_12,SM_6">
 								<b:FormGroup>
 									<b:FormLabel for="formQuantidade"> Data Inicio </b:FormLabel>
-									<b2:DatePicker autoClose="true" ui:field="DataInicioField"/>
+									<b2:DatePicker autoClose="true" ui:field="DataInicioField" language="PT_BR" format="dd/mm/yyyy"/>
 								</b:FormGroup>
+							</b:Column>						
+							<b:Column size="XS_12,SM_6">
 
 								<b:FormGroup>
 									<b:FormLabel for="formQuantidade"> Data Fim </b:FormLabel>
 			                        <b2:DatePicker autoClose="true" ui:field="DataFimField"/>
 			                  	</b:FormGroup>
-                            
+                            </b:Column>
+						</b:Row>
 								<b:FormGroup>
 									<b:FormLabel for="formQuantidade"> Peso Minimo </b:FormLabel>
-									<b:TextBox placeholder="PesoMinimo" ui:field="PesoMinimoField" />
+									<b:TextBox placeholder="Peso Minimo" ui:field="PesoMinimoField" />
 								</b:FormGroup>
 
 								<b:FormGroup>
-									<b:FormLabel for="formQuantidade"> Itens </b:FormLabel>
-									<b:TextBox placeholder="Itens" ui:field="ItensField" />
+									<b:Button type="PRIMARY" ui:field="addItem">Novo Item TOSCO</b:Button>
 								</b:FormGroup>
+								
+								<g:HTMLPanel ui:field="painelItens">
+								
+								</g:HTMLPanel>
 
 								<b:Button type="PRIMARY" ui:field="salvarBtn">Salvar</b:Button>
 								<b:Button  addStyleNames="col-xs-offset-1" ui:field="cancelarBtn">Cancelar</b:Button>

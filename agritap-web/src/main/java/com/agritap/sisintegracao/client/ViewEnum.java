@@ -7,17 +7,13 @@ public enum ViewEnum {
 	CONFIGURACAO_LOTE("/configuracaoLote"), 
 	CONTROLE_MORTALIDADE("/controleMortalidade"),
 	REPOSICAO_LOTE("/reposicaoLote"),
-<<<<<<< HEAD
 	PRODUTORES("/produtores"),
-	VACINACAO_ANIMAIS("/vacinacaoAnimais"),
 	TABELA_RACAO("/tabelaRacao"),
-	TECNICOS("/tecnicos");
-=======
+	TECNICOS("/tecnicos"),
 	PESSOAS("/pessoas"),
 	TIPORACAO("/tipoRacao"),
 	RECEBIMENTOS("/recebimentos"),
 	VACINACAO_ANIMAIS("/vacinacaoAnimais");
->>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
 
 	public String url;
 

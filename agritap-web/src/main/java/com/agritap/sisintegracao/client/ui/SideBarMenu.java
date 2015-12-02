@@ -22,20 +22,12 @@ public class SideBarMenu extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-<<<<<<< HEAD
-=======
-	@UiHandler("configuracaoLote")
-	public void configuracaoLoteClick(ClickEvent evt){
-		factory.getAppController().goTo(ViewEnum.CONFIGURACAO_LOTE);
-	}
->>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
-	
+
 	@UiHandler("produtores")
 	public void produtoresClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.PESSOAS);
 	}
-	
-<<<<<<< HEAD
+
 	@UiHandler("tecnicos")
 	public void tecnicosClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.TECNICOS);
@@ -50,7 +42,6 @@ public class SideBarMenu extends Composite {
 	public void configuracaoLoteClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.CONFIGURACAO_LOTE);
 	}
-=======
 	@UiHandler("tipoRacao")
 	public void pedidosClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.TIPORACAO);
@@ -60,7 +51,6 @@ public class SideBarMenu extends Composite {
 		factory.getAppController().goTo(ViewEnum.RECEBIMENTOS);
 	}
 	
->>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
 
 	@UiHandler("controleMortalidade")
 	public void controleMortalidadeClick(ClickEvent evt) {

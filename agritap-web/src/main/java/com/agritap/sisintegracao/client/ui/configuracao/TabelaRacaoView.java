@@ -1,7 +1,9 @@
 package com.agritap.sisintegracao.client.ui.configuracao;
 
+import java.util.List;
 import java.util.logging.Logger;
 
+import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
@@ -13,6 +15,7 @@ import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 import com.agritap.sisintegracao.client.request.Callback;
 import com.agritap.sisintegracao.client.request.beans.TabelaRacaoI;
 import com.agritap.sisintegracao.client.request.beans.TabelaRacaoIAdapter;
+import com.agritap.sisintegracao.client.request.beans.TipoRacaoI;
 import com.agritap.sisintegracao.client.request.clients.RacoesClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.google.gwt.cell.client.FieldUpdater;
@@ -60,7 +63,8 @@ public class TabelaRacaoView extends Composite {
 	TextBox PesoMinimoField;
 
 	@UiField
-	TextBox ItensField;
+	HTMLPanel painelItens;
+
 
 	TabelaRacaoI tabelaRacaoEditado;
 
@@ -80,6 +84,20 @@ public class TabelaRacaoView extends Composite {
 		bindAddEvent();
 	}
 
+//	List<TipoRacaoI> tiposRacao;
+	@UiHandler("addItem")
+	public void adicionarItemTabela(ClickEvent evt){
+//		if(tiposRacao==null){
+//			/busca no sevidor
+//		}
+		//adiciona elemento visual
+		ListBox tiposRacao=new ListBox();
+		//Os itens do listbox sao objetos do tipo TipoRacao
+		tiposRacao.addItem("Tipo 1");
+		tiposRacao.addItem("Tipo 2");
+		painelItens.add(tiposRacao);
+//		painelItens.add(child);
+	}
 	private void bindAddEvent() {
 
 		addTipoRacao.addDomHandler(new ClickHandler() {
@@ -217,6 +235,7 @@ public class TabelaRacaoView extends Composite {
 	}
 
 	public void loadForm(TabelaRacaoI tabelaRacao) {
+		//Se tiver itens tem q carregar os itens aqui embaixo
 		this.tabelaRacaoEditado = tabelaRacao;
 		DataInicioField.setValue(tabelaRacao.getInicio());
 		DataFimField.setValue(tabelaRacao.getFim());

@@ -3,19 +3,14 @@ package com.agritap.sisintegracao.client.request;
 import java.util.HashMap;
 import java.util.Map;
 
-<<<<<<< HEAD
-import com.agritap.sisintegracao.client.request.beans.ProdutorI;
-import com.agritap.sisintegracao.client.request.beans.ProdutorIAdapter;
-import com.agritap.sisintegracao.client.request.beans.TabelaRacaoI;
-import com.agritap.sisintegracao.client.request.beans.TabelaRacaoIAdapter;
-=======
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
 import com.agritap.sisintegracao.client.request.beans.PessoaI;
 import com.agritap.sisintegracao.client.request.beans.PessoaIAdapter;
+import com.agritap.sisintegracao.client.request.beans.TabelaRacaoI;
+import com.agritap.sisintegracao.client.request.beans.TabelaRacaoIAdapter;
 import com.agritap.sisintegracao.client.request.beans.TipoRacaoI;
 import com.agritap.sisintegracao.client.request.beans.TipoRacaoIAdapter;
 import com.agritap.sisintegracao.client.request.beans.UsuarioI;
->>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
 /**
  * 
  * Vergonhosamente copiado de 
@@ -37,31 +32,22 @@ public class MediaTypes {
 	}
 
 	private void registerEntities() {
-<<<<<<< HEAD
-		register(ProdutorI.TYPE, ProdutorI.class);
 		register(TabelaRacaoI.TYPE, TabelaRacaoI.class);
-=======
 		register(PessoaI.TYPE, PessoaI.class);
 		register(TipoRacaoI.TYPE, TipoRacaoI.class);
->>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
 	}
 
 
 	private void registerTOs() {
-<<<<<<< HEAD
-		register(ProdutorIAdapter.TYPE, ProdutorIAdapter.class);
 		register(TabelaRacaoIAdapter.TYPE, TabelaRacaoIAdapter.class);
 //		register(EnrollmentLaunchTO.TYPE, EnrollmentLaunchTO.class);
 //		// When auth filter sends 401, it adds the charset and we can't do
 //		// anything about it
-=======
-		register(TipoRacaoIAdapter.TYPE, TipoRacaoIAdapter.class);
 		register(UsuarioI.TYPE, UsuarioI.class);
 		register(PessoaIAdapter.TYPE, PessoaIAdapter.class);
 		register(ErrosI.TYPE,ErrosI.class);
 		register(TipoRacaoIAdapter.TYPE, TipoRacaoIAdapter.class);
 
->>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
 	}
 
 	private void register(String type, Class<?> clazz) {
