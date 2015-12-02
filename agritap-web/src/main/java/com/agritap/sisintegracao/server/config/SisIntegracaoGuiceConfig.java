@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.agritap.sisintegracao.server.rest.CustomJsonObjectFilter;
-import com.agritap.sisintegracao.server.rest.ProdutorServiceImpl;
+import com.agritap.sisintegracao.server.rest.PessoaServiceImpl;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
@@ -34,7 +34,7 @@ public class SisIntegracaoGuiceConfig extends ServletModule {
         // hook Jackson into Jersey as the POJO <-> JSON mapper
         bind(JacksonJsonProvider.class).in(Scopes.SINGLETON);
         Map<String,String> parameters = new HashMap<String, String>();
-        parameters.put(PackagesResourceConfig.PROPERTY_PACKAGES, ProdutorServiceImpl.class.getPackage().getName());
+        parameters.put(PackagesResourceConfig.PROPERTY_PACKAGES, PessoaServiceImpl.class.getPackage().getName());
         parameters.put(PackagesResourceConfig.PROPERTY_CONTAINER_RESPONSE_FILTERS, CustomJsonObjectFilter.class.getName());
         
         serve("/api/*").with(GuiceContainer.class,parameters);

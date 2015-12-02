@@ -8,7 +8,7 @@ public class Modulo {
 	
 	TipoAnimal tipoAnimal;
 	
-	Produtor produtor;
+	Pessoa produtor;
 	
 	Integer alojamentoMaximo;
 

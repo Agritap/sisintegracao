@@ -16,8 +16,13 @@
 
 				<li data-toggle="collapse" data-target="#configuracoes-collapse"
 						class="collapsed active">
+<<<<<<< HEAD
 						<g:Anchor>
 						    <i class="fa fa-wrench fa-fw"></i>
+=======
+						<a href="#">
+							<i class="fa fa-wrench fa-fw"></i>
+>>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
 							Configurações
 							<span class="fa arrow"></span>
 						</g:Anchor>
@@ -25,6 +30,7 @@
 					
 					<li> 
 						<ul class="sub-menu collapse" id="configuracoes-collapse">
+<<<<<<< HEAD
 							<g:Anchor ui:field="produtores"> Produtores  </g:Anchor>								
 						<p></p>
 							<g:Anchor ui:field="tecnicos"> Tecnicos  </g:Anchor>								
@@ -33,6 +39,19 @@
 						<p></p>
 						<a href="#"> Recebimento  </a>
 					</ul>
+=======
+							<li>
+
+								<g:Anchor ui:field="produtores"> Produtores  </g:Anchor>
+							</li>
+							<li>
+								<g:Anchor ui:field="tipoRacao"> Tipo Ração  </g:Anchor>
+
+							</li>
+
+
+						</ul>
+>>>>>>> a5369d748f4a44296e001de459c4d495c8e9922b
 					</li>
 
 					<li>
@@ -82,17 +101,25 @@
 					</li>
 						<li> 
 						<ul class="sub-menu collapse" id="controle-agenda-collapse">
-							<g:Anchor ui:field="reposicaoLote"> Reposição do lote  </g:Anchor>
-							<p></p>
-							<g:Anchor ui:field="vacinacaoAnimais"> Vacinação dos animais  </g:Anchor>
-							<p></p>
-							<a href="#"> Visitações  </a>
-							<p></p>
-							<a href="#"> Eventos  </a>
-							<p></p>
-							<a href="#"> Data de entrega  </a>
-							<p></p>
-							<a href="#"> Data de saida  </a>
+
+							<li>
+								<g:Anchor ui:field="reposicaoLote"> Reposição do lote  </g:Anchor>
+							</li>
+							<li>
+								<g:Anchor ui:field="vacinacaoAnimais"> Vacinação dos animais  </g:Anchor>
+							</li>
+							<li>
+								<a href="#"> Visitações  </a>
+							</li>
+							<li>
+								<a href="#"> Eventos  </a>
+							</li>
+							<li>
+								<a href="#"> Data de entrega  </a>
+							</li>
+							<li>
+								<a href="#"> Data de saida  </a>
+							</li>
 						</ul>
 					</li>
 

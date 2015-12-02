@@ -14,7 +14,7 @@ public class Lote {
 	 * Mesmo produtor do modulo, colocado aqui para facilitar consultas,
 	 * talvez remover
 	 */
-	private Produtor produtor;
+	private Pessoa produtor;
 	
 	private Calendar dataMediaAlojamento;
 	
@@ -24,7 +24,7 @@ public class Lote {
 	
 	private AssistenteTecnico tecnico;
 	
-	private List<Granjeiro> granjeirosResponsaveis;
+	private List<Pessoa> granjeirosResponsaveis;
 	
 	private List<OrigemAlojamento> origens;
 	

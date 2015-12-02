@@ -7,7 +7,7 @@ public class OrigemAlojamento {
 
 	private Integer id;
 	
-	private Produtor produtor;
+	private Pessoa produtor;
 	
 	private Integer quantidade;
 	
