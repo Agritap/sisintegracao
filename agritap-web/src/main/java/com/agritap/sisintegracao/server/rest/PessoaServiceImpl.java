@@ -62,7 +62,6 @@ public class PessoaServiceImpl {
 	
 	@GET
 	@Path("{id}/removeSenha")
-	@Produces("application/boolean")
 	public Boolean removeSenha(@PathParam("usuario.porPessoa")Integer id){
 		Pessoa p= em.find(Pessoa.class, id);
 		try{
@@ -102,6 +101,7 @@ public class PessoaServiceImpl {
 		Pessoa p = em.find(Pessoa.class, id);
 		em.remove(p);
 	}
+	
 	@POST
 	@Path("/authToken")
 	public UsuarioTO getUsuario(@FormParam("token")String authToken){
@@ -123,6 +123,7 @@ public class PessoaServiceImpl {
 		}
 		throw new ValidacaoException("Token expirado, inválido ou inexistente");
 	}
+	
 	@POST
 	@Path("/auth")
 	public UsuarioTO getUsuario(@FormParam("login")String email,@FormParam("password")String pass){
@@ -151,6 +152,20 @@ public class PessoaServiceImpl {
 			ex.addErro("Senha de acesso inválida");
 			throw ex;
 		}
+	}
+	
+	@POST
+	@Path("{id}/updatePass")
+	@Transactional
+	public Boolean updatePass(@FormParam("senha")String senha,@PathParam("id")Integer idPessoa){
+		Pessoa p= em.find(Pessoa.class, idPessoa);
+		try{
+			Usuario u = em.createNamedQuery("usuario.porPessoa",Usuario.class).setParameter("pessoa", p).getSingleResult();
+			u.setSenha(ServerUtil.crypt(senha));
+			em.merge(u);
+			return true;
+		}catch(Exception e){}
+		return false;
 	}
 
 	private UsuarioTO geraUsuarioTO(Usuario user) {

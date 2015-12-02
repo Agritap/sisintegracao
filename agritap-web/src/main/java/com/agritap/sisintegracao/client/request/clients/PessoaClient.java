@@ -71,4 +71,11 @@ public class PessoaClient extends RESTClient {
 		}
 	}
 
+	public void updatePassword(Integer id, String pass, Callback<Boolean> callback) {
+		String formBody = "senha=" + pass;
+		ExceptionalRequestBuilder reqB = POST("pessoas", id.toString(),"updatePass");
+		reqB.setRequestData(formBody );
+		reqB.go(callback);
+	}
+
 }
