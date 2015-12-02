@@ -97,10 +97,11 @@ public abstract class Callback<T> implements RequestCallback {
 		String contentType = contentTypeHeader.toLowerCase();
 		String responseText = response.getText();
 
-		if (contentType.equals("application/boolean")) {
+		if (contentType.equals("application/boolean") || contentType.equals("text/plain")) {
 			T bool = bool(responseText);
 			ok(bool);
-		} else if (contentType.contains("json")) {
+		} 
+		else if (contentType.contains("json")) {
 			if (MediaTypes.get().containsType(customTypeHeader)) {
 				@SuppressWarnings("unchecked")
 				Class<T> clazz = (Class<T>) MediaTypes.get().classOf(
@@ -172,7 +173,10 @@ public abstract class Callback<T> implements RequestCallback {
 
 	@SuppressWarnings("unchecked")
 	private T bool(String responseText) {
-		return (T) Boolean.valueOf(responseText);
+		try{
+			return (T) Boolean.valueOf(responseText);
+		}catch(Exception e){}
+		return (T) responseText;
 	}
 
 	private AutoBeanFactory factoryFor(String contentType) {

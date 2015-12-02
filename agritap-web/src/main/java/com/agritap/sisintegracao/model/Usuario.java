@@ -1,5 +1,6 @@
 package com.agritap.sisintegracao.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,7 +14,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-@NamedQueries(@NamedQuery(name="usuario.porEmail",query="select u from Usuario u where u.usuario.email=:email "))
+@NamedQueries({@NamedQuery(name="usuario.porEmail",query="select u from Usuario u where u.usuario.email=:email "),
+		
+		@NamedQuery(name="usuario.porPessoa",query="select u from Usuario u where u.usuario = :pessoa ")
+}
+		)
 public class Usuario {
 
 	@Id
@@ -32,7 +37,6 @@ public class Usuario {
 	private String permissoes;
 	
 	private Boolean alteraSenha;
-	
 
 	public Integer getId() {
 		return id;

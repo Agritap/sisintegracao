@@ -2,14 +2,19 @@ package com.agritap.sisintegracao.client.ui.configuracao;
 
 import java.util.logging.Logger;
 
+import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.InlineCheckBox;
+import org.gwtbootstrap3.client.ui.Input;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.ListGroup;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.client.ui.form.validator.BlankValidator;
+import org.gwtbootstrap3.client.ui.form.validator.FieldMatchValidator;
+import org.gwtbootstrap3.client.ui.form.validator.RegExValidator;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 
@@ -20,6 +25,7 @@ import com.agritap.sisintegracao.client.request.beans.PessoaI;
 import com.agritap.sisintegracao.client.request.beans.PessoaIAdapter;
 import com.agritap.sisintegracao.client.request.clients.PessoaClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
+import com.agritap.sisintegracao.model.Integradora;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
@@ -77,6 +83,25 @@ public class PessoasView extends Composite {
 
 	@UiField
 	TextBox telefoneField;
+	@UiField
+	TextBox apelidoField;
+	@UiField
+	TextBox cpfField;
+	@UiField
+	InlineCheckBox produtorField;
+	@UiField
+	InlineCheckBox tecnicoField;
+	@UiField	
+	InlineCheckBox granjeiroField;
+	@UiField	
+	Anchor definirSenhaAnchor;
+	@UiField	
+	Input senhaField;
+	@UiField	
+	Input confirmaSenhaField;
+	
+	@UiField	
+	Row blocoSenhas;
 	
 	PessoaI produtorEditado;
 	
@@ -92,7 +117,20 @@ public class PessoasView extends Composite {
 	private void init() {
 		preparaTabela();
 		loadTabela();
+		preparaFormulario();
 		bindAddEvent();
+		ClientUtil.populaListBox(integradoraField,Integradora.values());
+	}
+
+	private void preparaFormulario() {
+		FieldMatchValidator<String> fm = new FieldMatchValidator<>(senhaField);
+		confirmaSenhaField.addValidator(fm);
+		confirmaSenhaField.setValidateOnBlur(true);
+		nomeField.addValidator(new BlankValidator<String>());
+		nomeField.setValidateOnBlur(true);
+//		emailField.setValidators(new RegExValidator(""));
+//		cpfField.setValidators(new RegExValidator(""));
+
 	}
 
 	private void bindAddEvent() {
@@ -140,8 +178,6 @@ public class PessoasView extends Composite {
 			@Override
 			public String getValue(PessoaI produtor){
 				return produtor.getTelefone();
-				
-						
 			}
 			
 		};
@@ -207,6 +243,11 @@ public class PessoasView extends Composite {
 		produtorEditado.setTelefone(telefoneField.getValue());
 		produtorEditado.setAtivo(ativoField.getValue());
 		produtorEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
+		produtorEditado.setCpf(ClientUtil.numbers(cpfField.getValue()));
+		produtorEditado.setProdutor(produtorField.getValue());
+		produtorEditado.setTecnico(tecnicoField.getValue());
+		produtorEditado.setGranjeiro(granjeiroField.getValue());
+		produtorEditado.setApelido(apelidoField.getValue());
 		client.update(produtorEditado, new Callback<PessoaI>() {
 
 			@Override
@@ -231,11 +272,7 @@ public class PessoasView extends Composite {
 
 	@UiHandler("excluirBtn")
 	public void excluirClick(ClickEvent evt){
-		produtorEditado.setNome(nomeField.getValue());
-		produtorEditado.setEmail(emailField.getValue());
-		produtorEditado.setTelefone(telefoneField.getValue());
-		produtorEditado.setAtivo(ativoField.getValue());
-		produtorEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
+		
 		client.delete(produtorEditado.getId(), new Callback<Void>() {
 
 			@Override
@@ -247,6 +284,25 @@ public class PessoasView extends Composite {
 		});
 	}
 //	
+	@UiHandler("removerAcessoBtn")
+	public void clickRemoverAcessoBtn(ClickEvent evt){
+		client.removeSenhas(produtorEditado.getId(), new Callback<Boolean>() {
+
+			@Override
+			public void ok(Boolean sucesso) {
+				blocoSenhas.setVisible(false);
+				definirSenhaAnchor.setVisible(true);
+				definirSenhaAnchor.setText("Este usuário NÃO possui acesso ao sistema. Clique aqui para definir uma senha");
+				
+			}
+		});
+
+	}
+	@UiHandler("definirSenhaAnchor")
+	public void clickDefinirSenhas(ClickEvent evt){
+		blocoSenhas.setVisible(true);
+		definirSenhaAnchor.setVisible(false);
+	}
 
 	public void loadForm(PessoaI produtor) {
 		errorBox.setVisible(false);
@@ -257,7 +313,26 @@ public class PessoasView extends Composite {
 		codigoIntegradoraField.setValue(produtor.getCodigoIntegradora());
 		ativoField.setValue(produtor.getAtivo());;
 		telefoneField.setValue(produtor.getTelefone());
-		
+		cpfField.setValue(ClientUtil.formatDoc(produtor.getCpf()));
+		produtorField.setValue(produtorEditado.getProdutor());
+		tecnicoField.setValue(produtorEditado.getTecnico());
+		granjeiroField.setValue(produtorEditado.getGranjeiro());
+		apelidoField.setValue(produtorEditado.getApelido());
+		blocoSenhas.setVisible(false);
+		definirSenhaAnchor.setVisible(true);
+
+		client.possuiSenha(produtor.getId(),new Callback<Boolean>() {
+
+			@Override
+			public void ok(Boolean possuiSenha) {
+				if(possuiSenha){
+					definirSenhaAnchor.setText("Este usuário ja possui acesso ao sistema. Clique aqui para redefinir Senha");
+				}else{
+					definirSenhaAnchor.setText("Este usuário NÃO possui acesso ao sistema. Clique aqui para definir uma senha");
+				}
+				
+			}
+		});
 		
 	}
 

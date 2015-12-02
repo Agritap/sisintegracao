@@ -44,4 +44,31 @@ public class PessoaClient extends RESTClient {
 		reqB.go(callback);
 	}
 
+	/**
+	 * Verifica se o usuario possui senha definida
+	 * @param id
+	 * @param callback
+	 */
+	public void possuiSenha(Integer id, Callback<Boolean> callback) {
+		if(id==null){
+			callback.ok(false);
+		}else{
+			GET("pessoas", id.toString(),"possuiSenha").go(callback);
+		}
+	}
+
+	/**
+	 * Remove as senhas cadastradas para o usuario removendo o acesso.
+	 * 
+	 * @param id
+	 * @param callback
+	 */
+	public void removeSenhas(Integer id, Callback<Boolean> callback) {
+		if(id==null){
+			callback.ok(true);
+		}else{
+			GET("pessoas", id.toString(),"removeSenha").go(callback);
+		}
+	}
+
 }

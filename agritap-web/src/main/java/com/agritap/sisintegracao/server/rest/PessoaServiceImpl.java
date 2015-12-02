@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -18,6 +19,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.agritap.sisintegracao.client.ValidacaoException;
@@ -43,6 +45,35 @@ public class PessoaServiceImpl {
 	public Pessoa get(@PathParam("id")Integer id){
 		return em.find(Pessoa.class, id);
 	}
+	
+	@GET
+	@Path("{id}/possuiSenha")
+	public Boolean possuiSenha(@PathParam("id")Integer id,@Context HttpServletResponse servletResponse){
+		Pessoa p= em.find(Pessoa.class, id);
+		try{
+			Usuario u = em.createNamedQuery("usuario.porPessoa",Usuario.class).setParameter("pessoa", p).getSingleResult();
+			if(u!=null){
+				return true;
+			}
+		}catch(Exception e){
+		}
+		return false;
+	}
+	
+	@GET
+	@Path("{id}/removeSenha")
+	@Produces("application/boolean")
+	public Boolean removeSenha(@PathParam("usuario.porPessoa")Integer id){
+		Pessoa p= em.find(Pessoa.class, id);
+		try{
+			Usuario u = em.createNamedQuery("usuario.porPessoa",Usuario.class).setParameter("pessoa", p).getSingleResult();
+			em.remove(u);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
 	
 	@GET
 	@Path("/todos")
