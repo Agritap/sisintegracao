@@ -38,6 +38,10 @@ public class SideBarMenu extends Composite {
 		factory.getAppController().goTo(ViewEnum.TABELA_RACAO);
 	}
 	
+	@UiHandler("modulos")
+	public void modulosClick(ClickEvent evt){
+		factory.getAppController().goTo(ViewEnum.MODULOS);
+	}
 	@UiHandler("configuracaoLote")
 	public void configuracaoLoteClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.CONFIGURACAO_LOTE);

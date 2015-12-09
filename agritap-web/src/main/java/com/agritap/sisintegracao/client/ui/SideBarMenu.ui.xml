@@ -25,16 +25,23 @@
 					
 					<li> 
 						<ul class="sub-menu collapse" id="configuracoes-collapse">
-							<g:Anchor ui:field="produtores"> Produtores  </g:Anchor>								
-						<p></p>
-							<g:Anchor ui:field="tecnicos"> Tecnicos  </g:Anchor>								
-						<p></p>
-						<a href="#"> Pedidos  </a>
-						<p></p>
-						<a href="#"> Recebimento  </a>
-						<p></p>
-						<g:Anchor ui:field="tipoRacao"> Tipo Ração  </g:Anchor>
 						
+						<li>
+							<g:Anchor ui:field="produtores"> Produtores  </g:Anchor>		
+							
+							</li>						
+						<li>
+							<g:Anchor ui:field="tecnicos"> Tecnicos  </g:Anchor>								
+						</li>
+						
+						
+						<li>
+							<g:Anchor  ui:field="modulos"> Modulos </g:Anchor>
+							
+						</li>
+						<li>
+						<g:Anchor ui:field="tipoRacao"> Tipo Ração  </g:Anchor>
+						</li>
 						</ul>
 						</li>
 							<li>

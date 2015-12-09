@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
+import com.agritap.sisintegracao.client.request.beans.ModulosI;
+import com.agritap.sisintegracao.client.request.beans.ModulosIAdapter;
 import com.agritap.sisintegracao.client.request.beans.PessoaI;
 import com.agritap.sisintegracao.client.request.beans.PessoaIAdapter;
 import com.agritap.sisintegracao.client.request.beans.TabelaRacaoI;
@@ -35,6 +37,7 @@ public class MediaTypes {
 		register(TabelaRacaoI.TYPE, TabelaRacaoI.class);
 		register(PessoaI.TYPE, PessoaI.class);
 		register(TipoRacaoI.TYPE, TipoRacaoI.class);
+		register(ModulosI.TYPE, ModulosI.class );
 	}
 
 
@@ -47,6 +50,7 @@ public class MediaTypes {
 		register(PessoaIAdapter.TYPE, PessoaIAdapter.class);
 		register(ErrosI.TYPE,ErrosI.class);
 		register(TipoRacaoIAdapter.TYPE, TipoRacaoIAdapter.class);
+		register(ModulosIAdapter.TYPE, ModulosIAdapter.class);
 
 	}
 

@@ -7,6 +7,7 @@ import com.agritap.sisintegracao.client.ui.MainWindow;
 import com.agritap.sisintegracao.client.ui.StateHistory;
 import com.agritap.sisintegracao.client.ui.configuracao.ConfiguracaoLote;
 import com.agritap.sisintegracao.client.ui.configuracao.ControleMortalidade;
+import com.agritap.sisintegracao.client.ui.configuracao.ModulosView;
 import com.agritap.sisintegracao.client.ui.configuracao.PessoasView;
 import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;
 import com.agritap.sisintegracao.client.ui.configuracao.TabelaRacaoView;
@@ -112,6 +113,11 @@ public class AppController implements ValueChangeHandler<String>{
 			}
 			if(view.equals(ViewEnum.TECNICOS)){
 				mw.addConteudo(new TecnicosView(factory));
+				return mw;
+			}
+			
+			if(view.equals(ViewEnum.MODULOS)){
+				mw.addConteudo(new ModulosView(factory));
 				return mw;
 			}
 			

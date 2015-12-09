@@ -1,6 +1,8 @@
 package com.agritap.sisintegracao.client.request;
 
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
+import com.agritap.sisintegracao.client.request.beans.ModulosI;
+import com.agritap.sisintegracao.client.request.beans.ModulosIAdapter;
 import com.agritap.sisintegracao.client.request.beans.PessoaI;
 import com.agritap.sisintegracao.client.request.beans.PessoaIAdapter;
 import com.agritap.sisintegracao.client.request.beans.RecebimentoI;
@@ -19,8 +21,11 @@ public interface EntityFactory extends AutoBeanFactory {
 	public static String PREFIX = "application/vnd.agritap.v1.entity.";
 
 	AutoBean<TabelaRacaoI> newTabelaRacao();
+
 	AutoBean<TabelaRacaoIAdapter> newTabelaRacaoAdapter();
+
 	AutoBean<TecnicoI> newTecnico();
+
 	AutoBean<TecnicoIAdapter> newTecnicoAdapter();
 
 	AutoBean<TipoRacaoI> newTipoRacao();
@@ -30,14 +35,17 @@ public interface EntityFactory extends AutoBeanFactory {
 	AutoBean<PessoaI> newProdutor();
 
 	AutoBean<PessoaIAdapter> newProdutores();
-	
+
 	AutoBean<ErrosI> newErros();
-	
+
 	AutoBean<UsuarioI> newUsuario();
 
 	AutoBean<RecebimentoI> newRecebimento();
 
 	AutoBean<RecebimentoIAdapter> newRecebimentos();
 
-	
+	AutoBean<ModulosI> newModulo();
+
+	AutoBean<ModulosIAdapter> newModulos();
+
 }
