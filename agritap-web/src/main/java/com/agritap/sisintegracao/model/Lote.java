@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
+import com.agritap.sisintegracao.server.rest.BigDecimalSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class Lote {
 
 	private Integer id;
@@ -35,8 +38,10 @@ public class Lote {
 	 */
 	private Integer quantidadeAlojada;
 	
+	@JsonSerialize(using=BigDecimalSerializer.class)
 	private BigDecimal pesoMedioAlojado;
 	
+	@JsonSerialize(using=BigDecimalSerializer.class)
 	private BigDecimal idadeMediaAlojada;
 	
 	private SexoLote sexo;

@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.agritap.sisintegracao.server.rest.BigDecimalSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 public class TabelaRacao {
 	@Id
@@ -24,6 +27,7 @@ public class TabelaRacao {
 	@Temporal (TemporalType.DATE)
 	private Date fim;
 	
+	@JsonSerialize(using=BigDecimalSerializer.class)
 	private BigDecimal pesoMinimo;
 	
 	@OneToMany(mappedBy="tabela")

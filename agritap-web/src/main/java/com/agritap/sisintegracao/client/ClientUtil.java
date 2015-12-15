@@ -1,5 +1,6 @@
 package com.agritap.sisintegracao.client;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import com.agritap.sisintegracao.client.request.beans.ErrosI;
 import com.agritap.sisintegracao.model.Integradora;
 import com.agritap.sisintegracao.model.Rotulavel;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.Cookies;
 
 public class ClientUtil {
@@ -157,6 +159,22 @@ public class ClientUtil {
 		} catch (StringIndexOutOfBoundsException e) {// This is OK. It happens
 		}
 		return fmt.toString();
+	}
+	
+	public static BigDecimal parseBigDecimal(String value) {
+		if(isEmpty(value)){
+			return null;
+		}
+		value = value.replaceAll("\\.", "");
+		value = value.replaceAll(",", ".");
+		return new BigDecimal(value);
+	}
+	public static String formatBigDecimal(BigDecimal value) {
+		if(isEmpty(value)){
+			return null;
+		}
+		NumberFormat nf =NumberFormat.getDecimalFormat();
+		return nf.format(value);
 	}
 
 }
