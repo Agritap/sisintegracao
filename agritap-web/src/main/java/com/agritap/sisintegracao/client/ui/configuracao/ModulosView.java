@@ -8,6 +8,7 @@ import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 
+import com.agritap.sisintegracao.client.ClientUtil;
 import com.agritap.sisintegracao.client.request.Callback;
 import com.agritap.sisintegracao.client.request.beans.ModulosI;
 import com.agritap.sisintegracao.client.request.beans.ModulosIAdapter;
@@ -45,6 +46,9 @@ public class ModulosView extends Composite {
 	@UiField
 	ListBox tipoAnimalField;
 
+	@UiField
+	TextBox alojamentoMaximoField;
+
 	ModulosI ModulosEditado;
 
 	interface ModulosUiBinder extends UiBinder<Widget, ModulosView> {
@@ -73,12 +77,11 @@ public class ModulosView extends Composite {
 				tabelaModulos.setRowData(response.getResultado());
 				tabelaModulos.redraw();
 			}
-		
+
 		});
 	}
 
 	private void preparaTabela() {
-		
 
 		TextColumn<ModulosI> nomeColumn = new TextColumn<ModulosI>() {
 			@Override
@@ -100,14 +103,34 @@ public class ModulosView extends Composite {
 			}
 
 		};
-		
+
 		TextColumn<ModulosI> barracoesColumn = new TextColumn<ModulosI>() {
 			@Override
-			public String getValue(ModulosI barracao){
-				return barracao.getBarracao() ;
+			public String getValue(ModulosI barracao) {
+				return barracao.getBarracao();
 			}
 		};
-		
+
+		TextColumn<ModulosI> produtorColumn = new TextColumn<ModulosI>() {
+			@Override
+			public String getValue(ModulosI produtor) {
+				return produtor.getProdutor();
+
+			}
+		};
+
+		TextColumn<ModulosI> alojamentoMaximo = new TextColumn<ModulosI>() {
+			@Override
+			public String getValue(ModulosI modulo) {
+				if(modulo.getAlojamentoMaximo()==null){
+					return null;
+				}else{
+					return modulo.getAlojamentoMaximo().toString();
+				}
+//				return modulo.getAlojamentoMaximo()!=null?modulo.getAlojamentoMaximo().toString():null;
+
+			}
+		};
 
 		final Column<ModulosI, String> click = new Column<ModulosI, String>(
 				new ButtonCell(ButtonType.PRIMARY, IconType.EDIT)) {
@@ -126,10 +149,9 @@ public class ModulosView extends Composite {
 
 		});
 
-		tabelaModulos.addColumn(nomeColumn, "Nome");
-		tabelaModulos.addColumn(barracoesColumn, "Barracão");
-		tabelaModulos.addColumn(tipoAnimalColumn, "Tipo de Animal");
+		tabelaModulos.addColumn(produtorColumn, "Modulos");
 		tabelaModulos.addColumn(click, "Ações");
+		tabelaModulos.addColumn(alojamentoMaximo, "Alojamento Maximo");
 	}
 
 	public static ModulosUiBinder getUiBinder() {
@@ -188,11 +210,31 @@ public class ModulosView extends Composite {
 		ModulosEditado = modulosEditado;
 	}
 
+	public ListBox getTipoAnimalField() {
+		return tipoAnimalField;
+	}
+
+	public void setTipoAnimalField(ListBox tipoAnimalField) {
+		this.tipoAnimalField = tipoAnimalField;
+	}
+
+	public TextBox getAlojamentoMaximoField() {
+		return alojamentoMaximoField;
+	}
+
+	public void setAlojamentoMaximoField(TextBox alojamentoMaximoField) {
+		this.alojamentoMaximoField = alojamentoMaximoField;
+	}
+	
+	
+
 	@UiHandler("salvarBtn")
 	public void salvarClick(ClickEvent evt) {
 
 		ModulosEditado.setNome(nomeField.getValue());
 		ModulosEditado.setTipoAnimal(TipoAnimal.values()[tipoAnimalField.getSelectedIndex()]);
+		ModulosEditado.setAlojamentoMaximo(ClientUtil.parseInteger(alojamentoMaximoField.getValue()));
+
 		// ModulosEditado.setBarracao();
 		// TipoRacaoEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
 		client.update(ModulosEditado, new Callback<ModulosI>() {
@@ -227,12 +269,13 @@ public class ModulosView extends Composite {
 			}
 		});
 	}
-	//
 
 	public void loadForm(ModulosI modulos) {
 		this.ModulosEditado = modulos;
 
 		nomeField.setValue(modulos.getNome());
+		
+		alojamentoMaximoField.setValue(ClientUtil.formatInteger(modulos.getAlojamentoMaximo()));
 
 		if (modulos.getTipoAnimal() != null) {
 
@@ -241,13 +284,4 @@ public class ModulosView extends Composite {
 		}
 
 	}
-
-	public ListBox getTipoAnimalField() {
-		return tipoAnimalField;
-	}
-
-	public void setTipoAnimalField(ListBox tipoAnimalField) {
-		this.tipoAnimalField = tipoAnimalField;
-	}
-
 }

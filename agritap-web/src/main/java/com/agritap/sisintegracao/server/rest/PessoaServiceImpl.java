@@ -34,7 +34,7 @@ import com.google.inject.persist.Transactional;
 
 @Path("/pessoas")
 @Produces(MediaType.APPLICATION_JSON)
-public class PessoaServiceImpl {
+public class PessoaServiceImpl extends AuthRestServiceImpl{
 	Logger log = Logger.getLogger(PessoaServiceImpl.class.getName());
 	@Inject
 	transient EntityManager em ;
@@ -106,11 +106,8 @@ public class PessoaServiceImpl {
 	@Path("/authToken")
 	public UsuarioTO getUsuario(@FormParam("token")String authToken){
 		try{
-		String token = ServerUtil.decrypt(authToken);
-		StringTokenizer buf = new StringTokenizer(token,"|");
-		Integer id = Integer.parseInt(buf.nextToken());
-		long expires = Long.parseLong(buf.nextToken());
-		Date exp = new Date(expires);
+			Integer id =ServerUtil.getTokenId(authToken);
+			Date exp = ServerUtil.getTokenExpiracao(authToken);
 		Date agora= new Date();
 		if(agora.compareTo(exp)<0){
 			//wheee. ta valido
@@ -168,31 +165,5 @@ public class PessoaServiceImpl {
 		return false;
 	}
 
-	private UsuarioTO geraUsuarioTO(Usuario user) {
-		Integer id = user.getId();
-		Calendar agora= Calendar.getInstance();
-		agora.add(Calendar.DAY_OF_MONTH, 30);
-		String token = id+"|"+agora.getTimeInMillis();
-		UsuarioTO to = new UsuarioTO();
-		to.setToken(ServerUtil.crypt(token));
-		to.setPermissoes(user.getPermissoes());
-		to.setUsuario(user.getUsuario());
-		to.setAlteraSenha(user.getAlteraSenha());
-		to.setId(user.getId());
-		
-		List<Pessoa> produtoresPermitidos = new LinkedList<>();
-		to.setProdutores(produtoresPermitidos);
-		if(user.getUsuario().getProdutor()!=null && user.getUsuario().getProdutor()){
-			produtoresPermitidos.add(user.getUsuario());
-		}
-		if(user.getProdutores()!=null){
-			for(UsuarioProdutor u:user.getProdutores()){
-				if(ServerUtil.isPeriodosIntercecao(u.getDataInicio(), u.getDataFim(), new Date(), new Date())){
-					produtoresPermitidos.add(u.getProdutor());
-				}
-			}
-		}
-		
-		return to;
-	}
+	
 }

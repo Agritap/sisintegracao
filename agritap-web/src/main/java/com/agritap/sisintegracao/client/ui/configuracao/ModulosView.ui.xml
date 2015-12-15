@@ -21,7 +21,7 @@
 						<b:Form>
 							<b:FieldSet>
 								<b:Row>
-									<b:Column size="XS_12">
+									<b:Column size="XS_5">
 										<b:FormGroup>
 											<b:FormLabel for="nomeField"> Nome </b:FormLabel>
 											<b:TextBox placeholder="Nome" ui:field="nomeField" />
@@ -29,14 +29,26 @@
 									</b:Column>
 								</b:Row>
 								<b:Row>
-									<b:Column size="XS_12">
+									<b:Column size="XS_5">
 										<b:FormGroup>
 											<b:FormLabel for="tipoAnimalField"> Tipo Animal </b:FormLabel>
 											<b:ListBox ui:field="tipoAnimalField" />
 										</b:FormGroup>
 									</b:Column>
 								</b:Row>
-								
+
+								<b:Row>
+									<b:Column size="XS_5">
+										<b:FormGroup>
+											<b:FormLabel for="alojamentoMaximoField"> Alojamento Maximo </b:FormLabel>
+											<b:TextBox ui:field="alojamentoMaximoField" />
+										</b:FormGroup>
+									</b:Column>
+
+
+
+								</b:Row>
+
 
 								<b:Button type="PRIMARY" ui:field="salvarBtn">Salvar</b:Button>
 								<b:Button addStyleNames="col-xs-offset-1" ui:field="cancelarBtn">Cancelar</b:Button>
@@ -48,15 +60,16 @@
 				</b:Panel>
 			</b:Column>
 		</b:Row>
+
 		<b:Row>
-			<b:Column size="XS_12">
+			<b:Column size="XS_8">
 				<gwt:CellTable ui:field="tabelaModulos" bordered="true"
 					condensed="true" striped="true" hover="true">
 
 				</gwt:CellTable>
 			</b:Column>
 		</b:Row>
-		
+
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

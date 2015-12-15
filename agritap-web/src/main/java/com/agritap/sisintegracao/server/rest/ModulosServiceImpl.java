@@ -3,31 +3,35 @@ package com.agritap.sisintegracao.server.rest;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.agritap.sisintegracao.client.ValidacaoException;
 import com.agritap.sisintegracao.model.Modulo;
+import com.agritap.sisintegracao.model.Pessoa;
 import com.agritap.sisintegracao.server.ServerUtil;
 import com.agritap.sisintegracao.server.to.ListAdapter;
+import com.agritap.sisintegracao.server.to.UsuarioTO;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
 @Path("/modulos")
 @Produces(MediaType.APPLICATION_JSON)
-public class ModulosServiceImpl {
+public class ModulosServiceImpl extends AuthRestServiceImpl{
 
 	@Inject
 	transient EntityManager em;
 
 	@GET
 	@Path("{id}")
-	// application/vnd.agritap.v1.entity.TipoRacao+json
+	// application/vnd.agritap.v1.entity.Modulo+json
 	public Modulo get(@PathParam("id") Integer id) {
 		Modulo m = new Modulo();
 		m.setNome("");
@@ -37,10 +41,18 @@ public class ModulosServiceImpl {
 
 	@GET
 	@Path("/todos")
-	public ListAdapter<Modulo> todos() {
-		List<Modulo> modulos = em.createNamedQuery("modulos.todos", Modulo.class).getResultList();
+	public ListAdapter<Modulo> todos( @Context HttpServletRequest request) {
+//		ServerUtil.getUsuarioTO(em, request);
+		UsuarioTO usuario = getUsuario(request);
+		List<Pessoa> produtoresAutorizados =usuario.getProdutores();
+		
+		
+		List<Modulo> modulos = em.createNamedQuery("modulos.porProdutores", Modulo.class).setParameter("produtores", produtoresAutorizados).getResultList();
+		
 		return new ListAdapter<Modulo>(modulos);
 	}
+
+	
 
 	@PUT
 	@Transactional
