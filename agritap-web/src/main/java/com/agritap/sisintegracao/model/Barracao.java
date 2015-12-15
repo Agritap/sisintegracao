@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.agritap.sisintegracao.server.rest.BigDecimalSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 
 public class Barracao {
@@ -29,6 +32,7 @@ public class Barracao {
 	 * QUantidade de racao em kg que cabem nos comedouros + linhas
 	 */
 	@Column(scale = 2, precision = 10)
+	@JsonSerialize(using=BigDecimalSerializer.class)
 	private BigDecimal estoqueRacaoLinha;
 
 	/**

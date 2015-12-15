@@ -2,10 +2,8 @@ package com.agritap.sisintegracao.client.request.beans;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 import com.agritap.sisintegracao.client.request.EntityFactory;
-import com.agritap.sisintegracao.model.TabelaRacaoItem;
 
 public interface TabelaRacaoI {
 	public static String TYPE = EntityFactory.PREFIX + "TabelaRacao+json";
