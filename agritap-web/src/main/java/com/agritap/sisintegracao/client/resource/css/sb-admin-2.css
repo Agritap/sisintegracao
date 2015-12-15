@@ -10,7 +10,7 @@
 
 
 body {
-    background-color: #f8f8f8; /*cor de fundo*/  
+    background-color: #625856; /*cor de fundo*/  
 }
  
 #divBusca{
@@ -396,13 +396,13 @@ table.dataTable thead .sorting:after {
     color: #df8a13;
 }
 .addButton {
-	background: #d9534f none repeat scroll 0 0;
+	background: #c6462d none repeat scroll 0 0;
     border-radius: 50%;
     bottom: 5%;
     color: #fff;
     display: block;
     height: 55.5px;
-    position: absolute;
+    position: fixed;
     right: 5%;
     width: 55.5px;
     z-index: 2147483647;
@@ -428,10 +428,15 @@ Botao de login
 */
 
 .form-signin {
-		max-width: 330px;
+		max-width: 390px;
 		padding: 15px;
-		margin: 0 auto;
+		color: #fff;
+		margin-top: 5% !important;
 	}
+.form-signin .form-signin-heading {	
+	 white-space: nowrap;
+	  text-align: center;
+}
 	
 	.form-signin .form-signin-heading, .form-signin .checkbox {
 		margin-bottom: 10px;
@@ -510,3 +515,97 @@ Botao de login
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
 	}
+
+
+/*Tutu*/
+/*
+Cor vermelha = #C6462D 
+Cor cinza = #808080
+
+*/	
+.form-control {
+	border-radius: 0px;
+}
+
+.navbar-default {
+    background-color: #625856;
+    border-color: #808080;
+}
+
+.nav > li > a,
+.navbar-default .navbar-brand {
+    color: #fff !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.page-header {
+	color: #C6462D;
+}
+
+.panel {
+	border-radius: 0px;
+}
+
+.control-label {
+	color: #808080 !important;
+}
+
+.sidebar ul li {
+	border-color: #808080;	
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+    background-color: #c6462d;
+}   
+
+.form-control:focus {
+    border-color: #e68884;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(198, 70, 45, 0.44);
+    outline: 0 none;
+}
+
+.btn-custom {
+    background-color: #c6462d;
+    border-color: #c6462d;
+    color: #fff;
+}
+
+.btn-custom.active, 
+.btn-custom.focus, 
+.btn-custom:active, 
+.btn-custom:focus, 
+.btn-custom:hover, .open > .dropdown-toggle.btn-primary {
+   	background-color: #ae2e15;
+    border-color: #ae2e15;
+    color: #fff;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+	vertical-align: middle;
+}
+.table > thead > tr > th{
+	color: #808080 !important;
+}
+
+.alert,
+.dropdown-menu,
+.btn,
+.panel-info > .panel-heading {
+	border-radius: 0px;
+}
+
+.dropdown-menu > li > a {
+    color: #333 !important;
+}
+
+ 
+.panel-info > .panel-heading {
+    background-color: #C6462D;
+    border-color: #C6462D;
+    color: #fff;
+}
+
+.panel-info {
+    border-color: #c6462d;
+}

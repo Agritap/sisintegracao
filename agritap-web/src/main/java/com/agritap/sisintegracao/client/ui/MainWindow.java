@@ -16,50 +16,51 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class MainWindow extends Composite  {
+public class MainWindow extends Composite {
 
 	private static MainWindowUiBinder uiBinder = GWT.create(MainWindowUiBinder.class);
-	
+
 	Logger log = Logger.getLogger(MainWindow.class.getName());
-	
+
 	@UiField
 	SimplePanel conteudo;
-	
+
 	@UiField
 	HTMLPanel sideBarMenu;
-	
+
+	@UiField
+	HTMLPanel wrapper;
+
 	ClientFactory factory;
-	
+
 	interface MainWindowUiBinder extends UiBinder<Widget, MainWindow> {
 	}
-	
-	public void addConteudo(IsWidget w){
+
+	public void addConteudo(IsWidget w) {
 		conteudo.clear();
 		conteudo.add(w);
 	}
 
-	public void clearConteudo(){
+	public void clearConteudo() {
 		conteudo.clear();
 	}
-	
-	public void open(){
-//		addConteudo(new LoginWindow());
+
+	public void open() {
+		// addConteudo(new LoginWindow());
 	}
 
 	@UiHandler("sair")
-	public void onSair(ClickEvent evt){
+	public void onSair(ClickEvent evt) {
 		ClientUtil.clearToken();
 		factory.setAutenticado(null);
 		History.newItem(ViewEnum.LOGIN.getUrl());
 	}
-	
-	
+
 	public MainWindow(ClientFactory clientFactory) {
 		initWidget(uiBinder.createAndBindUi(this));
 		sideBarMenu.add(new SideBarMenu(clientFactory));
-		this.factory=clientFactory;
-		
-	}
-	
+		this.factory = clientFactory;
 
+		wrapper.getElement().setId("wrapper");
+	}
 }

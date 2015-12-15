@@ -1,6 +1,5 @@
 package com.agritap.sisintegracao.client.ui.configuracao;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.gwtbootstrap3.client.ui.ListBox;
@@ -15,7 +14,6 @@ import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 import com.agritap.sisintegracao.client.request.Callback;
 import com.agritap.sisintegracao.client.request.beans.TabelaRacaoI;
 import com.agritap.sisintegracao.client.request.beans.TabelaRacaoIAdapter;
-import com.agritap.sisintegracao.client.request.beans.TipoRacaoI;
 import com.agritap.sisintegracao.client.request.clients.RacoesClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.google.gwt.cell.client.FieldUpdater;
@@ -36,17 +34,16 @@ import com.google.gwt.user.client.ui.Widget;
 public class TabelaRacaoView extends Composite {
 
 	Logger logger = Logger.getLogger(TabelaRacaoView.class.getName());
-	
-	private static TabelaRacaoUiBinder uiBinder = GWT
-			.create(TabelaRacaoUiBinder.class);
+
+	private static TabelaRacaoUiBinder uiBinder = GWT.create(TabelaRacaoUiBinder.class);
 
 	RacoesClient client = new RacoesClient();
 
 	ClientFactory factory;
-	
+
 	@UiField
 	CellTable<TabelaRacaoI> TabelaRacao;
-	
+
 	@UiField
 	HTMLPanel addTipoRacao;
 
@@ -65,9 +62,7 @@ public class TabelaRacaoView extends Composite {
 	@UiField
 	HTMLPanel painelItens;
 
-
 	TabelaRacaoI tabelaRacaoEditado;
-
 
 	interface TabelaRacaoUiBinder extends UiBinder<Widget, TabelaRacaoView> {
 	}
@@ -84,27 +79,32 @@ public class TabelaRacaoView extends Composite {
 		bindAddEvent();
 	}
 
-//	List<TipoRacaoI> tiposRacao;
+	// List<TipoRacaoI> tiposRacao;
 	@UiHandler("addItem")
-	public void adicionarItemTabela(ClickEvent evt){
-//		if(tiposRacao==null){
-//			/busca no sevidor
-//		}
-		//adiciona elemento visual
-		ListBox tiposRacao=new ListBox();
-		//Os itens do listbox sao objetos do tipo TipoRacao
+	public void adicionarItemTabela(ClickEvent evt) {
+		// if(tiposRacao==null){
+		// /busca no sevidor
+		// }
+		// adiciona elemento visual
+		ListBox tiposRacao = new ListBox();
+		// Os itens do listbox sao objetos do tipo TipoRacao
 		tiposRacao.addItem("Tipo 1");
 		tiposRacao.addItem("Tipo 2");
-		painelItens.add(tiposRacao);
-//		painelItens.add(child);
+
+		HTMLPanel formgroup = new HTMLPanel("");
+		formgroup.setStyleName("form-group");
+		formgroup.add(tiposRacao);
+
+		painelItens.add(formgroup);
+		// painelItens.add(child);
 	}
+
 	private void bindAddEvent() {
 
 		addTipoRacao.addDomHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				tabelaRacaoEditado = factory.getEntityfactory()
-						.newTabelaRacao().as();
+				tabelaRacaoEditado = factory.getEntityfactory().newTabelaRacao().as();
 				loadForm(tabelaRacaoEditado);
 				formRow.setVisible(true);
 
@@ -118,7 +118,7 @@ public class TabelaRacaoView extends Composite {
 
 			@Override
 			public void ok(TabelaRacaoIAdapter response) {
-				logger.info("retornou todos os elementos"+response.getResultado().size());
+				logger.info("retornou todos os elementos" + response.getResultado().size());
 				TabelaRacao.setRowData(response.getResultado());
 				TabelaRacao.redraw();
 			}
@@ -126,7 +126,7 @@ public class TabelaRacaoView extends Composite {
 	}
 
 	private void preparaTabelaRacao() {
-		
+
 		TextColumn<TabelaRacaoI> dataInicioColumn = new TextColumn<TabelaRacaoI>() {
 			@Override
 			public String getValue(TabelaRacaoI TabelaRacao) {
@@ -135,10 +135,9 @@ public class TabelaRacaoView extends Composite {
 					logger.info("Inicio nulo");
 					return null;
 				}
-				logger.info("Valor da data de incio"+TabelaRacao.getInicio());
-				
-				String resultado = DateTimeFormat.getFormat("dd/MM/yyyy").format(
-						TabelaRacao.getInicio());
+				logger.info("Valor da data de incio" + TabelaRacao.getInicio());
+
+				String resultado = DateTimeFormat.getFormat("dd/MM/yyyy").format(TabelaRacao.getInicio());
 				logger.info("retornara coluna datainicio");
 				return resultado;
 			}
@@ -151,26 +150,24 @@ public class TabelaRacaoView extends Composite {
 				if (TabelaRacao.getFim() == null) {
 					return null;
 				}
-				return DateTimeFormat.getFormat("dd/MM/yyyy").format(
-						TabelaRacao.getFim());
-			}
-		};
-		
-		TextColumn<TabelaRacaoI> pesoMinimoColumn = new TextColumn<TabelaRacaoI>() {
-			@Override
-			public String getValue(TabelaRacaoI TabelaRacao) {
-			logger.info("coluna peso minimo");
-				if(TabelaRacao.getPesoMinimo()==null){
-					return null;
-				}
-		    	NumberFormat numberFormat = NumberFormat.getFormat("#.##");
-				return numberFormat.format(TabelaRacao.getPesoMinimo()); 
-				
+				return DateTimeFormat.getFormat("dd/MM/yyyy").format(TabelaRacao.getFim());
 			}
 		};
 
-		final Column<TabelaRacaoI, String> click = new Column<TabelaRacaoI, String>(
-				new ButtonCell(ButtonType.PRIMARY, IconType.EDIT)) {
+		TextColumn<TabelaRacaoI> pesoMinimoColumn = new TextColumn<TabelaRacaoI>() {
+			@Override
+			public String getValue(TabelaRacaoI TabelaRacao) {
+				logger.info("coluna peso minimo");
+				if (TabelaRacao.getPesoMinimo() == null) {
+					return null;
+				}
+				NumberFormat numberFormat = NumberFormat.getFormat("#.##");
+				return numberFormat.format(TabelaRacao.getPesoMinimo());
+
+			}
+		};
+
+		final Column<TabelaRacaoI, String> click = new Column<TabelaRacaoI, String>(new ButtonCell(ButtonType.PRIMARY, IconType.EDIT)) {
 			@Override
 			public String getValue(TabelaRacaoI object) {
 				return "";
@@ -184,12 +181,11 @@ public class TabelaRacaoView extends Composite {
 				formRow.setVisible(true);
 			}
 		});
-		
+
 		TabelaRacao.addColumn(dataInicioColumn, "Data Inicio");
 		TabelaRacao.addColumn(dataFimColumn, "Data Fim");
 		TabelaRacao.addColumn(pesoMinimoColumn, "Peso Minimo");
 		TabelaRacao.addColumn(click, "Ação");
-
 
 	}
 
@@ -197,8 +193,7 @@ public class TabelaRacaoView extends Composite {
 	public void salvarClick(ClickEvent evt) {
 		tabelaRacaoEditado.setInicio(DataInicioField.getValue());
 		tabelaRacaoEditado.setFim(DataFimField.getValue());
-   // 	tabelaRacaoEditado.setPesoMinimo(PesoMinimoField.getValue());
-		
+		// tabelaRacaoEditado.setPesoMinimo(PesoMinimoField.getValue());
 
 		client.update(tabelaRacaoEditado, new Callback<TabelaRacaoI>() {
 
@@ -221,7 +216,7 @@ public class TabelaRacaoView extends Composite {
 	public void excluirClick(ClickEvent evt) {
 		tabelaRacaoEditado.setInicio(DataInicioField.getValue());
 		tabelaRacaoEditado.setFim(DataFimField.getValue());
-   // 	tabelaRacaoEditado.setPesoMinimo(PesoMinimoField.getValue());
+		// tabelaRacaoEditado.setPesoMinimo(PesoMinimoField.getValue());
 
 		client.delete(tabelaRacaoEditado.getId(), new Callback<Void>() {
 
@@ -235,10 +230,10 @@ public class TabelaRacaoView extends Composite {
 	}
 
 	public void loadForm(TabelaRacaoI tabelaRacao) {
-		//Se tiver itens tem q carregar os itens aqui embaixo
+		// Se tiver itens tem q carregar os itens aqui embaixo
 		this.tabelaRacaoEditado = tabelaRacao;
 		DataInicioField.setValue(tabelaRacao.getInicio());
 		DataFimField.setValue(tabelaRacao.getFim());
-//		PesoMinimoField.setValue(tabelaRacao.getPesoMinimo());
+		// PesoMinimoField.setValue(tabelaRacao.getPesoMinimo());
 	}
 }
