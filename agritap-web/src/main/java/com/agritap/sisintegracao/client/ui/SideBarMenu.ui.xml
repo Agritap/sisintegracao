@@ -14,12 +14,8 @@
 
 						<ul class="sub-menu nav nav-second-level collapse" id="configuracoes-collapse">
 							<li>
-								<g:Anchor ui:field="produtores"> Produtores  </g:Anchor>		
+								<g:Anchor ui:field="pessoas"> Usuarios  </g:Anchor>		
 							</li>						
-							
-							<li>
-								<g:Anchor ui:field="tecnicos"> Tecnicos  </g:Anchor>								
-							</li>
 							
 							
 							<li>
@@ -34,9 +30,9 @@
 					</li>
 
 					<li>
-						<g:Anchor ui:field="configuracaoLote">
+						<g:Anchor ui:field="lotes">
 							<i class="fa fa-wrench fa-fw"></i>
-							Configuração do Lote
+							Lotes
 						</g:Anchor>
 					</li>
 					

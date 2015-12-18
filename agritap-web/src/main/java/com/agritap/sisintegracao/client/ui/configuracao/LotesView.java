@@ -6,14 +6,14 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ConfiguracaoLote extends Composite {
+public class LotesView extends Composite {
 
-	private static ConfiguracaoLoteUiBinder uiBinder = GWT.create(ConfiguracaoLoteUiBinder.class);
+	private static LotesViewUiBinder uiBinder = GWT.create(LotesViewUiBinder.class);
 
-	interface ConfiguracaoLoteUiBinder extends UiBinder<Widget, ConfiguracaoLote> {
+	interface LotesViewUiBinder extends UiBinder<Widget, LotesView> {
 	}
 
-	public ConfiguracaoLote() {
+	public LotesView() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 

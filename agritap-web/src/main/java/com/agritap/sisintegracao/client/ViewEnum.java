@@ -4,12 +4,11 @@ public enum ViewEnum {
 
 	LOGIN("/login",false),INICIAL("/inicial"),
 	ERRO("/erro"),
-	CONFIGURACAO_LOTE("/configuracaoLote"), 
+	LOTES("/lotes"), 
 	CONTROLE_MORTALIDADE("/controleMortalidade"),
 	REPOSICAO_LOTE("/reposicaoLote"),
 	PRODUTORES("/produtores"),
 	TABELA_RACAO("/tabelaRacao"),
-	TECNICOS("/tecnicos"),
 	PESSOAS("/pessoas"),
 	TIPORACAO("/tipoRacao"),
 	RECEBIMENTOS("/recebimentos"),

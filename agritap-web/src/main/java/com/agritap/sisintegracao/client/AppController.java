@@ -5,13 +5,12 @@ import java.util.logging.Logger;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.agritap.sisintegracao.client.ui.MainWindow;
 import com.agritap.sisintegracao.client.ui.StateHistory;
-import com.agritap.sisintegracao.client.ui.configuracao.ConfiguracaoLote;
+import com.agritap.sisintegracao.client.ui.configuracao.LotesView;
 import com.agritap.sisintegracao.client.ui.configuracao.ControleMortalidade;
 import com.agritap.sisintegracao.client.ui.configuracao.ModulosView;
 import com.agritap.sisintegracao.client.ui.configuracao.PessoasView;
 import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;
 import com.agritap.sisintegracao.client.ui.configuracao.TabelaRacaoView;
-import com.agritap.sisintegracao.client.ui.configuracao.TecnicosView;
 import com.agritap.sisintegracao.client.ui.configuracao.TipoRacaoView;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -87,8 +86,8 @@ public class AppController implements ValueChangeHandler<String>{
 				mw.open();
 				return mw;
 			}
-			if(view.equals(ViewEnum.CONFIGURACAO_LOTE)){
-				mw.addConteudo(new ConfiguracaoLote());
+			if(view.equals(ViewEnum.LOTES)){
+				mw.addConteudo(new LotesView());
 				return mw;
 			}
 			if(view.equals(ViewEnum.CONTROLE_MORTALIDADE)){
@@ -111,11 +110,6 @@ public class AppController implements ValueChangeHandler<String>{
 				mw.addConteudo(new ReposicaoLote());
 				return mw;
 			}
-			if(view.equals(ViewEnum.TECNICOS)){
-				mw.addConteudo(new TecnicosView(factory));
-				return mw;
-			}
-			
 			if(view.equals(ViewEnum.MODULOS)){
 				mw.addConteudo(new ModulosView(factory));
 				return mw;
