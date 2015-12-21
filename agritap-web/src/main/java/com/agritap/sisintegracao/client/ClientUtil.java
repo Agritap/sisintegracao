@@ -2,19 +2,27 @@ package com.agritap.sisintegracao.client;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
+import org.gwtbootstrap3.client.ui.IntegerBox;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.ListGroup;
 import org.gwtbootstrap3.client.ui.ListGroupItem;
 import org.gwtbootstrap3.client.ui.constants.ListGroupItemType;
 
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
-import com.agritap.sisintegracao.model.Integradora;
+import com.agritap.sisintegracao.client.request.beans.PessoaI;
 import com.agritap.sisintegracao.model.Rotulavel;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
 
 public class ClientUtil {
 	static Logger log = Logger.getLogger(ClientUtil.class.getName());
@@ -34,6 +42,16 @@ public class ClientUtil {
 		return dateFormat.format(data);
 	}
 	
+	public static void populateListBox(ListBox listBox,List<PessoaI> pessoas) {
+		listBox.clear();
+		for (PessoaI prod:pessoas){
+			listBox.addItem(prod.getNome(),prod.getId().toString());
+		}
+		if(pessoas.size()==1){
+			listBox.setSelectedIndex(0);
+		}
+	}
+
 	public static String formatSimNao(Boolean b){
 		if(b!=null && b){
 			return "Sim";
@@ -47,6 +65,33 @@ public class ClientUtil {
 			return null;
 		}
 		return carencia.toString();
+	}
+
+	public static void prepareIntegerBox(IntegerBox input){
+		input.setValidateOnBlur(true);
+		input.setAlignment(TextAlignment.RIGHT);
+		input.addKeyPressHandler(new KeyPressHandler() {
+			
+			@Override
+			public void onKeyPress(KeyPressEvent event) {
+				if(event.getNativeEvent().getKeyCode() == KeyCodes.KEY_TAB){
+					return;	
+				}
+				if(!Character.isDigit(event.getCharCode()))
+	                ((IntegerBox)event.getSource()).cancelKey();
+			}
+		});
+		input.addKeyUpHandler(new KeyUpHandler() {
+			
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				try{
+					Integer.parseInt(((IntegerBox)event.getSource()).getText());
+				}catch(NumberFormatException ex){
+					((IntegerBox)event.getSource()).setText("");
+				}
+			}
+		});
 	}
 	
 //	public static void showError (ErrosI erros,Form form){
@@ -98,29 +143,29 @@ public class ClientUtil {
 		return str.toString().trim().equals("");
 	}
 	
-	public static void populaListBox(ListBox integradoraField, Enum<?>[] values,boolean emptyOption) {
-		integradoraField.clear();
+	public static void populaListBox(ListBox listBox, Enum<?>[] values,boolean emptyOption) {
+		listBox.clear();
 		if(emptyOption){
-			integradoraField.addItem("","");
+			listBox.addItem("","");
 		}
 		for(Enum<?> enu:values){
 			if(enu instanceof Rotulavel){
-				integradoraField.addItem(enu.name(),((Rotulavel)enu).getRotulo());
+				listBox.addItem(enu.name(),((Rotulavel)enu).getRotulo());
 			}else{
-				integradoraField.addItem(enu.name());
+				listBox.addItem(enu.name());
 			}
 		}
 		if(values.length==1){
 			if(emptyOption){
-				integradoraField.setSelectedIndex(1);
+				listBox.setSelectedIndex(1);
 			}else{
-				integradoraField.setSelectedIndex(0);
+				listBox.setSelectedIndex(0);
 			}
 		}
 		
 	}
-	public static void populaListBox(ListBox integradoraField, Integradora[] values) {
-		populaListBox(integradoraField, values,false);
+	public static void populaListBox(ListBox listBox, Enum<?>[] values) {
+		populaListBox(listBox, values,false);
 	}
 	public static String formatDoc(String doc) {
 		if (isEmpty(doc)) {

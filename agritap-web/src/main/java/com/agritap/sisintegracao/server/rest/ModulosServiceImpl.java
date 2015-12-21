@@ -31,7 +31,6 @@ public class ModulosServiceImpl extends AuthRestServiceImpl{
 
 	@GET
 	@Path("{id}")
-	// application/vnd.agritap.v1.entity.Modulo+json
 	public Modulo get(@PathParam("id") Integer id) {
 		Modulo m = new Modulo();
 		m.setNome("");
@@ -42,17 +41,20 @@ public class ModulosServiceImpl extends AuthRestServiceImpl{
 	@GET
 	@Path("/todos")
 	public ListAdapter<Modulo> todos( @Context HttpServletRequest request) {
-//		ServerUtil.getUsuarioTO(em, request);
 		UsuarioTO usuario = getUsuario(request);
 		List<Pessoa> produtoresAutorizados =usuario.getProdutores();
-		
-		
 		List<Modulo> modulos = em.createNamedQuery("modulos.porProdutores", Modulo.class).setParameter("produtores", produtoresAutorizados).getResultList();
-		
 		return new ListAdapter<Modulo>(modulos);
 	}
 
-	
+
+	@GET
+	@Path("/produtor/{id}")
+	public ListAdapter<Modulo> todos( @Context HttpServletRequest request,@PathParam("id") Integer id) {
+		List<Modulo> modulos = em.createNamedQuery("modulos.porProdutorId", Modulo.class).setParameter("produtorId", id).getResultList();
+		return new ListAdapter<Modulo>(modulos);
+	}
+
 
 	@PUT
 	@Transactional

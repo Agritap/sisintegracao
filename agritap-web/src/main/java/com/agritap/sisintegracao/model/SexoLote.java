@@ -1,6 +1,16 @@
 package com.agritap.sisintegracao.model;
 
-public enum SexoLote {
+public enum SexoLote implements Rotulavel{
 
-	MACHO,FEMEA,MISTO;
+	MACHO("Macho"),FEMEA("Fêmea"),MISTO("Misto");
+
+	private String rotulo;
+	
+	private SexoLote(String descricao){
+		this.rotulo=descricao;
+	}
+	@Override
+	public String getRotulo() {
+		return rotulo;
+	}
 }

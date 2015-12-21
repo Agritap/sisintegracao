@@ -7,8 +7,6 @@
  /* CSS used here will be applied after bootstrap.css */
 
 
-
-
 body {
     background-color: #625856; /*cor de fundo*/  
 }
@@ -395,6 +393,8 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+.addButtonMenu{
+}
 .addButton {
 	background: #c6462d none repeat scroll 0 0;
     border-radius: 50%;
@@ -609,3 +609,71 @@ Cor cinza = #808080
 .panel-info {
     border-color: #c6462d;
 }
+
+
+/*
+.block-header .actions {
+  position: absolute;
+  right: 10px;
+  top: -5px;
+  z-index: 3;
+}
+.actions {
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+.actions > li {
+  display: inline-block;
+  vertical-align: baseline;
+  
+}
+.actions > li > a:before, .actions > a:before {
+  backface-visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform: scale3d(0, 0, 0);
+  transition: all 250ms ease 0s;
+  width: 100%;
+  z-index: 0;
+  
+}
+
+.actions > li > a, .actions > a {
+  display: inline-block;
+  height: 30px;
+  line-height: 29px;
+  position: relative;
+  text-align: center;
+  width: 30px;
+ 
+}
+
+.actions > li > a > i, .actions > a > i {
+  color: #858788;
+  font-size: 14px;
+  transition: color 500ms ease 0s;
+}
+.actions > li > a:hover:before, .actions > a:hover:before {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.actions > li > a:hover > i, .actions > a:hover > i {
+  color: #000000;
+}
+
+.panel .panel-heading .actions {
+  position: absolute;
+  right: 5px;
+  z-index: 2;
+  top: 5px;
+}
+*/

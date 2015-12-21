@@ -5,6 +5,7 @@
 	xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
 	xmlns:l="urn:import:com.google.gwt.core.ext.linker"
 	xmlns:b2="urn:import:org.gwtbootstrap3.extras.datepicker.client.ui">
+	<g:HTMLPanel>
 	
 	<b:Row>
 		<b:Column size="XS_12">
@@ -76,6 +77,9 @@
 	    			</b:Column>
 		
 	</b:Row>
-
+		<g:HTMLPanel ui:field="addLote" styleName="addButton">
+			<span>+</span>
+		</g:HTMLPanel>
+</g:HTMLPanel>
 
 </ui:UiBinder> 

@@ -18,6 +18,10 @@ public class ModulosClient extends RESTClient {
 		GET("modulos", "todos").withCustomReturn(ModulosIAdapter.TYPE).go(cb);
 	}
 
+	public void porProdutor(Integer produtorId,Callback<ModulosIAdapter> cb) {
+		GET("modulos", "produtor",produtorId.toString()).withCustomReturn(ModulosIAdapter.TYPE).go(cb);
+	}
+
 	public void update(ModulosI modulos, Callback<ModulosI> cb) {
 		PUT("modulos").withCustomReturn(ModulosI.TYPE).withJsonContentType().withEntityBody(modulos).go(cb);
 	}

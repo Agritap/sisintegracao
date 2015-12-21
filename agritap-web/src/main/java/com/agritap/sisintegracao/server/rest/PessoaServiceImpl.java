@@ -1,10 +1,7 @@
 package com.agritap.sisintegracao.server.rest;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +22,6 @@ import javax.ws.rs.core.MediaType;
 import com.agritap.sisintegracao.client.ValidacaoException;
 import com.agritap.sisintegracao.model.Pessoa;
 import com.agritap.sisintegracao.model.Usuario;
-import com.agritap.sisintegracao.model.UsuarioProdutor;
 import com.agritap.sisintegracao.server.ServerUtil;
 import com.agritap.sisintegracao.server.to.ListAdapter;
 import com.agritap.sisintegracao.server.to.UsuarioTO;
@@ -81,7 +77,26 @@ public class PessoaServiceImpl extends AuthRestServiceImpl{
 		return new ListAdapter<Pessoa>(produtores);
 	}
 
-	
+
+	@GET
+	@Path("/todos/tipo/{tipo}/{idUsuario}")
+	public ListAdapter<Pessoa> porTipo(@PathParam("tipo")String tipo,@PathParam("idUsuario") Integer idUsuario){
+		String query="select p from Pessoa p where ";
+		
+		if(tipo.equals("tecnico")){
+			query += "tecnico = true";
+		}
+		if(tipo.equals("granjeiro")){
+			query += "granjeiro = true";
+		}
+		if(tipo.equals("produtor")){
+			query += "produtor = true";			
+		} 
+		TypedQuery<Pessoa> queryP = em.createQuery(query,Pessoa.class);
+		List<Pessoa> produtores = queryP.getResultList();
+		return new ListAdapter<Pessoa>(produtores);
+	}
+
 	@PUT
 	@Transactional
 	public Pessoa save(Pessoa produtor){

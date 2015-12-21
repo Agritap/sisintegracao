@@ -3,6 +3,8 @@ package com.agritap.sisintegracao.client.ui;
 import com.agritap.sisintegracao.client.AppController;
 import com.agritap.sisintegracao.client.request.EntityFactory;
 import com.agritap.sisintegracao.client.request.beans.UsuarioI;
+import com.agritap.sisintegracao.client.request.clients.ModulosClient;
+import com.agritap.sisintegracao.client.request.clients.PessoaClient;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.web.bindery.event.shared.EventBus;
 
@@ -27,5 +29,9 @@ public interface ClientFactory {
 	public UsuarioI getUsuarioAutenticado();
 
 	public LoginWindow openLoginWindow(HasWidgets panel,StateHistory st);
+
+	public ModulosClient getModuloClient();
+	
+	public PessoaClient getPessoaClient();
 
 }

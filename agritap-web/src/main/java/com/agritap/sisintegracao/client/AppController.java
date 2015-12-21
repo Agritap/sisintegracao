@@ -5,8 +5,9 @@ import java.util.logging.Logger;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.agritap.sisintegracao.client.ui.MainWindow;
 import com.agritap.sisintegracao.client.ui.StateHistory;
-import com.agritap.sisintegracao.client.ui.configuracao.LotesView;
 import com.agritap.sisintegracao.client.ui.configuracao.ControleMortalidade;
+import com.agritap.sisintegracao.client.ui.configuracao.LoteView;
+import com.agritap.sisintegracao.client.ui.configuracao.LotesView;
 import com.agritap.sisintegracao.client.ui.configuracao.ModulosView;
 import com.agritap.sisintegracao.client.ui.configuracao.PessoasView;
 import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;
@@ -87,7 +88,11 @@ public class AppController implements ValueChangeHandler<String>{
 				return mw;
 			}
 			if(view.equals(ViewEnum.LOTES)){
-				mw.addConteudo(new LotesView());
+				mw.addConteudo(new LotesView(factory));
+				return mw;
+			}
+			if(view.equals(ViewEnum.LOTE)){
+				mw.addConteudo(new LoteView(factory,st));
 				return mw;
 			}
 			if(view.equals(ViewEnum.CONTROLE_MORTALIDADE)){

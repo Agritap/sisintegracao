@@ -5,6 +5,7 @@ public enum ViewEnum {
 	LOGIN("/login",false),INICIAL("/inicial"),
 	ERRO("/erro"),
 	LOTES("/lotes"), 
+	LOTE("/lote"), 
 	CONTROLE_MORTALIDADE("/controleMortalidade"),
 	REPOSICAO_LOTE("/reposicaoLote"),
 	PRODUTORES("/produtores"),

@@ -9,10 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
  @Entity 
- @NamedQuery (name="modulos.porProdutores", query = "select x from Modulo x where x.produtor in (:produtores) ")
+ @NamedQueries(
+		 { @NamedQuery (name="modulos.porProdutores", query = "select x from Modulo x where x.produtor in (:produtores) "),
+			 @NamedQuery (name="modulos.porProdutorId", query = "select x from Modulo x where x.produtor.id = :produtorId order by nome")
+		 })
 public class Modulo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

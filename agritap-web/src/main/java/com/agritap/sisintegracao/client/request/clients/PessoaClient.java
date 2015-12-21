@@ -78,4 +78,12 @@ public class PessoaClient extends RESTClient {
 		reqB.go(callback);
 	}
 
+	public void getTecnicos(Integer id, Callback<PessoaIAdapter> callback) {
+		GET("pessoas","tipo","tecnico",id.toString()).withCustomReturn(PessoaI.TYPE).go(callback);
+	}
+
+	public void getGranjeiros(Integer id, Callback<PessoaIAdapter> callback) {
+		GET("pessoas","tipo","granjeiro",id.toString()).withCustomReturn(PessoaI.TYPE).go(callback);
+	}
+
 }
