@@ -3,8 +3,10 @@ package com.agritap.sisintegracao.server.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.agritap.sisintegracao.server.rest.BigDecimalSerializer;
 import com.agritap.sisintegracao.server.rest.CustomJsonObjectFilter;
 import com.agritap.sisintegracao.server.rest.PessoaServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
@@ -32,8 +34,11 @@ public class SisIntegracaoGuiceConfig extends ServletModule {
         bind(GuiceContainer.class).in(Scopes.SINGLETON);;
  
         // hook Jackson into Jersey as the POJO <-> JSON mapper
+//        bind(BigDecimalSerializer.class).toProvider(ObjectMapperProvider)in(Scopes.SINGLETON);
         bind(JacksonJsonProvider.class).in(Scopes.SINGLETON);
         Map<String,String> parameters = new HashMap<String, String>();
+        
+        
         parameters.put(PackagesResourceConfig.PROPERTY_PACKAGES, PessoaServiceImpl.class.getPackage().getName());
         parameters.put(PackagesResourceConfig.PROPERTY_CONTAINER_RESPONSE_FILTERS, CustomJsonObjectFilter.class.getName());
         

@@ -7,10 +7,8 @@
  /* CSS used here will be applied after bootstrap.css */
 
 
-
-
 body {
-    background-color: #f8f8f8; /*cor de fundo*/  
+    background-color: #625856; /*cor de fundo*/  
 }
  
 #divBusca{
@@ -395,14 +393,16 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+.addButtonMenu{
+}
 .addButton {
-	background: #d9534f none repeat scroll 0 0;
+	background: #c6462d none repeat scroll 0 0;
     border-radius: 50%;
     bottom: 5%;
     color: #fff;
     display: block;
     height: 55.5px;
-    position: absolute;
+    position: fixed;
     right: 5%;
     width: 55.5px;
     z-index: 2147483647;
@@ -428,10 +428,15 @@ Botao de login
 */
 
 .form-signin {
-		max-width: 330px;
+		max-width: 390px;
 		padding: 15px;
-		margin: 0 auto;
+		color: #fff;
+		margin-top: 5% !important;
 	}
+.form-signin .form-signin-heading {	
+	 white-space: nowrap;
+	  text-align: center;
+}
 	
 	.form-signin .form-signin-heading, .form-signin .checkbox {
 		margin-bottom: 10px;
@@ -510,3 +515,165 @@ Botao de login
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
 	}
+
+
+/*Tutu*/
+/*
+Cor vermelha = #C6462D 
+Cor cinza = #808080
+
+*/	
+.form-control {
+	border-radius: 0px;
+}
+
+.navbar-default {
+    background-color: #625856;
+    border-color: #808080;
+}
+
+.nav > li > a,
+.navbar-default .navbar-brand {
+    color: #fff !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.page-header {
+	color: #C6462D;
+}
+
+.panel {
+	border-radius: 0px;
+}
+
+.control-label {
+	color: #808080 !important;
+}
+
+.sidebar ul li {
+	border-color: #808080;	
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+    background-color: #c6462d;
+}   
+
+.form-control:focus {
+    border-color: #e68884;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(198, 70, 45, 0.44);
+    outline: 0 none;
+}
+
+.btn-custom {
+    background-color: #c6462d;
+    border-color: #c6462d;
+    color: #fff;
+}
+
+.btn-custom.active, 
+.btn-custom.focus, 
+.btn-custom:active, 
+.btn-custom:focus, 
+.btn-custom:hover, .open > .dropdown-toggle.btn-primary {
+   	background-color: #ae2e15;
+    border-color: #ae2e15;
+    color: #fff;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+	vertical-align: middle;
+}
+.table > thead > tr > th{
+	color: #808080 !important;
+}
+
+.alert,
+.dropdown-menu,
+.btn,
+.panel-info > .panel-heading {
+	border-radius: 0px;
+}
+
+.dropdown-menu > li > a {
+    color: #333 !important;
+}
+
+ 
+.panel-info > .panel-heading {
+    background-color: #C6462D;
+    border-color: #C6462D;
+    color: #fff;
+}
+
+.panel-info {
+    border-color: #c6462d;
+}
+
+
+/*
+.block-header .actions {
+  position: absolute;
+  right: 10px;
+  top: -5px;
+  z-index: 3;
+}
+.actions {
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+.actions > li {
+  display: inline-block;
+  vertical-align: baseline;
+  
+}
+.actions > li > a:before, .actions > a:before {
+  backface-visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform: scale3d(0, 0, 0);
+  transition: all 250ms ease 0s;
+  width: 100%;
+  z-index: 0;
+  
+}
+
+.actions > li > a, .actions > a {
+  display: inline-block;
+  height: 30px;
+  line-height: 29px;
+  position: relative;
+  text-align: center;
+  width: 30px;
+ 
+}
+
+.actions > li > a > i, .actions > a > i {
+  color: #858788;
+  font-size: 14px;
+  transition: color 500ms ease 0s;
+}
+.actions > li > a:hover:before, .actions > a:hover:before {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.actions > li > a:hover > i, .actions > a:hover > i {
+  color: #000000;
+}
+
+.panel .panel-heading .actions {
+  position: absolute;
+  right: 5px;
+  z-index: 2;
+  top: 5px;
+}
+*/

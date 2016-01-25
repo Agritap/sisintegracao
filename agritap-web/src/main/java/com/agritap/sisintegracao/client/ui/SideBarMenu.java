@@ -23,24 +23,24 @@ public class SideBarMenu extends Composite {
 	}
 
 
-	@UiHandler("produtores")
+	@UiHandler("pessoas")
 	public void produtoresClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.PESSOAS);
 	}
 
-	@UiHandler("tecnicos")
-	public void tecnicosClick(ClickEvent evt){
-		factory.getAppController().goTo(ViewEnum.TECNICOS);
-	}
 	
 	@UiHandler("tabelaRacao")
 	public void tabelaRacaoClick(ClickEvent evt){
 		factory.getAppController().goTo(ViewEnum.TABELA_RACAO);
 	}
 	
-	@UiHandler("configuracaoLote")
+	@UiHandler("modulos")
+	public void modulosClick(ClickEvent evt){
+		factory.getAppController().goTo(ViewEnum.MODULOS);
+	}
+	@UiHandler("lotes")
 	public void configuracaoLoteClick(ClickEvent evt){
-		factory.getAppController().goTo(ViewEnum.CONFIGURACAO_LOTE);
+		factory.getAppController().goTo(ViewEnum.LOTES);
 	}
 	@UiHandler("tipoRacao")
 	public void pedidosClick(ClickEvent evt){

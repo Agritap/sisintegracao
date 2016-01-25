@@ -14,7 +14,6 @@ import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.form.validator.BlankValidator;
 import org.gwtbootstrap3.client.ui.form.validator.FieldMatchValidator;
-import org.gwtbootstrap3.client.ui.form.validator.RegExValidator;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 
@@ -237,30 +236,47 @@ public class PessoasView extends Composite {
 	public void salvarClick(ClickEvent evt){
 		errorBox.setVisible(false);
 		errorBox.clear();
-		
-		produtorEditado.setNome(nomeField.getValue());
-		produtorEditado.setEmail(emailField.getValue());
-		produtorEditado.setTelefone(telefoneField.getValue());
-		produtorEditado.setAtivo(ativoField.getValue());
-		produtorEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
-		produtorEditado.setCpf(ClientUtil.numbers(cpfField.getValue()));
-		produtorEditado.setProdutor(produtorField.getValue());
-		produtorEditado.setTecnico(tecnicoField.getValue());
-		produtorEditado.setGranjeiro(granjeiroField.getValue());
-		produtorEditado.setApelido(apelidoField.getValue());
-		client.update(produtorEditado, new Callback<PessoaI>() {
-
-			@Override
-			public void ok(PessoaI to) {
-				loadTabela();
-				produtorEditado=null;
-				formRow.setVisible(false);
-			}
-			@Override
-			public void onValidation(ErrosI erro) {
-				ClientUtil.printValidation(erro,errorBox);
-			}
-		});
+		if(form.validate()){
+			
+			produtorEditado.setNome(nomeField.getValue());
+			produtorEditado.setEmail(emailField.getValue());
+			produtorEditado.setTelefone(telefoneField.getValue());
+			produtorEditado.setAtivo(ativoField.getValue());
+			produtorEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
+			produtorEditado.setCpf(ClientUtil.numbers(cpfField.getValue()));
+			produtorEditado.setProdutor(produtorField.getValue());
+			produtorEditado.setTecnico(tecnicoField.getValue());
+			produtorEditado.setGranjeiro(granjeiroField.getValue());
+			produtorEditado.setApelido(apelidoField.getValue());
+			client.update(produtorEditado, new Callback<PessoaI>() {
+				
+				@Override
+				public void ok(PessoaI to) {
+					if(!ClientUtil.isEmpty(senhaField.getValue())){
+						client.updatePassword(to.getId(),senhaField.getValue(), new Callback<Boolean>() {
+							@Override
+							public void ok(Boolean to) {
+								loadTabela();
+								produtorEditado=null;
+								formRow.setVisible(false);
+							}
+							public void onValidation(ErrosI erro) {
+								ClientUtil.printValidation(erro,errorBox);
+							};
+						});
+						
+					}else{
+						loadTabela();
+						produtorEditado=null;
+						formRow.setVisible(false);
+					}
+				}
+				@Override
+				public void onValidation(ErrosI erro) {
+					ClientUtil.printValidation(erro,errorBox);
+				}
+			});
+		}
 	}
 	@UiHandler("cancelarBtn")
 	public void cancelarClick(ClickEvent evt){

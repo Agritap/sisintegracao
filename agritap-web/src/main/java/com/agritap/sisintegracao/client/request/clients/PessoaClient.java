@@ -71,4 +71,19 @@ public class PessoaClient extends RESTClient {
 		}
 	}
 
+	public void updatePassword(Integer id, String pass, Callback<Boolean> callback) {
+		String formBody = "senha=" + pass;
+		ExceptionalRequestBuilder reqB = POST("pessoas", id.toString(),"updatePass");
+		reqB.setRequestData(formBody );
+		reqB.go(callback);
+	}
+
+	public void getTecnicos(Integer id, Callback<PessoaIAdapter> callback) {
+		GET("pessoas","tipo","tecnico",id.toString()).withCustomReturn(PessoaI.TYPE).go(callback);
+	}
+
+	public void getGranjeiros(Integer id, Callback<PessoaIAdapter> callback) {
+		GET("pessoas","tipo","granjeiro",id.toString()).withCustomReturn(PessoaI.TYPE).go(callback);
+	}
+
 }

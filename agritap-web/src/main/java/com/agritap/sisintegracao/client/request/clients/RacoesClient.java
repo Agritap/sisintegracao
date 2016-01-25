@@ -16,11 +16,11 @@ public class RacoesClient extends RESTClient {
 	}
 
 	public void update(TabelaRacaoI tabelaRacao, Callback<TabelaRacaoI> cb) {
-		PUT("tabelaRacao").withCustomReturn(TabelaRacaoI.TYPE).withJsonContentType().withEntityBody(tabelaRacao).go(cb);
+		PUT("racoes","tabela").withCustomReturn(TabelaRacaoI.TYPE).withJsonContentType().withEntityBody(tabelaRacao).go(cb);
 	}
 
 	public void delete(Integer id,Callback<Void> cb) {
-		DELETE("tabelaRacao",id.toString()).go(cb);
+		DELETE("racoes","tabelaRacao",id.toString()).go(cb);
 	}
 	
 }

@@ -2,6 +2,8 @@ package com.agritap.sisintegracao.client;
 
 import com.agritap.sisintegracao.client.request.EntityFactory;
 import com.agritap.sisintegracao.client.request.beans.UsuarioI;
+import com.agritap.sisintegracao.client.request.clients.ModulosClient;
+import com.agritap.sisintegracao.client.request.clients.PessoaClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.agritap.sisintegracao.client.ui.LoginWindow;
 import com.agritap.sisintegracao.client.ui.MainWindow;
@@ -25,6 +27,9 @@ public class ClientFactoryImpl implements ClientFactory {
 	
 	private UsuarioI usuario;
 	
+	private ModulosClient modulosClient = new ModulosClient();
+	
+	private PessoaClient pessoaClient = new PessoaClient();
 
 	public EventBus getEventbus() {
 		return eventBus;
@@ -82,6 +87,16 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public UsuarioI getUsuarioAutenticado() {
 		return usuario;
+	}
+
+	@Override
+	public ModulosClient getModuloClient() {
+		return modulosClient;
+	}
+
+	@Override
+	public PessoaClient getPessoaClient() {
+		return pessoaClient;
 	}
 
 }

@@ -1,10 +1,7 @@
 package com.agritap.sisintegracao.server.rest;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +22,6 @@ import javax.ws.rs.core.MediaType;
 import com.agritap.sisintegracao.client.ValidacaoException;
 import com.agritap.sisintegracao.model.Pessoa;
 import com.agritap.sisintegracao.model.Usuario;
-import com.agritap.sisintegracao.model.UsuarioProdutor;
 import com.agritap.sisintegracao.server.ServerUtil;
 import com.agritap.sisintegracao.server.to.ListAdapter;
 import com.agritap.sisintegracao.server.to.UsuarioTO;
@@ -34,7 +30,7 @@ import com.google.inject.persist.Transactional;
 
 @Path("/pessoas")
 @Produces(MediaType.APPLICATION_JSON)
-public class PessoaServiceImpl {
+public class PessoaServiceImpl extends AuthRestServiceImpl{
 	Logger log = Logger.getLogger(PessoaServiceImpl.class.getName());
 	@Inject
 	transient EntityManager em ;
@@ -62,7 +58,6 @@ public class PessoaServiceImpl {
 	
 	@GET
 	@Path("{id}/removeSenha")
-	@Produces("application/boolean")
 	public Boolean removeSenha(@PathParam("usuario.porPessoa")Integer id){
 		Pessoa p= em.find(Pessoa.class, id);
 		try{
@@ -82,7 +77,26 @@ public class PessoaServiceImpl {
 		return new ListAdapter<Pessoa>(produtores);
 	}
 
-	
+
+	@GET
+	@Path("/todos/tipo/{tipo}/{idUsuario}")
+	public ListAdapter<Pessoa> porTipo(@PathParam("tipo")String tipo,@PathParam("idUsuario") Integer idUsuario){
+		String query="select p from Pessoa p where ";
+		
+		if(tipo.equals("tecnico")){
+			query += "tecnico = true";
+		}
+		if(tipo.equals("granjeiro")){
+			query += "granjeiro = true";
+		}
+		if(tipo.equals("produtor")){
+			query += "produtor = true";			
+		} 
+		TypedQuery<Pessoa> queryP = em.createQuery(query,Pessoa.class);
+		List<Pessoa> produtores = queryP.getResultList();
+		return new ListAdapter<Pessoa>(produtores);
+	}
+
 	@PUT
 	@Transactional
 	public Pessoa save(Pessoa produtor){
@@ -102,15 +116,13 @@ public class PessoaServiceImpl {
 		Pessoa p = em.find(Pessoa.class, id);
 		em.remove(p);
 	}
+	
 	@POST
 	@Path("/authToken")
 	public UsuarioTO getUsuario(@FormParam("token")String authToken){
 		try{
-		String token = ServerUtil.decrypt(authToken);
-		StringTokenizer buf = new StringTokenizer(token,"|");
-		Integer id = Integer.parseInt(buf.nextToken());
-		long expires = Long.parseLong(buf.nextToken());
-		Date exp = new Date(expires);
+			Integer id =ServerUtil.getTokenId(authToken);
+			Date exp = ServerUtil.getTokenExpiracao(authToken);
 		Date agora= new Date();
 		if(agora.compareTo(exp)<0){
 			//wheee. ta valido
@@ -123,6 +135,7 @@ public class PessoaServiceImpl {
 		}
 		throw new ValidacaoException("Token expirado, inválido ou inexistente");
 	}
+	
 	@POST
 	@Path("/auth")
 	public UsuarioTO getUsuario(@FormParam("login")String email,@FormParam("password")String pass){
@@ -152,32 +165,20 @@ public class PessoaServiceImpl {
 			throw ex;
 		}
 	}
-
-	private UsuarioTO geraUsuarioTO(Usuario user) {
-		Integer id = user.getId();
-		Calendar agora= Calendar.getInstance();
-		agora.add(Calendar.DAY_OF_MONTH, 30);
-		String token = id+"|"+agora.getTimeInMillis();
-		UsuarioTO to = new UsuarioTO();
-		to.setToken(ServerUtil.crypt(token));
-		to.setPermissoes(user.getPermissoes());
-		to.setUsuario(user.getUsuario());
-		to.setAlteraSenha(user.getAlteraSenha());
-		to.setId(user.getId());
-		
-		List<Pessoa> produtoresPermitidos = new LinkedList<>();
-		to.setProdutores(produtoresPermitidos);
-		if(user.getUsuario().getProdutor()!=null && user.getUsuario().getProdutor()){
-			produtoresPermitidos.add(user.getUsuario());
-		}
-		if(user.getProdutores()!=null){
-			for(UsuarioProdutor u:user.getProdutores()){
-				if(ServerUtil.isPeriodosIntercecao(u.getDataInicio(), u.getDataFim(), new Date(), new Date())){
-					produtoresPermitidos.add(u.getProdutor());
-				}
-			}
-		}
-		
-		return to;
+	
+	@POST
+	@Path("{id}/updatePass")
+	@Transactional
+	public Boolean updatePass(@FormParam("senha")String senha,@PathParam("id")Integer idPessoa){
+		Pessoa p= em.find(Pessoa.class, idPessoa);
+		try{
+			Usuario u = em.createNamedQuery("usuario.porPessoa",Usuario.class).setParameter("pessoa", p).getSingleResult();
+			u.setSenha(ServerUtil.crypt(senha));
+			em.merge(u);
+			return true;
+		}catch(Exception e){}
+		return false;
 	}
+
+	
 }

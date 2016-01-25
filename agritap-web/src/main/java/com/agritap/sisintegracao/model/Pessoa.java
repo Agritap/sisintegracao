@@ -15,7 +15,11 @@ import javax.persistence.Version;
 
 @Entity
 @NamedQueries(
-		{@NamedQuery(name="pessoa.todos",query="select p from Pessoa p")})
+		{
+			@NamedQuery(name="pessoa.todos",query="select p from Pessoa p")
+			}
+		
+		)
 public class Pessoa implements Serializable{
 	
 	private static final long serialVersionUID = -3216625491090034548L;
@@ -26,7 +30,7 @@ public class Pessoa implements Serializable{
 
 	@Enumerated(EnumType.STRING)
 	private Integradora integradora;
-
+	
 	@Column(length=14)
 	private String cpf;
 

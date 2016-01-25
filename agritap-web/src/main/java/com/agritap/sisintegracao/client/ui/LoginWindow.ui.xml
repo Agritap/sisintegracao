@@ -14,7 +14,7 @@
 	<g:HTMLPanel styleName="login-body">
 		<b:Form styleName="form-signin" ui:field="formSign">
 		<g:HTMLPanel>
-			<h2 class="form-signin-heading">Faça Login</h2>
+			<h2 class="form-signin-heading">INTEGRATION</h2>
 			
 			<label for="inputEmail" class="sr-only">Email</label>
 			<b:TextBox  ui:field="emailField" placeholder="Email" ></b:TextBox>
@@ -35,7 +35,7 @@
 					<b:InlineCheckBox ui:field="lembrarField" text="Lembrar de mim"/> 
 				</label>
 			</div>
-			<g:Button ui:field="loginBtn" styleName="btn btn-lg btn-primary btn-block">Login</g:Button>
+			<g:Button ui:field="loginBtn" styleName="btn btn-lg btn-custom btn-block">Login</g:Button>
 		</g:HTMLPanel>
 		</b:Form>
 		

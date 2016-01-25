@@ -2,9 +2,13 @@ package com.agritap.sisintegracao.server;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 public class ServerUtil {
+
+	public static final String TOKEN_SEP = "-";
 
 	public static String crypt(String pass) {
 		return pass;
@@ -62,6 +66,31 @@ public class ServerUtil {
 			return true;
 		}
 		return str.toString().trim().equals("");
+	}
+
+	public static String generateToken(Integer id) {
+		Calendar agora= Calendar.getInstance();
+		agora.add(Calendar.DAY_OF_MONTH, 30);
+		String tok = id+TOKEN_SEP+agora.getTimeInMillis();
+		return crypt(tok);
+	}
+
+	public static Date getTokenExpiracao(String authToken) {
+		String token = ServerUtil.decrypt(authToken);
+		StringTokenizer buf = new StringTokenizer(token,TOKEN_SEP);
+		buf.nextToken(); //joga o id fora
+//		Integer id = Integer.parseInt(buf.nextToken());
+		long expires = Long.parseLong(buf.nextToken());
+		Date exp = new Date(expires);
+
+		return exp;
+	}
+
+	public static Integer getTokenId(String authToken) {
+		String token = ServerUtil.decrypt(authToken);
+		StringTokenizer buf = new StringTokenizer(token,TOKEN_SEP);
+		Integer id = Integer.parseInt(buf.nextToken());
+		return id;
 	}
 
 }

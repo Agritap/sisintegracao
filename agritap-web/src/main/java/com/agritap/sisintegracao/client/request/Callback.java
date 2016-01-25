@@ -97,7 +97,7 @@ public abstract class Callback<T> implements RequestCallback {
 		String contentType = contentTypeHeader.toLowerCase();
 		String responseText = response.getText();
 
-		if (contentType.equals("application/boolean") || contentType.equals("text/plain")) {
+		if (contentType.equals("application/boolean") || contentType.startsWith("text/plain")) {
 			T bool = bool(responseText);
 			ok(bool);
 		} 

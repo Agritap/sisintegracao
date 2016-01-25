@@ -12,6 +12,7 @@ import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 
+import com.agritap.sisintegracao.client.ClientUtil;
 import com.agritap.sisintegracao.client.request.Callback;
 import com.agritap.sisintegracao.client.request.beans.TabelaRacaoI;
 import com.agritap.sisintegracao.client.request.beans.TabelaRacaoIAdapter;
@@ -197,7 +198,7 @@ public class TabelaRacaoView extends Composite {
 	public void salvarClick(ClickEvent evt) {
 		tabelaRacaoEditado.setInicio(DataInicioField.getValue());
 		tabelaRacaoEditado.setFim(DataFimField.getValue());
-   // 	tabelaRacaoEditado.setPesoMinimo(PesoMinimoField.getValue());
+    	tabelaRacaoEditado.setPesoMinimo(ClientUtil.parseBigDecimal(PesoMinimoField.getValue()));
 		
 
 		client.update(tabelaRacaoEditado, new Callback<TabelaRacaoI>() {
@@ -239,6 +240,6 @@ public class TabelaRacaoView extends Composite {
 		this.tabelaRacaoEditado = tabelaRacao;
 		DataInicioField.setValue(tabelaRacao.getInicio());
 		DataFimField.setValue(tabelaRacao.getFim());
-//		PesoMinimoField.setValue(tabelaRacao.getPesoMinimo());
+		PesoMinimoField.setValue(ClientUtil.formatBigDecimal(tabelaRacao.getPesoMinimo()));
 	}
 }

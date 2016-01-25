@@ -40,7 +40,7 @@
 								</b:FormGroup>
 
 								<b:FormGroup>
-									<b:Button type="PRIMARY" ui:field="addItem">Novo Item TOSCO</b:Button>
+									<b:Button  styleName="btn btn-custom" icon="PLUS" ui:field="addItem"></b:Button>
 								</b:FormGroup>
 								
 								<g:HTMLPanel ui:field="painelItens">
