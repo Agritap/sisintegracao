@@ -30,7 +30,7 @@
 
 								<b:FormGroup>
 									<b:FormLabel for="formQuantidade"> Data Fim </b:FormLabel>
-			                        <b2:DatePicker autoClose="true" ui:field="DataFimField"/>
+			                        <b2:DatePicker autoClose="true" ui:field="DataFimField" language="PT_BR" format="dd/mm/yyyy"/>
 			                  	</b:FormGroup>
                             </b:Column>
 						</b:Row>
