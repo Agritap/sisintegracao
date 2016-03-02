@@ -26,28 +26,31 @@
 									<b2:DatePicker autoClose="true" ui:field="DataInicioField" language="PT_BR" format="dd/mm/yyyy"/>
 								</b:FormGroup>
 							</b:Column>						
-							<b:Column size="XS_12,SM_6">
 
+							<b:Column size="XS_12,SM_6">	
 								<b:FormGroup>
 									<b:FormLabel for="formQuantidade"> Data Fim </b:FormLabel>
 			                        <b2:DatePicker autoClose="true" ui:field="DataFimField" language="PT_BR" format="dd/mm/yyyy"/>
 			                  	</b:FormGroup>
                             </b:Column>
 						</b:Row>
+						
 								<b:FormGroup>
 									<b:FormLabel for="formQuantidade"> Peso Minimo </b:FormLabel>
 									<b:TextBox placeholder="Peso Minimo" ui:field="PesoMinimoField" />
 								</b:FormGroup>
 
+						   <b:Column size="XS_12,SM_6">
 								<b:FormGroup>
 									<b:Button  styleName="btn btn-custom" icon="PLUS" ui:field="addItem"></b:Button>
 								</b:FormGroup>
-								
+							</b:Column>
+							
 								<g:HTMLPanel ui:field="painelItens">
 								
 								</g:HTMLPanel>
-
-								<b:Button type="PRIMARY" ui:field="salvarBtn">Salvar</b:Button>
+								
+						   	<b:Button type="PRIMARY" ui:field="salvarBtn">Salvar</b:Button>
 								<b:Button  addStyleNames="col-xs-offset-1" ui:field="cancelarBtn">Cancelar</b:Button>
 								<b:Button type="DANGER" addStyleNames="col-xs-offset-1" ui:field="excluirBtn">Excluir</b:Button>
 							</b:FieldSet>

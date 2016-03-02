@@ -8,68 +8,37 @@
 	<g:HTMLPanel>
 		<b:Row>
 			<b:Column size="XS_12">
-				<b:Heading size="H1" styleName="page-header" text="Modulos" />
+				<b:Heading size="H1" styleName="page-header" text="Módulos" />
 			</b:Column>
 		</b:Row>
 
-		<b:Row ui:field="formRow" visible="false">
-			<b:Column size="XS_12">
-				<b:Panel>
-					<b:PanelBody>
-						<b:ListGroup ui:field="errorBox" visible="false">
-						</b:ListGroup>
-						<b:Form>
-							<b:FieldSet>
-								<b:Row>
-									<b:Column size="XS_5">
-										<b:FormGroup>
-											<b:FormLabel for="nomeField"> Nome </b:FormLabel>
-											<b:TextBox placeholder="Nome" ui:field="nomeField" />
-										</b:FormGroup>
-									</b:Column>
-								</b:Row>
-								<b:Row>
-									<b:Column size="XS_5">
-										<b:FormGroup>
-											<b:FormLabel for="tipoAnimalField"> Tipo Animal </b:FormLabel>
-											<b:ListBox ui:field="tipoAnimalField" />
-										</b:FormGroup>
-									</b:Column>
-								</b:Row>
+		<b:Form ui:field="form">
+			<b:FieldSet>
 
-								<b:Row>
-									<b:Column size="XS_5">
-										<b:FormGroup>
-											<b:FormLabel for="alojamentoMaximoField"> Alojamento Maximo </b:FormLabel>
-											<b:TextBox ui:field="alojamentoMaximoField" />
-										</b:FormGroup>
-									</b:Column>
-
-
-
-								</b:Row>
-
-
-								<b:Button type="PRIMARY" ui:field="salvarBtn">Salvar</b:Button>
-								<b:Button addStyleNames="col-xs-offset-1" ui:field="cancelarBtn">Cancelar</b:Button>
-								<b:Button type="DANGER" addStyleNames="col-xs-offset-1"
-									ui:field="excluirBtn">Excluir</b:Button>
-							</b:FieldSet>
-						</b:Form>
-					</b:PanelBody>
-				</b:Panel>
-			</b:Column>
-		</b:Row>
+				<b:Row>
+					<b:Column size="XS_12,SM_6">
+						<b:InputGroup>
+						<b:TextBox placeholder="Buscar" ui:field="buscarField" />
+							<b:InputGroupButton>
+								<b:Button icon="SEARCH"></b:Button>
+							</b:InputGroupButton>
+						</b:InputGroup>
+					</b:Column>
+				</b:Row>
+			</b:FieldSet>
+		</b:Form>
 
 		<b:Row>
-			<b:Column size="XS_8">
+			<b:Column size="XS_12">
 				<gwt:CellTable ui:field="tabelaModulos" bordered="true"
 					condensed="true" striped="true" hover="true">
 
 				</gwt:CellTable>
 			</b:Column>
 		</b:Row>
-
+<g:HTMLPanel ui:field="addModulo" styleName="addButton">
+			<span>+</span>
+		</g:HTMLPanel>
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

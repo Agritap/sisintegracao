@@ -64,5 +64,4 @@ public class SideBarMenu extends Composite {
 	public void vacinacaoAnimaisClick(ClickEvent evt) {
 		factory.getAppController().goTo(ViewEnum.VACINACAO_ANIMAIS);
 	}
-
 }

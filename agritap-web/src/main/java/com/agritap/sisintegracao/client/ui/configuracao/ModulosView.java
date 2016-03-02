@@ -1,29 +1,27 @@
 package com.agritap.sisintegracao.client.ui.configuracao;
 
-import org.gwtbootstrap3.client.ui.ListBox;
-import org.gwtbootstrap3.client.ui.Row;
-import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 
-import com.agritap.sisintegracao.client.ClientUtil;
+import com.agritap.sisintegracao.client.ViewEnum;
 import com.agritap.sisintegracao.client.request.Callback;
 import com.agritap.sisintegracao.client.request.beans.ModulosI;
 import com.agritap.sisintegracao.client.request.beans.ModulosIAdapter;
 import com.agritap.sisintegracao.client.request.clients.ModulosClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
-import com.agritap.sisintegracao.model.TipoAnimal;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class ModulosView extends Composite {
@@ -36,20 +34,23 @@ public class ModulosView extends Composite {
 
 	@UiField
 	CellTable<ModulosI> tabelaModulos;
-
 	@UiField
-	Row formRow;
+	HTMLPanel addModulo;
 
-	@UiField
-	TextBox nomeField;
+	
+//	@UiField
+//	Row formRow;
+//
+//	@UiField
+//	TextBox nomeField;
+//
+//	@UiField
+//	ListBox tipoAnimalField;
+//
+//	@UiField
+//	TextBox alojamentoMaximoField;
 
-	@UiField
-	ListBox tipoAnimalField;
-
-	@UiField
-	TextBox alojamentoMaximoField;
-
-	ModulosI ModulosEditado;
+	
 
 	interface ModulosUiBinder extends UiBinder<Widget, ModulosView> {
 	}
@@ -61,12 +62,23 @@ public class ModulosView extends Composite {
 	}
 
 	private void init() {
-		for (TipoAnimal t : TipoAnimal.values()) {
-			tipoAnimalField.addItem(t.name());
-		}
+//		for (TipoAnimal t : TipoAnimal.values()) {
+//			tipoAnimalField.addItem(t.name());
+//		}
 		preparaTabela();
 		loadTabela();
+		bindEvents();
 
+	}
+
+	private void bindEvents() {
+		addModulo.addDomHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				factory.getAppController().goTo(ViewEnum.MODULO); 	
+			}
+		}, ClickEvent.getType());
+		
 	}
 
 	private void loadTabela() {
@@ -143,15 +155,15 @@ public class ModulosView extends Composite {
 		click.setFieldUpdater(new FieldUpdater<ModulosI, String>() {
 			@Override
 			public void update(int index, ModulosI modulos, String value) {
-				loadForm(modulos);
-				formRow.setVisible(true);
+//				loadForm(modulos);
+//				formRow.setVisible(true);
 			}
 
 		});
 
 		tabelaModulos.addColumn(produtorColumn, "Modulos");
-		tabelaModulos.addColumn(click, "Ações");
 		tabelaModulos.addColumn(alojamentoMaximo, "Alojamento Maximo");
+		tabelaModulos.addColumn(click, "Ações");
 	}
 
 	public static ModulosUiBinder getUiBinder() {
@@ -186,102 +198,30 @@ public class ModulosView extends Composite {
 		this.tabelaModulos = tabelaModulos;
 	}
 
-	public Row getFormRow() {
-		return formRow;
-	}
-
-	public void setFormRow(Row formRow) {
-		this.formRow = formRow;
-	}
-
-	public TextBox getNomeField() {
-		return nomeField;
-	}
-
-	public void setNomeField(TextBox nomeField) {
-		this.nomeField = nomeField;
-	}
-
-	public ModulosI getModulosEditado() {
-		return ModulosEditado;
-	}
-
-	public void setModulosEditado(ModulosI modulosEditado) {
-		ModulosEditado = modulosEditado;
-	}
-
-	public ListBox getTipoAnimalField() {
-		return tipoAnimalField;
-	}
-
-	public void setTipoAnimalField(ListBox tipoAnimalField) {
-		this.tipoAnimalField = tipoAnimalField;
-	}
-
-	public TextBox getAlojamentoMaximoField() {
-		return alojamentoMaximoField;
-	}
-
-	public void setAlojamentoMaximoField(TextBox alojamentoMaximoField) {
-		this.alojamentoMaximoField = alojamentoMaximoField;
-	}
-	
 	
 
-	@UiHandler("salvarBtn")
-	public void salvarClick(ClickEvent evt) {
 
-		ModulosEditado.setNome(nomeField.getValue());
-		ModulosEditado.setTipoAnimal(TipoAnimal.values()[tipoAnimalField.getSelectedIndex()]);
-		ModulosEditado.setAlojamentoMaximo(ClientUtil.parseInteger(alojamentoMaximoField.getValue()));
 
-		// ModulosEditado.setBarracao();
-		// TipoRacaoEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
-		client.update(ModulosEditado, new Callback<ModulosI>() {
+//	@UiHandler("salvarBtn")
+//	public void salvarClick(ClickEvent evt) {
+//
+//		ModulosEditado.setNome(nomeField.getValue());
+//		ModulosEditado.setTipoAnimal(TipoAnimal.values()[tipoAnimalField.getSelectedIndex()]);
+//		ModulosEditado.setAlojamentoMaximo(ClientUtil.parseInteger(alojamentoMaximoField.getValue()));
+//
+//		// ModulosEditado.setBarracao();
+//		// TipoRacaoEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
+//		client.update(ModulosEditado, new Callback<ModulosI>() {
+//
+//			@Override
+//			public void ok(ModulosI to) {
+//				loadTabela();
+//				ModulosEditado = null;
+//				formRow.setVisible(false);
+//			}
+//
+//		});
+//	}
 
-			@Override
-			public void ok(ModulosI to) {
-				loadTabela();
-				ModulosEditado = null;
-				formRow.setVisible(false);
-			}
-
-		});
-	}
-
-	@UiHandler("cancelarBtn")
-	public void cancelarClick(ClickEvent evt) {
-		formRow.setVisible(false);
-		ModulosEditado = null;
-	}
-
-	@UiHandler("excluirBtn")
-	public void excluirClick(ClickEvent evt) {
-
-		// TipoRacaoEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
-		client.delete(ModulosEditado.getId(), new Callback<Void>() {
-
-			@Override
-			public void ok(Void to) {
-				loadTabela();
-				ModulosEditado = null;
-				formRow.setVisible(false);
-			}
-		});
-	}
-
-	public void loadForm(ModulosI modulos) {
-		this.ModulosEditado = modulos;
-
-		nomeField.setValue(modulos.getNome());
-		
-		alojamentoMaximoField.setValue(ClientUtil.formatInteger(modulos.getAlojamentoMaximo()));
-
-		if (modulos.getTipoAnimal() != null) {
-
-			tipoAnimalField.setSelectedIndex(modulos.getTipoAnimal().ordinal());
-
-		}
-
-	}
+	
 }

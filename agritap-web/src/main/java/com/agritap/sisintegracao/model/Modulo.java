@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
  @Entity 
  @NamedQueries(
 		 { @NamedQuery (name="modulos.porProdutores", query = "select x from Modulo x where x.produtor in (:produtores) "),
-			 @NamedQuery (name="modulos.porProdutorId", query = "select x from Modulo x where x.produtor.id = :produtorId order by nome")
+			 @NamedQuery (name="modulos.porProdutorId", query = "select x from Modulo x where x.produtor.id = :produtorId order by x.nome")
 		 })
 public class Modulo {
 	@Id

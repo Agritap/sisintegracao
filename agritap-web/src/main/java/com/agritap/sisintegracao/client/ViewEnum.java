@@ -14,7 +14,8 @@ public enum ViewEnum {
 	TIPORACAO("/tipoRacao"),
 	RECEBIMENTOS("/recebimentos"),
 	MODULOS("/modulos"),
-	VACINACAO_ANIMAIS("/vacinacaoAnimais");
+	VACINACAO_ANIMAIS("/vacinacaoAnimais"),
+	MODULO("/modulo");
 	
 
 	public String url;
