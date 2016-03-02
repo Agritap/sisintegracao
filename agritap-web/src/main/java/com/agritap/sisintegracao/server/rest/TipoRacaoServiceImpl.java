@@ -13,9 +13,9 @@ import javax.ws.rs.core.MediaType;
 
 import com.agritap.sisintegracao.client.ClientUtil;
 import com.agritap.sisintegracao.client.ValidacaoException;
+import com.agritap.sisintegracao.client.vo.ListAdapter;
 import com.agritap.sisintegracao.model.TipoRacao;
 import com.agritap.sisintegracao.server.ServerUtil;
-import com.agritap.sisintegracao.server.to.ListAdapter;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
@@ -38,9 +38,8 @@ public class TipoRacaoServiceImpl {
 
 	@GET
 	@Path("/todos")
-	public ListAdapter<TipoRacao> todos() {
-		List<TipoRacao> tipoRacao = em.createNamedQuery("tipoRacao.todos", TipoRacao.class).getResultList();
-		return new ListAdapter<TipoRacao>(tipoRacao);
+	public List<TipoRacao> todos() {
+		return em.createNamedQuery("tipoRacao.todos", TipoRacao.class).getResultList();
 	}
 
 	@PUT

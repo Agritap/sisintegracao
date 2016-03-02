@@ -14,11 +14,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.agritap.sisintegracao.client.ValidacaoException;
+import com.agritap.sisintegracao.client.vo.ListAdapter;
+import com.agritap.sisintegracao.client.vo.UsuarioTO;
 import com.agritap.sisintegracao.model.Modulo;
 import com.agritap.sisintegracao.model.Pessoa;
 import com.agritap.sisintegracao.server.ServerUtil;
-import com.agritap.sisintegracao.server.to.ListAdapter;
-import com.agritap.sisintegracao.server.to.UsuarioTO;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 

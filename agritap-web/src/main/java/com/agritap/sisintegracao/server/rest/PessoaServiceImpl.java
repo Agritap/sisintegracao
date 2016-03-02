@@ -20,11 +20,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.agritap.sisintegracao.client.ValidacaoException;
+import com.agritap.sisintegracao.client.vo.ListAdapter;
+import com.agritap.sisintegracao.client.vo.UsuarioTO;
 import com.agritap.sisintegracao.model.Pessoa;
 import com.agritap.sisintegracao.model.Usuario;
 import com.agritap.sisintegracao.server.ServerUtil;
-import com.agritap.sisintegracao.server.to.ListAdapter;
-import com.agritap.sisintegracao.server.to.UsuarioTO;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
@@ -72,15 +72,14 @@ public class PessoaServiceImpl extends AuthRestServiceImpl{
 	
 	@GET
 	@Path("/todos")
-	public ListAdapter<Pessoa> todos(){
-		List<Pessoa> produtores = em.createNamedQuery("pessoa.todos",Pessoa.class).getResultList();
-		return new ListAdapter<Pessoa>(produtores);
+	public List<Pessoa> todos(){
+		return em.createNamedQuery("pessoa.todos",Pessoa.class).getResultList();
 	}
 
 
 	@GET
-	@Path("/todos/tipo/{tipo}/{idUsuario}")
-	public ListAdapter<Pessoa> porTipo(@PathParam("tipo")String tipo,@PathParam("idUsuario") Integer idUsuario){
+	@Path("/todos/tipo/{tipo}")
+	public ListAdapter<Pessoa> porTipo(@PathParam("tipo")String tipo){
 		String query="select p from Pessoa p where ";
 		
 		if(tipo.equals("tecnico")){

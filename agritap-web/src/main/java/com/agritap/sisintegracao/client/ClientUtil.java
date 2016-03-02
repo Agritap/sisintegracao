@@ -12,7 +12,6 @@ import org.gwtbootstrap3.client.ui.ListGroupItem;
 import org.gwtbootstrap3.client.ui.constants.ListGroupItemType;
 
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
-import com.agritap.sisintegracao.client.request.beans.PessoaI;
 import com.agritap.sisintegracao.model.Rotulavel;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
@@ -42,10 +41,14 @@ public class ClientUtil {
 		return dateFormat.format(data);
 	}
 	
-	public static void populateListBox(ListBox listBox,List<PessoaI> pessoas) {
+	public static void populateListBox(ListBox listBox,List<?> pessoas) {
 		listBox.clear();
-		for (PessoaI prod:pessoas){
-			listBox.addItem(prod.getNome(),prod.getId().toString());
+		for (Object obj:pessoas){
+			if(obj instanceof Rotulavel){
+				listBox.addItem(((Rotulavel)obj).getRotulo(),((Rotulavel)obj).getIdAsString());
+			}else{
+				listBox.addItem(obj.toString());
+			}
 		}
 		if(pessoas.size()==1){
 			listBox.setSelectedIndex(0);

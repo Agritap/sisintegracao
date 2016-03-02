@@ -1,5 +1,7 @@
 package com.agritap.sisintegracao.client.ui.configuracao;
 
+import java.util.List;
+
 import org.gwtbootstrap3.client.ui.CheckBox;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.ListGroup;
@@ -12,13 +14,11 @@ import org.gwtbootstrap3.client.ui.gwt.CellTable;
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 
 import com.agritap.sisintegracao.client.ClientUtil;
-import com.agritap.sisintegracao.client.request.Callback;
-import com.agritap.sisintegracao.client.request.beans.ErrosI;
-import com.agritap.sisintegracao.client.request.beans.TipoRacaoI;
-import com.agritap.sisintegracao.client.request.beans.TipoRacaoIAdapter;
+import com.agritap.sisintegracao.client.request.RestCallback;
 import com.agritap.sisintegracao.client.request.clients.TipoRacaoClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.agritap.sisintegracao.model.TipoAnimal;
+import com.agritap.sisintegracao.model.TipoRacao;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -36,12 +36,12 @@ public class TipoRacaoView extends Composite {
 
 	private static TipoRacaoUiBinder uiBinder = GWT.create(TipoRacaoUiBinder.class);
 
-	TipoRacaoClient client = new TipoRacaoClient();
+	TipoRacaoClient client = GWT.create(TipoRacaoClient.class);
 
 	ClientFactory factory;
 
 	@UiField
-	CellTable<TipoRacaoI> tabelaTipoRacao;
+	CellTable<TipoRacao> tabelaTipoRacao;
 	@UiField
 	HTMLPanel addTipoRacao;
 
@@ -68,7 +68,7 @@ public class TipoRacaoView extends Composite {
 	@UiField
 	ListBox tipoAnimalField;
 
-	TipoRacaoI TipoRacaoEditado;
+	TipoRacao TipoRacaoEditado;
 
 	interface TipoRacaoUiBinder extends UiBinder<Widget, TipoRacaoView> {
 	}
@@ -93,7 +93,7 @@ public class TipoRacaoView extends Composite {
 		addTipoRacao.addDomHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				TipoRacaoEditado = factory.getEntityfactory().newTipoRacao().as();
+				TipoRacaoEditado = new TipoRacao();
 				loadForm(TipoRacaoEditado);
 				formRow.setVisible(true);
 			}
@@ -101,61 +101,61 @@ public class TipoRacaoView extends Composite {
 	}
 
 	private void loadTabela() {
-		client.todos(new Callback<TipoRacaoIAdapter>() {
+		client.todos(new RestCallback<List<TipoRacao>>() {
 
 			@Override
-			public void ok(TipoRacaoIAdapter response) {
-				tabelaTipoRacao.setRowData(response.getResultado());
+			public void success(List<TipoRacao> response) {
+				tabelaTipoRacao.setRowData(response);
 				tabelaTipoRacao.redraw();
 			}
 		});
 	}
 
 	private void preparaTabela() {
-		TextColumn<TipoRacaoI> carenciaColumn = new TextColumn<TipoRacaoI>() {
+		TextColumn<TipoRacao> carenciaColumn = new TextColumn<TipoRacao>() {
 			@Override
-			public String getValue(TipoRacaoI tipoRacao) {
+			public String getValue(TipoRacao tipoRacao) {
 				if (tipoRacao.getCarencia() != null) {
 					return tipoRacao.getCarencia().toString() + "  dias";
 				}
 				return "0 dias";
 			}
 		};
-		TextColumn<TipoRacaoI> dataFimColumn = new TextColumn<TipoRacaoI>() {
+		TextColumn<TipoRacao> dataFimColumn = new TextColumn<TipoRacao>() {
 			@Override
-			public String getValue(TipoRacaoI tipoRacao) {
+			public String getValue(TipoRacao tipoRacao) {
 				return ClientUtil.formatDate(tipoRacao.getDataFim());
 			}
 		};
 
-		TextColumn<TipoRacaoI> dataInicioColumn = new TextColumn<TipoRacaoI>() {
+		TextColumn<TipoRacao> dataInicioColumn = new TextColumn<TipoRacao>() {
 			@Override
-			public String getValue(TipoRacaoI tipoRacao) {
+			public String getValue(TipoRacao tipoRacao) {
 				return ClientUtil.formatDate(tipoRacao.getDataInicio());
 			}
 
 		};
 
-		TextColumn<TipoRacaoI> medicadaColumn = new TextColumn<TipoRacaoI>() {
+		TextColumn<TipoRacao> medicadaColumn = new TextColumn<TipoRacao>() {
 			@Override
-			public String getValue(TipoRacaoI tipoRacao) {
+			public String getValue(TipoRacao tipoRacao) {
 				return ClientUtil.formatSimNao(tipoRacao.getMedicada());
 			}
 
 		};
 
-		TextColumn<TipoRacaoI> nomeColumn = new TextColumn<TipoRacaoI>() {
+		TextColumn<TipoRacao> nomeColumn = new TextColumn<TipoRacao>() {
 			@Override
-			public String getValue(TipoRacaoI tipoRacao) {
+			public String getValue(TipoRacao tipoRacao) {
 				return tipoRacao.getNome();
 
 			}
 
 		};
 
-		TextColumn<TipoRacaoI> tipoAnimalColumn = new TextColumn<TipoRacaoI>() {
+		TextColumn<TipoRacao> tipoAnimalColumn = new TextColumn<TipoRacao>() {
 			@Override
-			public String getValue(TipoRacaoI tipoRacao) {
+			public String getValue(TipoRacao tipoRacao) {
 				if (tipoRacao.getTipoAnimal() == null) {
 					return null;
 				}
@@ -165,17 +165,17 @@ public class TipoRacaoView extends Composite {
 
 		};
 
-		final Column<TipoRacaoI, String> click = new Column<TipoRacaoI, String>(
+		final Column<TipoRacao, String> click = new Column<TipoRacao, String>(
 				new ButtonCell(ButtonType.PRIMARY, IconType.EDIT)) {
 			@Override
-			public String getValue(TipoRacaoI object) {
+			public String getValue(TipoRacao object) {
 				return "";
 			}
 		};
 
-		click.setFieldUpdater(new FieldUpdater<TipoRacaoI, String>() {
+		click.setFieldUpdater(new FieldUpdater<TipoRacao, String>() {
 			@Override
-			public void update(int index, TipoRacaoI tipoRacao, String value) {
+			public void update(int index, TipoRacao tipoRacao, String value) {
 				loadForm(tipoRacao);
 				formRow.setVisible(true);
 			}
@@ -215,11 +215,11 @@ public class TipoRacaoView extends Composite {
 		this.factory = factory;
 	}
 
-	public CellTable<TipoRacaoI> getTabelaTipoRacao() {
+	public CellTable<TipoRacao> getTabelaTipoRacao() {
 		return tabelaTipoRacao;
 	}
 
-	public void setTabelaTipoRacao(CellTable<TipoRacaoI> tabelaTipoRacao) {
+	public void setTabelaTipoRacao(CellTable<TipoRacao> tabelaTipoRacao) {
 		this.tabelaTipoRacao = tabelaTipoRacao;
 	}
 
@@ -255,11 +255,11 @@ public class TipoRacaoView extends Composite {
 		this.nomeField = nomeField;
 	}
 
-	public TipoRacaoI getTipoRacaoEditado() {
+	public TipoRacao getTipoRacaoEditado() {
 		return TipoRacaoEditado;
 	}
 
-	public void setTipoRacaoEditado(TipoRacaoI tipoRacaoEditado) {
+	public void setTipoRacaoEditado(TipoRacao tipoRacaoEditado) {
 		TipoRacaoEditado = tipoRacaoEditado;
 	}
 
@@ -276,19 +276,19 @@ public class TipoRacaoView extends Composite {
 
 		TipoRacaoEditado.setTipoAnimal(TipoAnimal.values()[tipoAnimalField.getSelectedIndex()]);
 		// TipoRacaoEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
-		client.update(TipoRacaoEditado, new Callback<TipoRacaoI>() {
+		client.update(TipoRacaoEditado, new RestCallback<TipoRacao>() {
 
 			@Override
-			public void ok(TipoRacaoI to) {
+			public void success(TipoRacao to) {
 				loadTabela();
 				TipoRacaoEditado = null;
 				formRow.setVisible(false);
 			}
-			@Override
-			public void onValidation(ErrosI erro) {
-				errorBox.setVisible(true);
-				ClientUtil.printValidation(erro, errorBox);
-			}
+//			@Override
+//			public void onValidation(ErrosI erro) {
+//				errorBox.setVisible(true);
+//				ClientUtil.printValidation(erro, errorBox);
+//			}
 		});
 	}
 
@@ -302,10 +302,10 @@ public class TipoRacaoView extends Composite {
 	public void excluirClick(ClickEvent evt) {
 
 		// TipoRacaoEditado.setCodigoIntegradora(codigoIntegradoraField.getValue());
-		client.delete(TipoRacaoEditado.getId(), new Callback<Void>() {
+		client.delete(TipoRacaoEditado.getId(), new RestCallback<Void>() {
 
 			@Override
-			public void ok(Void to) {
+			public void success(Void to) {
 				loadTabela();
 				TipoRacaoEditado = null;
 				formRow.setVisible(false);
@@ -314,7 +314,7 @@ public class TipoRacaoView extends Composite {
 	}
 	//
 
-	public void loadForm(TipoRacaoI tipoRacao) {
+	public void loadForm(TipoRacao tipoRacao) {
 		this.TipoRacaoEditado = tipoRacao;
 
 		carenciaField.setValue(ClientUtil.formatInteger(tipoRacao.getCarencia()));

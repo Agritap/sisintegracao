@@ -7,4 +7,9 @@ public enum Integradora implements Rotulavel{
 	public String getRotulo() {
 		return name();
 	}
+
+	@Override
+	public String getIdAsString() {
+		return name();
+	}
 }

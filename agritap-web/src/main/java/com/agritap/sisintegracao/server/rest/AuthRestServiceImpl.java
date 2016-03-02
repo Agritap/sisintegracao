@@ -10,11 +10,11 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import com.agritap.sisintegracao.client.vo.UsuarioTO;
 import com.agritap.sisintegracao.model.Pessoa;
 import com.agritap.sisintegracao.model.Usuario;
 import com.agritap.sisintegracao.model.UsuarioProdutor;
 import com.agritap.sisintegracao.server.ServerUtil;
-import com.agritap.sisintegracao.server.to.UsuarioTO;
 import com.google.inject.Inject;
 
 public class AuthRestServiceImpl {

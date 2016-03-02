@@ -20,7 +20,7 @@ import javax.persistence.Version;
 			}
 		
 		)
-public class Pessoa implements Serializable{
+public class Pessoa implements Serializable,Rotulavel{
 	
 	private static final long serialVersionUID = -3216625491090034548L;
 
@@ -171,5 +171,14 @@ public class Pessoa implements Serializable{
 
 	public void setAdministrador(Boolean administrador) {
 		this.administrador = administrador;
+	}
+
+	@Override
+	public String getRotulo() {
+		return getNome();
+	}
+	
+	public String getIdAsString(){
+		return id.toString();
 	}
 }

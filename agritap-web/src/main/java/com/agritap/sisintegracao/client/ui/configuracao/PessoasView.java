@@ -1,5 +1,6 @@
 package com.agritap.sisintegracao.client.ui.configuracao;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.gwtbootstrap3.client.ui.Anchor;
@@ -18,13 +19,12 @@ import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 
 import com.agritap.sisintegracao.client.ClientUtil;
-import com.agritap.sisintegracao.client.request.Callback;
+import com.agritap.sisintegracao.client.request.RestCallback;
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
-import com.agritap.sisintegracao.client.request.beans.PessoaI;
-import com.agritap.sisintegracao.client.request.beans.PessoaIAdapter;
 import com.agritap.sisintegracao.client.request.clients.PessoaClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.agritap.sisintegracao.model.Integradora;
+import com.agritap.sisintegracao.model.Pessoa;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
@@ -46,12 +46,12 @@ public class PessoasView extends Composite {
 	private static PessoasUiBinder uiBinder = GWT.create(PessoasUiBinder.class);
 	Logger log = Logger.getLogger(PessoasView.class.getName());
 
-	PessoaClient client = new PessoaClient();
+	PessoaClient client = GWT.create(PessoaClient.class);
 	
 	ClientFactory factory;
 	
 	@UiField
-	CellTable<PessoaI> tabelaProdutores;
+	CellTable<Pessoa> tabelaProdutores;
 	
 	@UiField
 	HTMLPanel addProdutor;
@@ -102,7 +102,7 @@ public class PessoasView extends Composite {
 	@UiField	
 	Row blocoSenhas;
 	
-	PessoaI produtorEditado;
+	Pessoa produtorEditado;
 	
 	interface PessoasUiBinder extends UiBinder<Widget, PessoasView> {
 	}
@@ -137,7 +137,7 @@ public class PessoasView extends Composite {
 		addProdutor.addDomHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				produtorEditado = factory.getEntityfactory().newProdutor().as();
+				produtorEditado = new Pessoa();
 				loadForm(produtorEditado);
 				 formRow.setVisible(true);
 			}
@@ -145,20 +145,20 @@ public class PessoasView extends Composite {
 	}
 
 	private void loadTabela() {
-		client.todos(new Callback<PessoaIAdapter>() {
-			
+		client.todos(new RestCallback<List<Pessoa>>() {
+		
 			@Override
-			public void ok(PessoaIAdapter response) {
-				tabelaProdutores.setRowData(response.getResultado());
-				tabelaProdutores.redraw();
+			public void success(List<Pessoa> result) {
+				tabelaProdutores.setRowData(result);
+				tabelaProdutores.redraw();				
 			}
 		});
 	}
 
 	private void preparaTabela() {
-		TextColumn<PessoaI> nomeColumn = new TextColumn<PessoaI>() {
+		TextColumn<Pessoa> nomeColumn = new TextColumn<Pessoa>() {
 			@Override
-			public String getValue(PessoaI produtor) {
+			public String getValue(Pessoa produtor) {
 				if(ClientUtil.isEmpty(produtor.getApelido())){
 					return produtor.getNome();
 				}else{
@@ -166,24 +166,24 @@ public class PessoasView extends Composite {
 				}
 			}
 		};
-		TextColumn<PessoaI> emailColumn = new TextColumn<PessoaI>() {
+		TextColumn<Pessoa> emailColumn = new TextColumn<Pessoa>() {
 			@Override
-			public String getValue(PessoaI produtor) {
+			public String getValue(Pessoa produtor) {
 				return produtor.getEmail();
 			}
 		};
 		
-		TextColumn<PessoaI> telefoneColumn = new TextColumn<PessoaI> (){
+		TextColumn<Pessoa> telefoneColumn = new TextColumn<Pessoa> (){
 			@Override
-			public String getValue(PessoaI produtor){
+			public String getValue(Pessoa produtor){
 				return produtor.getTelefone();
 			}
 			
 		};
 		
-		TextColumn<PessoaI> ativo2Column = new TextColumn<PessoaI>() {
+		TextColumn<Pessoa> ativo2Column = new TextColumn<Pessoa>() {
 			@Override
-			public String getValue(PessoaI produtor) {
+			public String getValue(Pessoa produtor) {
 				if(produtor.getAtivo() == null || produtor.getAtivo()){
 					return "true";
 				}else{
@@ -191,7 +191,7 @@ public class PessoasView extends Composite {
 				}
 			}
 			@Override
-			public void render(Context context, PessoaI produtor, SafeHtmlBuilder sb) {
+			public void render(Context context, Pessoa produtor, SafeHtmlBuilder sb) {
 				if(produtor.getAtivo() == null || produtor.getAtivo()){
 					sb.appendHtmlConstant("<i title=\"Ativo\" class=\"fa fa-check-square-o\"></i>");
 				}else{
@@ -209,16 +209,16 @@ public class PessoasView extends Composite {
 				}
 			}
 		};
-		 final Column<PessoaI, String> click = new Column<PessoaI, String>(new ButtonCell(ButtonType.PRIMARY, IconType.EDIT)) {
+		 final Column<Pessoa, String> click = new Column<Pessoa, String>(new ButtonCell(ButtonType.PRIMARY, IconType.EDIT)) {
 	            @Override
-	            public String getValue(PessoaI object) {
+	            public String getValue(Pessoa object) {
 	                return "";
 	            }
 	        };
 	        
-	        click.setFieldUpdater(new FieldUpdater<PessoaI, String>() {
+	        click.setFieldUpdater(new FieldUpdater<Pessoa, String>() {
             @Override
-            public void update(int index, PessoaI produtor, String value) {
+            public void update(int index, Pessoa produtor, String value) {
             	loadForm(produtor);
                 formRow.setVisible(true);
             }
@@ -248,14 +248,14 @@ public class PessoasView extends Composite {
 			produtorEditado.setTecnico(tecnicoField.getValue());
 			produtorEditado.setGranjeiro(granjeiroField.getValue());
 			produtorEditado.setApelido(apelidoField.getValue());
-			client.update(produtorEditado, new Callback<PessoaI>() {
+			client.update(produtorEditado, new RestCallback<Pessoa>() {
 				
 				@Override
-				public void ok(PessoaI to) {
+				public void success(Pessoa to) {
 					if(!ClientUtil.isEmpty(senhaField.getValue())){
-						client.updatePassword(to.getId(),senhaField.getValue(), new Callback<Boolean>() {
+						client.updatePass(to.getId(),senhaField.getValue(), new RestCallback<Boolean>() {
 							@Override
-							public void ok(Boolean to) {
+							public void success(Boolean to) {
 								loadTabela();
 								produtorEditado=null;
 								formRow.setVisible(false);
@@ -271,10 +271,10 @@ public class PessoasView extends Composite {
 						formRow.setVisible(false);
 					}
 				}
-				@Override
-				public void onValidation(ErrosI erro) {
-					ClientUtil.printValidation(erro,errorBox);
-				}
+//				@Override
+//				public void onValidation(ErrosI erro) {
+//					ClientUtil.printValidation(erro,errorBox);
+//				}
 			});
 		}
 	}
@@ -288,24 +288,22 @@ public class PessoasView extends Composite {
 
 	@UiHandler("excluirBtn")
 	public void excluirClick(ClickEvent evt){
-		
-		client.delete(produtorEditado.getId(), new Callback<Void>() {
-
-			@Override
-			public void ok(Void to) {
+		client.delete(produtorEditado.getId(), new RestCallback<Void>() {
+			public void success(Void result){
 				loadTabela();
 				produtorEditado=null;
 				formRow.setVisible(false);
 			}
 		});
+		
 	}
 //	
 	@UiHandler("removerAcessoBtn")
 	public void clickRemoverAcessoBtn(ClickEvent evt){
-		client.removeSenhas(produtorEditado.getId(), new Callback<Boolean>() {
+		client.removeSenha(produtorEditado.getId(), new RestCallback<Boolean>() {
 
 			@Override
-			public void ok(Boolean sucesso) {
+			public void success(Boolean sucesso) {
 				blocoSenhas.setVisible(false);
 				definirSenhaAnchor.setVisible(true);
 				definirSenhaAnchor.setText("Este usuário NÃO possui acesso ao sistema. Clique aqui para definir uma senha");
@@ -320,7 +318,7 @@ public class PessoasView extends Composite {
 		definirSenhaAnchor.setVisible(false);
 	}
 
-	public void loadForm(PessoaI produtor) {
+	public void loadForm(Pessoa produtor) {
 		errorBox.setVisible(false);
 		errorBox.clear();
 		this.produtorEditado=produtor;
@@ -337,10 +335,10 @@ public class PessoasView extends Composite {
 		blocoSenhas.setVisible(false);
 		definirSenhaAnchor.setVisible(true);
 
-		client.possuiSenha(produtor.getId(),new Callback<Boolean>() {
+		client.possuiSenha(produtor.getId(),new RestCallback<Boolean>() {
 
 			@Override
-			public void ok(Boolean possuiSenha) {
+			public void success(Boolean possuiSenha) {
 				if(possuiSenha){
 					definirSenhaAnchor.setText("Este usuário ja possui acesso ao sistema. Clique aqui para redefinir Senha");
 				}else{

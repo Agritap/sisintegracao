@@ -47,7 +47,7 @@ public class MainWindow extends Composite {
 
 	public void open() {
 		// addConteudo(new LoginWindow());
-	}
+	}	
 
 	@UiHandler("sair")
 	public void onSair(ClickEvent evt) {
