@@ -62,7 +62,8 @@ public class LoteView extends Composite {
 	HTMLPanel blocoDetalhamentoOrigem;
 	@UiField
 	ListBox tipoOrigemField;
-	
+	@UiField
+	HTMLPanel blockQuoteOrigens;
 	@UiField
 	IntegerBox quantidadeAlojadaField;
 	@UiField
@@ -113,13 +114,15 @@ public class LoteView extends Composite {
 	
 	@UiHandler("addOrigem")
 	public void addOrigemClick(ClickEvent evt){
-		log.info(quantidadeAlojadaField.getValue().toString());
 		addOrigem(null);
 	}
 	int quantidadeOrigens=0;
 	private void addOrigem(String alojamentoOrigem) {
-		
+		blockQuoteOrigens.setVisible(false);
 		quantidadeOrigens++;
+		if(quantidadeOrigens>0){
+//			addCabecalho();
+		}
 		String color = quantidadeOrigens%2==0?"#cccccc":"#eeeeee";
 		Row row = new Row();
 		row.getElement().getStyle().setBackgroundColor(color);

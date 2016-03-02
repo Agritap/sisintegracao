@@ -70,9 +70,11 @@
 				</b:PanelHeader>
 				<b:PanelBody>
 					<g:HTMLPanel>
+					<g:HTMLPanel ui:field="blockQuoteOrigens">
 					<blockquote>
 					  <p>Informe as origens do alojamento detalhadamente aqui OU apenas o resumo no painel abaixo</p>
 					</blockquote>
+					</g:HTMLPanel>
 					</g:HTMLPanel>
 					<g:HTMLPanel ui:field="blocoDetalhamentoOrigem">
 					</g:HTMLPanel>

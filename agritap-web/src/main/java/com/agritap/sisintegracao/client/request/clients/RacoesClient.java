@@ -1,27 +1,33 @@
 package com.agritap.sisintegracao.client.request.clients;
 
-import com.agritap.sisintegracao.client.request.Callback;
-import com.agritap.sisintegracao.client.request.RESTClient;
-import com.agritap.sisintegracao.client.request.beans.TabelaRacaoI;
-import com.agritap.sisintegracao.client.request.beans.TabelaRacaoIAdapter;
+import java.util.List;
 
-public class RacoesClient extends RESTClient {
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
-	
-	public RacoesClient(){
-	}
+import org.fusesource.restygwt.client.RestService;
 
-	public void todos(Callback<TabelaRacaoIAdapter> cb) {
-		GET("racoes", "tabela", "todos").withCustomReturn(TabelaRacaoIAdapter.TYPE).go(cb);
-	}
+import com.agritap.sisintegracao.client.request.RestCallback;
+import com.agritap.sisintegracao.model.TabelaRacao;
+import com.agritap.sisintegracao.model.TipoRacao;
 
-	public void update(TabelaRacaoI tabelaRacao, Callback<TabelaRacaoI> cb) {
-		PUT("racoes","tabela").withCustomReturn(TabelaRacaoI.TYPE).withJsonContentType().withEntityBody(tabelaRacao).go(cb);
-	}
+@Path("/racoes")
+@Produces(MediaType.APPLICATION_JSON)
+public interface RacoesClient extends RestService {
 
-	public void delete(Integer id,Callback<Void> cb) {
-		DELETE("racoes","tabelaRacao",id.toString()).go(cb);
-	}
+	@GET
+	@Path("/tipo/todos")
+	public void todosTipos(RestCallback<List<TipoRacao>> cb);
+	@PUT
+	@Path("/tabela")
+	public void update(TabelaRacao tabelaRacao, RestCallback<TabelaRacao> cb) ;
+
+	@GET
+	@Path("/tabela/todos")
+	public void todasTabelas(RestCallback<List<TabelaRacao>> cb);
 	
 }
 
