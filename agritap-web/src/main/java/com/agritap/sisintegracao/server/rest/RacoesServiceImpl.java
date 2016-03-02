@@ -11,7 +11,6 @@ import javax.ws.rs.core.MediaType;
 
 import com.agritap.sisintegracao.model.TabelaRacao;
 import com.agritap.sisintegracao.model.TipoRacao;
-import com.agritap.sisintegracao.server.to.ListAdapter;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
@@ -24,17 +23,16 @@ public class RacoesServiceImpl {
 
 	@GET
 	@Path("/tipo/todos")
-	public ListAdapter<TipoRacao> tipoRacaoTodos() {
+	public List<TipoRacao> tipoRacaoTodos() {
 		List<TipoRacao>  resultado =  em.createNamedQuery("tipoRacao.todos", TipoRacao.class).getResultList(); 
-		ListAdapter<TipoRacao> r = new ListAdapter<TipoRacao>(resultado);
-		return r;	
+		return resultado;	
 	}
 	
 	@GET
 	@Path("/tabela/todos")
-	public ListAdapter<TabelaRacao> tabelaRacaoTodos() {
+	public List<TabelaRacao> tabelaRacaoTodos() {
 		List<TabelaRacao>  resultado =  em.createQuery("select t from TabelaRacao t",TabelaRacao.class).getResultList();
-		return new ListAdapter<TabelaRacao>(resultado);
+		return resultado;
 	}
 	
 

@@ -3,10 +3,8 @@ package com.agritap.sisintegracao.server.config;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.agritap.sisintegracao.server.rest.BigDecimalSerializer;
 import com.agritap.sisintegracao.server.rest.CustomJsonObjectFilter;
 import com.agritap.sisintegracao.server.rest.PessoaServiceImpl;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
