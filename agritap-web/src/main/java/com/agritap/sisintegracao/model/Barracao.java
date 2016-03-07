@@ -10,18 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.agritap.sisintegracao.server.rest.BigDecimalSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
-
+@JsonIgnoreProperties({"modulo"})
 public class Barracao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@XmlTransient
 	@ManyToOne
 	private Modulo modulo;
 

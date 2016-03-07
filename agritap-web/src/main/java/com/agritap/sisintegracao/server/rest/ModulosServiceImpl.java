@@ -40,19 +40,17 @@ public class ModulosServiceImpl extends AuthRestServiceImpl{
 
 	@GET
 	@Path("/todos")
-	public ListAdapter<Modulo> todos( @Context HttpServletRequest request) {
+	public List<Modulo> todos( @Context HttpServletRequest request) {
 		UsuarioTO usuario = getUsuario(request);
 		List<Pessoa> produtoresAutorizados =usuario.getProdutores();
-		List<Modulo> modulos = em.createNamedQuery("modulos.porProdutores", Modulo.class).setParameter("produtores", produtoresAutorizados).getResultList();
-		return new ListAdapter<Modulo>(modulos);
+		return em.createNamedQuery("modulos.porProdutores", Modulo.class).setParameter("produtores", produtoresAutorizados).getResultList();
 	}
 
 
 	@GET
 	@Path("/produtor/{id}")
-	public ListAdapter<Modulo> todos( @Context HttpServletRequest request,@PathParam("id") Integer id) {
-		List<Modulo> modulos = em.createNamedQuery("modulos.porProdutorId", Modulo.class).setParameter("produtorId", id).getResultList();
-		return new ListAdapter<Modulo>(modulos);
+	public List<Modulo> porProdutor( @Context HttpServletRequest request,@PathParam("id") Integer id) {
+		return em.createNamedQuery("modulos.porProdutorId", Modulo.class).setParameter("produtorId", id).getResultList();
 	}
 
 

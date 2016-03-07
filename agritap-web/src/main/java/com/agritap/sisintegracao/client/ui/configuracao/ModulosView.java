@@ -1,23 +1,23 @@
 package com.agritap.sisintegracao.client.ui.configuracao;
 
+import java.util.List;
+
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 
 import com.agritap.sisintegracao.client.ViewEnum;
-import com.agritap.sisintegracao.client.request.Callback;
-import com.agritap.sisintegracao.client.request.beans.ModulosI;
-import com.agritap.sisintegracao.client.request.beans.ModulosIAdapter;
+import com.agritap.sisintegracao.client.request.RestCallback;
 import com.agritap.sisintegracao.client.request.clients.ModulosClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
+import com.agritap.sisintegracao.model.Modulo;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
@@ -28,12 +28,12 @@ public class ModulosView extends Composite {
 
 	private static ModulosUiBinder uiBinder = GWT.create(ModulosUiBinder.class);
 
-	ModulosClient client = new ModulosClient();
+	ModulosClient client = GWT.create(ModulosClient.class);
 
 	ClientFactory factory;
 
 	@UiField
-	CellTable<ModulosI> tabelaModulos;
+	CellTable<Modulo> tabelaModulos;
 	@UiField
 	HTMLPanel addModulo;
 
@@ -82,11 +82,11 @@ public class ModulosView extends Composite {
 	}
 
 	private void loadTabela() {
-		client.todos(new Callback<ModulosIAdapter>() {
+		client.todos(new RestCallback<List<Modulo>>() {
 
 			@Override
-			public void ok(ModulosIAdapter response) {
-				tabelaModulos.setRowData(response.getResultado());
+			public void success(List<Modulo> response) {
+				tabelaModulos.setRowData(response);
 				tabelaModulos.redraw();
 			}
 
@@ -95,18 +95,18 @@ public class ModulosView extends Composite {
 
 	private void preparaTabela() {
 
-		TextColumn<ModulosI> nomeColumn = new TextColumn<ModulosI>() {
+		TextColumn<Modulo> nomeColumn = new TextColumn<Modulo>() {
 			@Override
-			public String getValue(ModulosI modulos) {
+			public String getValue(Modulo modulos) {
 				return modulos.getNome();
 
 			}
 
 		};
 
-		TextColumn<ModulosI> tipoAnimalColumn = new TextColumn<ModulosI>() {
+		TextColumn<Modulo> tipoAnimalColumn = new TextColumn<Modulo>() {
 			@Override
-			public String getValue(ModulosI modulos) {
+			public String getValue(Modulo modulos) {
 				if (modulos.getTipoAnimal() == null) {
 					return null;
 				}
@@ -116,24 +116,25 @@ public class ModulosView extends Composite {
 
 		};
 
-		TextColumn<ModulosI> barracoesColumn = new TextColumn<ModulosI>() {
+		TextColumn<Modulo> barracoesColumn = new TextColumn<Modulo>() {
 			@Override
-			public String getValue(ModulosI barracao) {
-				return barracao.getBarracao();
+			public String getValue(Modulo barracao) {
+				return "";
+//				return barracao.getBarracoes();
 			}
 		};
 
-		TextColumn<ModulosI> produtorColumn = new TextColumn<ModulosI>() {
+		TextColumn<Modulo> produtorColumn = new TextColumn<Modulo>() {
 			@Override
-			public String getValue(ModulosI produtor) {
-				return produtor.getProdutor();
+			public String getValue(Modulo produtor) {
+				return produtor.getProdutor().getRotulo();
 
 			}
 		};
 
-		TextColumn<ModulosI> alojamentoMaximo = new TextColumn<ModulosI>() {
+		TextColumn<Modulo> alojamentoMaximo = new TextColumn<Modulo>() {
 			@Override
-			public String getValue(ModulosI modulo) {
+			public String getValue(Modulo modulo) {
 				if(modulo.getAlojamentoMaximo()==null){
 					return null;
 				}else{
@@ -144,17 +145,17 @@ public class ModulosView extends Composite {
 			}
 		};
 
-		final Column<ModulosI, String> click = new Column<ModulosI, String>(
+		final Column<Modulo, String> click = new Column<Modulo, String>(
 				new ButtonCell(ButtonType.PRIMARY, IconType.EDIT)) {
 			@Override
-			public String getValue(ModulosI object) {
+			public String getValue(Modulo object) {
 				return "";
 			}
 		};
 
-		click.setFieldUpdater(new FieldUpdater<ModulosI, String>() {
+		click.setFieldUpdater(new FieldUpdater<Modulo, String>() {
 			@Override
-			public void update(int index, ModulosI modulos, String value) {
+			public void update(int index, Modulo modulos, String value) {
 //				loadForm(modulos);
 //				formRow.setVisible(true);
 			}
@@ -190,11 +191,11 @@ public class ModulosView extends Composite {
 		this.factory = factory;
 	}
 
-	public CellTable<ModulosI> getTabelaModulos() {
+	public CellTable<Modulo> getTabelaModulos() {
 		return tabelaModulos;
 	}
 
-	public void setTabelaModulos(CellTable<ModulosI> tabelaModulos) {
+	public void setTabelaModulos(CellTable<Modulo> tabelaModulos) {
 		this.tabelaModulos = tabelaModulos;
 	}
 

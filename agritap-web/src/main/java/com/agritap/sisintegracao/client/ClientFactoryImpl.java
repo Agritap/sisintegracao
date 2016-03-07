@@ -1,8 +1,6 @@
 package com.agritap.sisintegracao.client;
 
 import com.agritap.sisintegracao.client.request.EntityFactory;
-import com.agritap.sisintegracao.client.request.clients.ModulosClient;
-import com.agritap.sisintegracao.client.request.clients.PessoaClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.agritap.sisintegracao.client.ui.LoginWindow;
 import com.agritap.sisintegracao.client.ui.MainWindow;
@@ -27,10 +25,6 @@ public class ClientFactoryImpl implements ClientFactory {
 	
 	private UsuarioTO usuario;
 	
-	private ModulosClient modulosClient = new ModulosClient();
-	
-	private PessoaClient pessoaClient = GWT.create(PessoaClient.class);
-
 	public EventBus getEventbus() {
 		return eventBus;
 	}
@@ -87,11 +81,6 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public UsuarioTO getUsuarioAutenticado() {
 		return usuario;
-	}
-
-	@Override
-	public ModulosClient getModuloClient() {
-		return modulosClient;
 	}
 
 }

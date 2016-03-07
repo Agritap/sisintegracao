@@ -1,8 +1,6 @@
 package com.agritap.sisintegracao.client.request;
 
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
-import com.agritap.sisintegracao.client.request.beans.ModulosI;
-import com.agritap.sisintegracao.client.request.beans.ModulosIAdapter;
 import com.agritap.sisintegracao.client.request.beans.RecebimentoI;
 import com.agritap.sisintegracao.client.request.beans.RecebimentoIAdapter;
 import com.agritap.sisintegracao.client.request.beans.TabelaRacaoI;
@@ -36,8 +34,5 @@ public interface EntityFactory extends AutoBeanFactory {
 
 	AutoBean<RecebimentoIAdapter> newRecebimentos();
 
-	AutoBean<ModulosI> newModulo();
-
-	AutoBean<ModulosIAdapter> newModulos();
 
 }

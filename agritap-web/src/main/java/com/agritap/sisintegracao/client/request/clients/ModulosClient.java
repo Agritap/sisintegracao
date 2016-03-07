@@ -1,33 +1,39 @@
 package com.agritap.sisintegracao.client.request.clients;
 
-import com.agritap.sisintegracao.client.request.Callback;
-import com.agritap.sisintegracao.client.request.RESTClient;
-import com.agritap.sisintegracao.client.request.beans.ModulosI;
-import com.agritap.sisintegracao.client.request.beans.ModulosIAdapter;
+import java.util.List;
 
-public class ModulosClient extends RESTClient {
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
-	public ModulosClient() {
-	}
+import org.fusesource.restygwt.client.RestService;
 
-	public void get(Integer id, Callback<ModulosI> cb) {
-		GET("modulos", id.toString()).withCustomReturn(ModulosI.TYPE).go(cb);
-	}
+import com.agritap.sisintegracao.client.request.RestCallback;
+import com.agritap.sisintegracao.model.Modulo;
 
-	public void todos(Callback<ModulosIAdapter> cb) {
-		GET("modulos", "todos").withCustomReturn(ModulosIAdapter.TYPE).go(cb);
-	}
+@Path("/modulos")
+public interface ModulosClient extends RestService{
 
-	public void porProdutor(Integer produtorId,Callback<ModulosIAdapter> cb) {
-		GET("modulos", "produtor",produtorId.toString()).withCustomReturn(ModulosIAdapter.TYPE).go(cb);
-	}
+	@GET
+	@Path("{id}")
+	public void get(@PathParam("id") Integer id,RestCallback<Modulo> cb);
 
-	public void update(ModulosI modulos, Callback<ModulosI> cb) {
-		PUT("modulos").withCustomReturn(ModulosI.TYPE).withJsonContentType().withEntityBody(modulos).go(cb);
-	}
+	@GET
+	@Path("/todos")
+	public void todos(RestCallback<List<Modulo>> cb);
 
-	public void delete(Integer id, Callback<Void> cb) {
-		DELETE("modulos", id.toString()).go(cb);
-	}
+	@GET
+	@Path("/produtor/{id}")
+	public void porProdutor(@PathParam("id") Integer produtorId,RestCallback<List<Modulo>> cb);
+
+
+	@PUT
+	public void update(Modulo modulo, RestCallback<Modulo> cb);
+
+	@DELETE
+	@Path("{id}")
+	public void delete(@PathParam("id") Integer id,RestCallback<Void> cb);
 
 }
