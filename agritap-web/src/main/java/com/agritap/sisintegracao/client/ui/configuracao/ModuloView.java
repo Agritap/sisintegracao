@@ -54,7 +54,7 @@ public class ModuloView extends Composite {
 	}
 
 	private void init() {
-		ClientUtil.populaListBox(tipoAnimalField, TipoAnimal.values(), true);
+		ClientUtil.populateListBox(tipoAnimalField, TipoAnimal.values(), true);
 		
 		
 	}

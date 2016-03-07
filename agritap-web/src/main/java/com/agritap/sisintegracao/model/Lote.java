@@ -1,7 +1,7 @@
 package com.agritap.sisintegracao.model;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -37,12 +37,12 @@ public class Lote {
 	private Pessoa produtor;
 
 	@Temporal(TemporalType.DATE)
-	private Calendar dataMediaAlojamento;
+	private Date dataMediaAlojamento;
 	
 	@Temporal(TemporalType.DATE)
-	private Calendar dataMediaSaida;
+	private Date dataMediaSaida;
 	
-	private Boolean ativo;
+	private Boolean encerrado;
 	
 	@ManyToOne
 	private Pessoa tecnico;
@@ -96,30 +96,6 @@ public class Lote {
 
 	public void setProdutor(Pessoa produtor) {
 		this.produtor = produtor;
-	}
-
-	public Calendar getDataMediaAlojamento() {
-		return dataMediaAlojamento;
-	}
-
-	public void setDataMediaAlojamento(Calendar dataMediaAlojamento) {
-		this.dataMediaAlojamento = dataMediaAlojamento;
-	}
-
-	public Calendar getDataMediaSaida() {
-		return dataMediaSaida;
-	}
-
-	public void setDataMediaSaida(Calendar dataMediaSaida) {
-		this.dataMediaSaida = dataMediaSaida;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	public Pessoa getTecnico() {
@@ -192,5 +168,29 @@ public class Lote {
 
 	public void setQuantidadeOrigemDistinta(Integer quantidadeOrigemDistinta) {
 		this.quantidadeOrigemDistinta = quantidadeOrigemDistinta;
+	}
+
+	public Boolean getEncerrado() {
+		return encerrado;
+	}
+
+	public void setEncerrado(Boolean encerrado) {
+		this.encerrado = encerrado;
+	}
+
+	public Date getDataMediaAlojamento() {
+		return dataMediaAlojamento;
+	}
+
+	public void setDataMediaAlojamento(Date dataMediaAlojamento) {
+		this.dataMediaAlojamento = dataMediaAlojamento;
+	}
+
+	public Date getDataMediaSaida() {
+		return dataMediaSaida;
+	}
+
+	public void setDataMediaSaida(Date dataMediaSaida) {
+		this.dataMediaSaida = dataMediaSaida;
 	}
 }

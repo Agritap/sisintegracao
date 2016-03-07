@@ -595,7 +595,7 @@ Cor cinza = #808080
 	border-radius: 0px;
 }
 
-.dropdown-menu > li > a {
+.dropdown-mecolunaPesonu > li > a {
     color: #333 !important;
 }
 
@@ -677,3 +677,7 @@ Cor cinza = #808080
   top: 5px;
 }
 */
+.small-padding{
+	padding-left: 5px; !important;
+	padding-right: 5px; !important;
+}

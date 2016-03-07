@@ -20,7 +20,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.agritap.sisintegracao.client.ValidacaoException;
-import com.agritap.sisintegracao.client.vo.ListAdapter;
 import com.agritap.sisintegracao.client.vo.UsuarioTO;
 import com.agritap.sisintegracao.model.Pessoa;
 import com.agritap.sisintegracao.model.Usuario;
@@ -79,7 +78,7 @@ public class PessoaServiceImpl extends AuthRestServiceImpl{
 
 	@GET
 	@Path("/todos/tipo/{tipo}")
-	public ListAdapter<Pessoa> porTipo(@PathParam("tipo")String tipo){
+	public List<Pessoa> porTipo(@PathParam("tipo")String tipo){
 		String query="select p from Pessoa p where ";
 		
 		if(tipo.equals("tecnico")){
@@ -93,7 +92,7 @@ public class PessoaServiceImpl extends AuthRestServiceImpl{
 		} 
 		TypedQuery<Pessoa> queryP = em.createQuery(query,Pessoa.class);
 		List<Pessoa> produtores = queryP.getResultList();
-		return new ListAdapter<Pessoa>(produtores);
+		return produtores;
 	}
 
 	@PUT

@@ -15,7 +15,7 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 
 public class BigDecimalBox extends ValueBoxBase<BigDecimal>{
 
-	protected BigDecimalBox() {
+	public BigDecimalBox() {
         super(Document.get().createTextInputElement(), BigDecimalRenderer.instance(), BigDecimalParser.instance());
         addStyleName(Styles.FORM_CONTROL);
         addDefaultHandlers();

@@ -13,6 +13,7 @@ import org.gwtbootstrap3.client.ui.constants.ListGroupItemType;
 
 import com.agritap.sisintegracao.client.request.beans.ErrosI;
 import com.agritap.sisintegracao.model.Rotulavel;
+import com.agritap.sisintegracao.model.SexoLote;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
@@ -146,7 +147,7 @@ public class ClientUtil {
 		return str.toString().trim().equals("");
 	}
 	
-	public static void populaListBox(ListBox listBox, Enum<?>[] values,boolean emptyOption) {
+	public static void populateListBox(ListBox listBox, Enum<?>[] values,boolean emptyOption) {
 		listBox.clear();
 		if(emptyOption){
 			listBox.addItem("","");
@@ -167,8 +168,8 @@ public class ClientUtil {
 		}
 		
 	}
-	public static void populaListBox(ListBox listBox, Enum<?>[] values) {
-		populaListBox(listBox, values,false);
+	public static void populateListBox(ListBox listBox, Enum<?>[] values) {
+		populateListBox(listBox, values,false);
 	}
 	public static String formatDoc(String doc) {
 		if (isEmpty(doc)) {
@@ -223,6 +224,22 @@ public class ClientUtil {
 		}
 		NumberFormat nf =NumberFormat.getDecimalFormat();
 		return nf.format(value);
+	}
+	public static void selectListBox(ListBox listBox, Object valor) {
+		int itemCount = listBox.getItemCount();
+		if(valor==null){
+			return;
+		}
+		for(int i=0 ; i<itemCount;i++){
+			String indexValue = listBox.getValue(i);
+			if(indexValue!=null){
+				if(indexValue.equals(valor.toString())){
+					listBox.setSelectedIndex(i);
+					return;
+				}
+			}
+		}
+		listBox.setSelectedIndex(0);
 	}
 
 }

@@ -14,7 +14,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.agritap.sisintegracao.client.ValidacaoException;
-import com.agritap.sisintegracao.client.vo.ListAdapter;
 import com.agritap.sisintegracao.client.vo.UsuarioTO;
 import com.agritap.sisintegracao.model.Modulo;
 import com.agritap.sisintegracao.model.Pessoa;
@@ -32,10 +31,7 @@ public class ModulosServiceImpl extends AuthRestServiceImpl{
 	@GET
 	@Path("{id}")
 	public Modulo get(@PathParam("id") Integer id) {
-		Modulo m = new Modulo();
-		m.setNome("");
-		m.setId(id);
-		return m;
+		return em.find(Modulo.class, id);
 	}
 
 	@GET
