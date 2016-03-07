@@ -19,6 +19,7 @@
 
 						<b:ListGroup ui:field="errorBox" visible="false">
 						</b:ListGroup>
+						
 						<b:Form ui:field="form">
 							<b:FieldSet>
 

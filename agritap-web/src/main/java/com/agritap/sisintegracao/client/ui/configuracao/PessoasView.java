@@ -118,7 +118,7 @@ public class PessoasView extends Composite {
 		loadTabela();
 		preparaFormulario();
 		bindAddEvent();
-		ClientUtil.populaListBox(integradoraField,Integradora.values());
+		ClientUtil.populateListBox(integradoraField,Integradora.values());
 	}
 
 	private void preparaFormulario() {

@@ -179,6 +179,9 @@ public class Pessoa implements Serializable,Rotulavel{
 	}
 	
 	public String getIdAsString(){
-		return id.toString();
+		if(id!=null){
+			return Integer.toString(id);
+		}
+		return null;
 	}
 }

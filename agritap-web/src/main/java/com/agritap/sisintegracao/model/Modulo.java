@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 		 { @NamedQuery (name="modulos.porProdutores", query = "select x from Modulo x where x.produtor in (:produtores) "),
 			 @NamedQuery (name="modulos.porProdutorId", query = "select x from Modulo x where x.produtor.id = :produtorId order by x.nome")
 		 })
-public class Modulo {
+public class Modulo implements Rotulavel{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -82,5 +82,18 @@ public class Modulo {
 
 	public void setAlojamentoMaximo(Integer alojamentoMaximo) {
 		this.alojamentoMaximo = alojamentoMaximo;
+	}
+
+	@Override
+	public String getIdAsString() {
+		if(id!=null){
+			return id.toString();
+		}
+		return null;
+	}
+
+	@Override
+	public String getRotulo() {
+		return nome;
 	}
 }

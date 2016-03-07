@@ -7,9 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
-public class Origem {
+@NamedQueries({@NamedQuery(name="origem.porTipoAtivos",query="select o from Origem o where o.animal = :tipoAnimal and  o.ativo= true order by o.nome ")})
+public class Origem implements Rotulavel{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,6 +31,8 @@ public class Origem {
 	
 	@Enumerated(EnumType.STRING)
 	private Integradora integradora;
+ 
+	 private Boolean ativo;
 
 	public Integer getId() {
 		return id;
@@ -75,6 +80,24 @@ public class Origem {
 
 	public void setIntegradora(Integradora integradora) {
 		this.integradora = integradora;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	@Override
+	public String getIdAsString() {
+		return id.toString();
+	}
+
+	@Override
+	public String getRotulo() {
+		return nome;
 	}
 	
 }

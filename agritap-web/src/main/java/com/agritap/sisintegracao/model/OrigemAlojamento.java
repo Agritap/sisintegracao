@@ -1,7 +1,7 @@
 package com.agritap.sisintegracao.model;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -32,7 +32,7 @@ public class OrigemAlojamento {
 	private Integer quantidade;
 
 	@Temporal(TemporalType.DATE)
-	private Calendar dataAlojamento;
+	private Date dataAlojamento;
 	
 	private Integer idadeAlojamento;
 	
@@ -66,14 +66,6 @@ public class OrigemAlojamento {
 		this.quantidade = quantidade;
 	}
 
-	public Calendar getDataAlojamento() {
-		return dataAlojamento;
-	}
-
-	public void setDataAlojamento(Calendar dataAlojamento) {
-		this.dataAlojamento = dataAlojamento;
-	}
-
 	public Integer getIdadeAlojamento() {
 		return idadeAlojamento;
 	}
@@ -96,5 +88,21 @@ public class OrigemAlojamento {
 
 	public void setSexo(SexoLote sexo) {
 		this.sexo = sexo;
+	}
+
+	public Lote getLote() {
+		return lote;
+	}
+
+	public void setLote(Lote lote) {
+		this.lote = lote;
+	}
+
+	public Date getDataAlojamento() {
+		return dataAlojamento;
+	}
+
+	public void setDataAlojamento(Date dataAlojamento) {
+		this.dataAlojamento = dataAlojamento;
 	}
 }

@@ -1,7 +1,6 @@
 package com.agritap.sisintegracao.model;
 
-import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import com.agritap.sisintegracao.server.rest.BigDecimalSerializer;
@@ -14,12 +13,12 @@ public class BarracaoAlojamento {
 
 	private Integer quantidade;
 	
-	private Calendar dataAlojamento;
+	private Date dataAlojamento;
 	
 	private Integer idadeAlojamento;
 	
 	@JsonSerialize(using=BigDecimalSerializer.class)
-	private BigDecimal pesoAlojado;
+	private Date pesoAlojado;
 
 	private List<OrigemAlojamento> origens;
 	
