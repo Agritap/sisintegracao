@@ -12,9 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.agritap.sisintegracao.server.rest.BigDecimalSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @JsonIgnoreProperties({"modulo"})
@@ -35,7 +33,6 @@ public class Barracao {
 	 * QUantidade de racao em kg que cabem nos comedouros + linhas
 	 */
 	@Column(scale = 2, precision = 10)
-	@JsonSerialize(using=BigDecimalSerializer.class)
 	private BigDecimal estoqueRacaoLinha;
 
 	/**
