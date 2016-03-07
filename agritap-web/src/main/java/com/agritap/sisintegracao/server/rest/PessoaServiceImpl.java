@@ -79,8 +79,8 @@ public class PessoaServiceImpl extends AuthRestServiceImpl{
 
 
 	@GET
-	@Path("/todos/tipo/{tipo}/{idUsuario}")
-	public ListAdapter<Pessoa> porTipo(@PathParam("tipo")String tipo,@PathParam("idUsuario") Integer idUsuario){
+	@Path("/todos/tipo/{tipo}")
+	public ListAdapter<Pessoa> porTipo(@PathParam("tipo")String tipo){
 		String query="select p from Pessoa p where ";
 		
 		if(tipo.equals("tecnico")){
