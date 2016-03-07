@@ -13,4 +13,8 @@ public enum SexoLote implements Rotulavel{
 	public String getRotulo() {
 		return rotulo;
 	}
+	@Override
+	public String getIdAsString() {
+		return name();
+	}
 }

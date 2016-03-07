@@ -1,13 +1,11 @@
 package com.agritap.sisintegracao.client;
 
 import com.agritap.sisintegracao.client.request.EntityFactory;
-import com.agritap.sisintegracao.client.request.beans.UsuarioI;
-import com.agritap.sisintegracao.client.request.clients.ModulosClient;
-import com.agritap.sisintegracao.client.request.clients.PessoaClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.agritap.sisintegracao.client.ui.LoginWindow;
 import com.agritap.sisintegracao.client.ui.MainWindow;
 import com.agritap.sisintegracao.client.ui.StateHistory;
+import com.agritap.sisintegracao.client.vo.UsuarioTO;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.web.bindery.event.shared.EventBus;
@@ -25,12 +23,8 @@ public class ClientFactoryImpl implements ClientFactory {
 
 	private LoginWindow loginWindow;
 	
-	private UsuarioI usuario;
+	private UsuarioTO usuario;
 	
-	private ModulosClient modulosClient = new ModulosClient();
-	
-	private PessoaClient pessoaClient = new PessoaClient();
-
 	public EventBus getEventbus() {
 		return eventBus;
 	}
@@ -80,23 +74,13 @@ public class ClientFactoryImpl implements ClientFactory {
 	}
 
 	@Override
-	public void setAutenticado(UsuarioI user) {
+	public void setAutenticado(UsuarioTO user) {
 		this.usuario=user;
 	}
 
 	@Override
-	public UsuarioI getUsuarioAutenticado() {
+	public UsuarioTO getUsuarioAutenticado() {
 		return usuario;
-	}
-
-	@Override
-	public ModulosClient getModuloClient() {
-		return modulosClient;
-	}
-
-	@Override
-	public PessoaClient getPessoaClient() {
-		return pessoaClient;
 	}
 
 }

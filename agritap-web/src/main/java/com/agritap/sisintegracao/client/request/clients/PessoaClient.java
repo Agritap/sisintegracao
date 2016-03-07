@@ -1,89 +1,65 @@
 package com.agritap.sisintegracao.client.request.clients;
 
-import com.agritap.sisintegracao.client.request.Callback;
-import com.agritap.sisintegracao.client.request.ExceptionalRequestBuilder;
-import com.agritap.sisintegracao.client.request.RESTClient;
-import com.agritap.sisintegracao.client.request.beans.PessoaI;
-import com.agritap.sisintegracao.client.request.beans.PessoaIAdapter;
-import com.agritap.sisintegracao.client.request.beans.UsuarioI;
+import java.util.List;
 
-public class PessoaClient extends RESTClient {
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
-	public PessoaClient() {
-	}
+import org.fusesource.restygwt.client.RestService;
 
-	public void auth(String usuario, String senha, Callback<UsuarioI> cb) {
-//		iss_username=ss&iss_password=s&loginFailed=loginInvalido
-		String formBody = "login=" + usuario + "&password=" + senha ;
-//		String jsonBody = "{ \"login\": \"" + usuario + "\",\"password\": \"" + senha + "\"}";
-		ExceptionalRequestBuilder reqB = POST("pessoas", "auth").withCustomReturn(UsuarioI.TYPE);
-		reqB.setRequestData(formBody );
-		reqB.go(cb);
-	}
+import com.agritap.sisintegracao.client.request.RestCallback;
+import com.agritap.sisintegracao.client.vo.UsuarioTO;
+import com.agritap.sisintegracao.model.Pessoa;
 
-	public void get(Integer id, Callback<PessoaI> cb) {
-		GET("pessoas", id.toString()).withCustomReturn(PessoaI.TYPE).go(cb);
-	}
+@Path("/pessoas")
+@Produces(MediaType.APPLICATION_JSON)
+public interface PessoaClient  extends RestService {
 
-	public void todos(Callback<PessoaIAdapter> cb) {
-		GET("pessoas", "todos").withCustomReturn(PessoaIAdapter.TYPE).go(cb);
-	}
 
-	public void update(PessoaI produtor, Callback<PessoaI> cb) {
-		PUT("pessoas").withCustomReturn(PessoaI.TYPE).withJsonContentType().withEntityBody(produtor).go(cb);
-	}
+	@POST
+	@Path("/auth")
+	public void  auth(@FormParam("login")String email,@FormParam("password")String pass,RestCallback<UsuarioTO> cb);
 
-	public void delete(Integer id, Callback<Void> cb) {
-		DELETE("pessoas", id.toString()).go(cb);
-	}
+	@GET
+	@Path("{id}")
+	public void get(@PathParam("id")Integer id,RestCallback<Pessoa> cb);
 
-	public void auth(String cookie, Callback<UsuarioI> callback) {
-		String formBody = "token=" + cookie;
-		ExceptionalRequestBuilder reqB = POST("pessoas", "authToken").withCustomReturn(UsuarioI.TYPE);
-		reqB.setRequestData(formBody );
-		reqB.go(callback);
-	}
+	@GET
+	@Path("/todos")
+	public void todos(RestCallback<List<Pessoa>> cb);
 
-	/**
-	 * Verifica se o usuario possui senha definida
-	 * @param id
-	 * @param callback
-	 */
-	public void possuiSenha(Integer id, Callback<Boolean> callback) {
-		if(id==null){
-			callback.ok(false);
-		}else{
-			GET("pessoas", id.toString(),"possuiSenha").go(callback);
-		}
-	}
+	@PUT
+	public void update(Pessoa pessoa,RestCallback<Pessoa> cb);
 
-	/**
-	 * Remove as senhas cadastradas para o usuario removendo o acesso.
-	 * 
-	 * @param id
-	 * @param callback
-	 */
-	public void removeSenhas(Integer id, Callback<Boolean> callback) {
-		if(id==null){
-			callback.ok(true);
-		}else{
-			GET("pessoas", id.toString(),"removeSenha").go(callback);
-		}
-	}
+	@DELETE
+	@Path("{id}")
+	public void delete(@PathParam("id")Integer id,RestCallback<Void> cb);
 
-	public void updatePassword(Integer id, String pass, Callback<Boolean> callback) {
-		String formBody = "senha=" + pass;
-		ExceptionalRequestBuilder reqB = POST("pessoas", id.toString(),"updatePass");
-		reqB.setRequestData(formBody );
-		reqB.go(callback);
-	}
+	@POST
+	@Path("/authToken")
+	public void auth(@FormParam("token")String authToken,RestCallback<UsuarioTO> cb);
 
-	public void getTecnicos(Integer id, Callback<PessoaIAdapter> callback) {
-		GET("pessoas","tipo","tecnico",id.toString()).withCustomReturn(PessoaI.TYPE).go(callback);
-	}
+	@GET
+	@Path("{id}/possuiSenha")
+	public void possuiSenha(@PathParam("id")Integer id,RestCallback<Boolean> callback);
 
-	public void getGranjeiros(Integer id, Callback<PessoaIAdapter> callback) {
-		GET("pessoas","tipo","granjeiro",id.toString()).withCustomReturn(PessoaI.TYPE).go(callback);
-	}
+	@GET
+	@Path("{id}/removeSenha")
+	public void removeSenha(@PathParam("usuario.porPessoa")Integer id,RestCallback<Boolean> callback);
+	
+	@POST
+	@Path("{id}/updatePass")
+	public void updatePass(@PathParam("id")Integer idPessoa,@FormParam("senha")String senha,RestCallback<Boolean> callback);
+
+	@GET
+	@Path("/todos/tipo/{tipo}")
+	public void porTipo(@PathParam("tipo")String tipo,RestCallback<List<Pessoa>> cb);
 
 }

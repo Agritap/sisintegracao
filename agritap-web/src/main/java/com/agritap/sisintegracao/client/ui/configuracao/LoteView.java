@@ -1,5 +1,6 @@
 package com.agritap.sisintegracao.client.ui.configuracao;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.gwtbootstrap3.client.ui.Button;
@@ -17,13 +18,14 @@ import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.DatePickerLanguage;
 
 import com.agritap.sisintegracao.client.ClientUtil;
-import com.agritap.sisintegracao.client.request.Callback;
-import com.agritap.sisintegracao.client.request.beans.ModulosI;
-import com.agritap.sisintegracao.client.request.beans.ModulosIAdapter;
-import com.agritap.sisintegracao.client.request.beans.PessoaIAdapter;
+import com.agritap.sisintegracao.client.request.RestCallback;
+import com.agritap.sisintegracao.client.request.clients.ModulosClient;
+import com.agritap.sisintegracao.client.request.clients.PessoaClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.agritap.sisintegracao.client.ui.StateHistory;
 import com.agritap.sisintegracao.client.ui.component.BigDecimalBox;
+import com.agritap.sisintegracao.model.Modulo;
+import com.agritap.sisintegracao.model.Pessoa;
 import com.agritap.sisintegracao.model.SexoLote;
 import com.agritap.sisintegracao.model.TipoOrigem;
 import com.google.gwt.core.client.GWT;
@@ -42,10 +44,12 @@ public class LoteView extends Composite {
 
 	private static LoteViewUiBinder uiBinder = GWT.create(LoteViewUiBinder.class);
 
+	ModulosClient modulosClient = GWT.create(ModulosClient.class);
+	
 	Logger log = Logger.getLogger(LoteView.class.getName());
 
 	ClientFactory factory;
-
+	PessoaClient pessoaClient = GWT.create(PessoaClient.class);
 	@UiField
 	Heading loteTitulo;
 	@UiField
@@ -92,19 +96,19 @@ public class LoteView extends Composite {
 		if(factory.getUsuarioAutenticado().getProdutores().size()==1){
 			changeProdutor(null);
 		}
-		factory.getPessoaClient().getTecnicos(factory.getUsuarioAutenticado().getId(),new Callback<PessoaIAdapter>() {
+		pessoaClient.porTipo("tecnico", new RestCallback<List<Pessoa>>() {
 			@Override
-			public void ok(PessoaIAdapter to) {
-				ClientUtil.populateListBox(tecnicoField, to.getResultado());
+			public void success(List<Pessoa> result) {
+				ClientUtil.populateListBox(tecnicoField, result);
 			}
 		});
-		factory.getPessoaClient().getGranjeiros(factory.getUsuarioAutenticado().getId(),new Callback<PessoaIAdapter>() {
+		pessoaClient.porTipo("granjeiro", new RestCallback<List<Pessoa>>() {
 			@Override
-			public void ok(PessoaIAdapter to) {
-				ClientUtil.populateListBox(granjeiroField, to.getResultado());
+			public void success(List<Pessoa> result) {
+				ClientUtil.populateListBox(granjeiroField, result);
 			}
 		});
-		
+	
 		ClientUtil.populaListBox(sexoField, SexoLote.values());
 		ClientUtil.populaListBox(tipoOrigemField, TipoOrigem.values());
 		ClientUtil.prepareIntegerBox(quantidadeAlojadaField);
@@ -192,14 +196,14 @@ public class LoteView extends Composite {
 	public void changeProdutor(ChangeEvent evt){
 		Integer produtorId = ClientUtil.parseInteger(produtoresField.getSelectedValue());
 		if(produtorId!=null){
-			factory.getModuloClient().porProdutor(Integer.parseInt(produtoresField.getSelectedValue()), new Callback<ModulosIAdapter>() {
+			modulosClient.porProdutor(produtorId, new RestCallback<List<Modulo>>() {
 				@Override
-				public void ok(ModulosIAdapter to) {
+				public void success(List<Modulo> modulos) {
 					moduloField.clear();
-					if(to.getResultado().size()>1){
+					if(modulos.size()>1){
 						moduloField.addItem("");
 					}
-					for(ModulosI modulo: to.getResultado()){
+					for(Modulo modulo: modulos){
 						moduloField.addItem(modulo.getNome(),modulo.getId().toString());
 					}
 				}

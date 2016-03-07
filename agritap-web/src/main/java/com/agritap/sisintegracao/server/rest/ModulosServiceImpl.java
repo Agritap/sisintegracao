@@ -14,11 +14,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.agritap.sisintegracao.client.ValidacaoException;
+import com.agritap.sisintegracao.client.vo.ListAdapter;
+import com.agritap.sisintegracao.client.vo.UsuarioTO;
 import com.agritap.sisintegracao.model.Modulo;
 import com.agritap.sisintegracao.model.Pessoa;
 import com.agritap.sisintegracao.server.ServerUtil;
-import com.agritap.sisintegracao.server.to.ListAdapter;
-import com.agritap.sisintegracao.server.to.UsuarioTO;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
@@ -40,19 +40,17 @@ public class ModulosServiceImpl extends AuthRestServiceImpl{
 
 	@GET
 	@Path("/todos")
-	public ListAdapter<Modulo> todos( @Context HttpServletRequest request) {
+	public List<Modulo> todos( @Context HttpServletRequest request) {
 		UsuarioTO usuario = getUsuario(request);
 		List<Pessoa> produtoresAutorizados =usuario.getProdutores();
-		List<Modulo> modulos = em.createNamedQuery("modulos.porProdutores", Modulo.class).setParameter("produtores", produtoresAutorizados).getResultList();
-		return new ListAdapter<Modulo>(modulos);
+		return em.createNamedQuery("modulos.porProdutores", Modulo.class).setParameter("produtores", produtoresAutorizados).getResultList();
 	}
 
 
 	@GET
 	@Path("/produtor/{id}")
-	public ListAdapter<Modulo> todos( @Context HttpServletRequest request,@PathParam("id") Integer id) {
-		List<Modulo> modulos = em.createNamedQuery("modulos.porProdutorId", Modulo.class).setParameter("produtorId", id).getResultList();
-		return new ListAdapter<Modulo>(modulos);
+	public List<Modulo> porProdutor( @Context HttpServletRequest request,@PathParam("id") Integer id) {
+		return em.createNamedQuery("modulos.porProdutorId", Modulo.class).setParameter("produtorId", id).getResultList();
 	}
 
 

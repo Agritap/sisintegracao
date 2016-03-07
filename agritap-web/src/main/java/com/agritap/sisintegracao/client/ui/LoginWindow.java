@@ -10,10 +10,9 @@ import org.gwtbootstrap3.client.ui.gwt.HTMLPanel;
 
 import com.agritap.sisintegracao.client.ClientUtil;
 import com.agritap.sisintegracao.client.ViewEnum;
-import com.agritap.sisintegracao.client.request.Callback;
-import com.agritap.sisintegracao.client.request.beans.ErrosI;
-import com.agritap.sisintegracao.client.request.beans.UsuarioI;
+import com.agritap.sisintegracao.client.request.RestCallback;
 import com.agritap.sisintegracao.client.request.clients.PessoaClient;
+import com.agritap.sisintegracao.client.vo.UsuarioTO;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -56,7 +55,7 @@ public class LoginWindow extends Composite {
 	
 	StateHistory stateHistory;
 	
-	PessoaClient pessoaClient = new PessoaClient();
+	PessoaClient pessoaClient = GWT.create(PessoaClient.class);
 	
 	public LoginWindow(ClientFactory clientFactory, StateHistory st) {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -71,17 +70,17 @@ public class LoginWindow extends Composite {
 	private void verifyToken() {
 		String cookie = Cookies.getCookie(ClientUtil.COOKIE_TOKEN_NAME);
 		if(!ClientUtil.isEmpty(cookie)){
-			pessoaClient.auth(cookie, new Callback<UsuarioI>(){
+			pessoaClient.auth(cookie, new RestCallback<UsuarioTO>() {
 				@Override
-				public void ok(UsuarioI to) {
-					login(to);
+				public void success(UsuarioTO result) {
+					login(result);
 				}
 			});
 		}
 	}
 	
 
-	private void geraToken(UsuarioI to) {
+	private void geraToken(UsuarioTO to) {
 		Cookies.setCookie(ClientUtil.COOKIE_TOKEN_NAME,to.getToken());
 	}
 
@@ -93,7 +92,7 @@ public class LoginWindow extends Composite {
       }
 	}
 	
-	private void login(UsuarioI to) {
+	private void login(UsuarioTO to) {
 		clientFactory.setAutenticado(to);
 		String retorno = stateHistory.getParameter("st_retorno");
 		if(lembrarField.getValue()!=null && lembrarField.getValue()){
@@ -108,21 +107,21 @@ public class LoginWindow extends Composite {
 	
 	@UiHandler("loginBtn")
 	void onClick(ClickEvent e) {
-		pessoaClient.auth(emailField.getText(),passwordField.getText(),new Callback<UsuarioI>() {
+		pessoaClient.auth(emailField.getText(),passwordField.getText(),new RestCallback<UsuarioTO>() {
 			
 			@Override
-			public void ok(UsuarioI to) {
+			public void success(UsuarioTO to) {
 				login(to);
 			}
 			
-			@Override
-			public void onValidation(ErrosI erro) {
-				mensagemErroBox.setVisible(true);
-				for(String err:erro.getErrosGenericos()){
-					Label l = new Label(err);
-					mensagemErroBox.add(l);
-				}
-			}
+//			@Override
+//			public void onValidation(ErrosI erro) {
+//				mensagemErroBox.setVisible(true);
+//				for(String err:erro.getErrosGenericos()){
+//					Label l = new Label(err);
+//					mensagemErroBox.add(l);
+//				}
+//			}
 		});
 	}
 

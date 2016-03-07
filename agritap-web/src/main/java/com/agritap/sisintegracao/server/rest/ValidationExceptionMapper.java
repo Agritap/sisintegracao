@@ -6,7 +6,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import com.agritap.sisintegracao.client.ValidacaoException;
-import com.agritap.sisintegracao.server.to.ErrosTO;
+import com.agritap.sisintegracao.client.vo.ErrosTO;
 
 @Provider
 public class ValidationExceptionMapper  implements ExceptionMapper<ValidacaoException>{

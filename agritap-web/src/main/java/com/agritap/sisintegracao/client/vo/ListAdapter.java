@@ -1,4 +1,4 @@
-package com.agritap.sisintegracao.server.to;
+package com.agritap.sisintegracao.client.vo;
 
 import java.util.List;
 

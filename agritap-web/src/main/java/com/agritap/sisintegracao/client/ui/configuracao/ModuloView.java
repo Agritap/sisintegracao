@@ -22,11 +22,8 @@ public class ModuloView extends Composite {
 
 	private static ModulosUiBinder uiBinder = GWT.create(ModulosUiBinder.class);
 	Logger log = Logger.getLogger(ModuloView.class.getName());
-
 	
 	ClientFactory factory;
-	
-	
 
 	@UiField
 	Row formRow;
