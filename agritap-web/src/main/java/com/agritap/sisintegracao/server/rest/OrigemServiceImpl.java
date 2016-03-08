@@ -23,7 +23,8 @@ public class OrigemServiceImpl extends AuthRestServiceImpl{
 	@GET
 	@Path("porTipo/{tipo}")
 	public List<Origem> porTipo(@PathParam("tipo") TipoAnimal tipo) {
-		return em.createNamedQuery("origem.porTipoAtivos",Origem.class).setParameter("tipoAnimal", tipo).getResultList();
+		List<Origem> result= em.createNamedQuery("origem.porTipoAtivos",Origem.class).setParameter("tipoAnimal", tipo).getResultList();
+		return result;
 	}
 
 	

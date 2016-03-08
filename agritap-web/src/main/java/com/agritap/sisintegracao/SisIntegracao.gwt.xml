@@ -11,7 +11,8 @@
 	<replace-with class="com.agritap.sisintegracao.client.ClientFactoryImpl">
    	 <when-type-is class="com.agritap.sisintegracao.client.ui.ClientFactory"/>
     </replace-with>
-	
+    <extend-property name="locale" values="pt_BR"/>
+	<set-property-fallback name="locale" value="pt_BR"/>
 		<set-property name="compiler.stackMode" value="emulated" />
 		<set-configuration-property name="compiler.emulatedStack.recordFileNames"
 			value="true" />

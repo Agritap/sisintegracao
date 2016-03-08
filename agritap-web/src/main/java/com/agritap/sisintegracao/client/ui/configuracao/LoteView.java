@@ -13,9 +13,9 @@ import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.Heading;
 import org.gwtbootstrap3.client.ui.InputGroup;
 import org.gwtbootstrap3.client.ui.IntegerBox;
-import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.client.ui.form.validator.BlankValidator;
 import org.gwtbootstrap3.client.ui.html.Span;
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 import org.gwtbootstrap3.extras.datepicker.client.ui.base.constants.DatePickerLanguage;
@@ -29,6 +29,7 @@ import com.agritap.sisintegracao.client.request.clients.PessoaClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
 import com.agritap.sisintegracao.client.ui.StateHistory;
 import com.agritap.sisintegracao.client.ui.component.BigDecimalBox;
+import com.agritap.sisintegracao.client.ui.component.ListBox;
 import com.agritap.sisintegracao.model.Lote;
 import com.agritap.sisintegracao.model.Modulo;
 import com.agritap.sisintegracao.model.Origem;
@@ -38,8 +39,11 @@ import com.agritap.sisintegracao.model.TipoAnimal;
 import com.agritap.sisintegracao.model.TipoOrigem;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -125,28 +129,26 @@ public class LoteView extends Composite {
 	}
 	
 	private void initForm() {
-		ClientUtil.populateListBox(produtoresField, factory.getUsuarioAutenticado().getProdutores());
+		produtoresField.setItems(factory.getUsuarioAutenticado().getProdutores());
 		if(factory.getUsuarioAutenticado().getProdutores().size()==1){
 			changeProdutor(null);
 		}
 		pessoaClient.porTipo("tecnico", new RestCallback<List<Pessoa>>() {
 			@Override
 			public void success(List<Pessoa> result) {
-				ClientUtil.populateListBox(tecnicoField, result);
+				tecnicoField.setItems(result);
 			}
 		});
 		pessoaClient.porTipo("granjeiro", new RestCallback<List<Pessoa>>() {
 			@Override
 			public void success(List<Pessoa> result) {
-				ClientUtil.populateListBox(granjeiroField, result);
+				granjeiroField.setItems(result);
 			}
 		});
-		
-		
 	
-		ClientUtil.populateListBox(sexoField, SexoLote.values());
-		ClientUtil.selectListBox(sexoField,SexoLote.MISTO);
-		ClientUtil.populateListBox(tipoOrigemField, TipoOrigem.values());
+		sexoField.setItems(SexoLote.values());
+		sexoField.setSelectedValue(SexoLote.MISTO);
+		tipoOrigemField.setItems(TipoOrigem.values());
 		ClientUtil.prepareIntegerBox(quantidadeAlojadaField);
 		ClientUtil.prepareIntegerBox(idadeMediaAlojadaField);
 		ClientUtil.prepareIntegerBox(quantidadeOrigensField);
@@ -162,7 +164,17 @@ public class LoteView extends Composite {
 		}
 		addOrigem(null);
 	}
-	
+
+	@UiHandler("moduloField")
+	public void addModuloChangeEvent(ChangeEvent evt){
+		if(moduloField.getSelectedObject()!=null){
+			TipoAnimal tp = ((Modulo)moduloField.getSelectedObject()).getTipoAnimal();
+			for(ListBox listIntegrado:integradoOrigemOrigensFields){
+				loadOrigens(tp,listIntegrado);
+			}
+		}
+
+	}
 	
 	private void addOrigem(String alojamentoOrigem) {
 		blockQuoteOrigens.setVisible(false);
@@ -171,13 +183,13 @@ public class LoteView extends Composite {
 //			addCabecalho();
 		}
 		String color = quantidadeOrigens%2==0?"#cccccc":"#eeeeee";
-		Row row = new Row();
+		final Row row = new Row();
 		row.getElement().getStyle().setBackgroundColor(color);
 		row.getElement().getStyle().setPaddingTop(15, Unit.PX);
 		
 		Column colunaDt = new Column("XS_4,MD_2");
 		colunaDt.addStyleName("small-padding");
-		DatePicker dp = new DatePicker();
+		final DatePicker dp = new DatePicker();
 		dp.setPlaceholder("Data do alojamento");
 		dp.setFormat("dd-mm-yyyy");
 		dp.setLanguage(DatePickerLanguage.PT_BR);
@@ -189,12 +201,18 @@ public class LoteView extends Composite {
 		colunaDt.add(fg);
 		row.add(colunaDt);
 		
-		Column colunaQtd = new Column("XS_4,MD_2");
+		Column colunaQtd = new Column("XS_4,MD_1");
 		colunaQtd.addStyleName("small-padding");
 
-		IntegerBox tbQtd = new IntegerBox();
+		final IntegerBox tbQtd = new IntegerBox();
 		ClientUtil.prepareIntegerBox(tbQtd);
 		tbQtd.setPlaceholder("Quantidade Alojada");
+		tbQtd.addBlurHandler(new BlurHandler() {
+			@Override
+			public void onBlur(BlurEvent event) {
+				updateDadosAlojamento();	
+			}
+		});
 		fg = new FormGroup();
 		fg.add(tbQtd);
 		colunaQtd.add(fg);
@@ -203,7 +221,14 @@ public class LoteView extends Composite {
 
 		Column colunaIdade = new Column("XS_2,MD_1");
 		colunaIdade.addStyleName("small-padding");
-		IntegerBox tbIdade = new IntegerBox();
+		final IntegerBox tbIdade = new IntegerBox();
+		tbIdade.addBlurHandler(new BlurHandler() {
+			@Override
+			public void onBlur(BlurEvent event) {
+				updateDadosAlojamento();	
+			}
+		});
+
 		ClientUtil.prepareIntegerBox(tbIdade);
 		tbIdade.setPlaceholder("Idade Média");
 		fg = new FormGroup();
@@ -214,7 +239,14 @@ public class LoteView extends Composite {
 		
 		Column colunaMort = new Column("XS_2,MD_1");
 		colunaMort.addStyleName("small-padding");
-		IntegerBox tbMort = new IntegerBox();
+
+		final IntegerBox tbMort = new IntegerBox();
+		tbMort.addBlurHandler(new BlurHandler() {
+			@Override
+			public void onBlur(BlurEvent event) {
+				updateDadosAlojamento();	
+			}
+		});
 		tbMort.setPlaceholder("Mortos no transporte");
 		ClientUtil.prepareIntegerBox(tbMort);
 		fg = new FormGroup();
@@ -223,10 +255,13 @@ public class LoteView extends Composite {
 		row.add(colunaMort);
 		mortosTransporteOrigensFields.add(tbMort);
 
-		Column colunaIntegrado = new Column("XS_4,MD_2");
+		Column colunaIntegrado = new Column("XS_4,MD_3");
 		colunaIntegrado.addStyleName("small-padding");
-		ListBox listIntegrado = new ListBox();
-		ClientUtil.populateListBox(listIntegrado, origens);
+		final ListBox listIntegrado = new ListBox();
+		if(moduloField.getSelectedObject()!=null){
+			TipoAnimal tp = ((Modulo)moduloField.getSelectedObject()).getTipoAnimal();
+			loadOrigens(tp,listIntegrado);
+		}
 		fg = new FormGroup();
 		fg.add(listIntegrado);
 		colunaIntegrado.add(fg);
@@ -235,8 +270,15 @@ public class LoteView extends Composite {
 		
 		Column colunaPeso = new Column("XS_4,MD_2");
 		colunaPeso.addStyleName("small-padding");
-		BigDecimalBox tbPeso = new BigDecimalBox();
+		final BigDecimalBox tbPeso = new BigDecimalBox();
 		tbPeso.setPlaceholder("Peso Total");
+		tbPeso.addBlurHandler(new BlurHandler() {
+			@Override
+			public void onBlur(BlurEvent event) {
+				updateDadosAlojamento();	
+			}
+		});
+
 		fg = new FormGroup();
 		fg.add(tbPeso);
 		colunaPeso.add(fg);
@@ -244,10 +286,10 @@ public class LoteView extends Composite {
 		pesoTotalOrigensFields.add(tbPeso);
 
 		
-		Column colunaSexo = new Column("XS_4,MD_1");
+		Column colunaSexo = new Column("XS_4,MD_2");
 		colunaSexo.addStyleName("small-padding");
 		InputGroup inputG = new InputGroup();
-		ListBox listSexo = new ListBox();
+		final ListBox listSexo = new ListBox();
 		ClientUtil.populateListBox(listSexo, SexoLote.values());
 		inputG.add(listSexo);
 		
@@ -260,7 +302,25 @@ public class LoteView extends Composite {
 		colunaSexo.add(inputG);
 		row.add(colunaSexo);
 		sexoAlojamentoOrigensFields.add(listSexo);
+		btn.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				row.removeFromParent();
+				row.clear();
+				sexoAlojamentoOrigensFields.remove(listSexo);
+				datasAlojamentoOrigensFields.remove(dp);
+				quantidadeAlojadaOrigensFields.remove(tbQtd);
+				mortosTransporteOrigensFields.remove(tbMort);
+				integradoOrigemOrigensFields.remove(listIntegrado);
+				pesoTotalOrigensFields.remove(tbPeso);
+				idadeAlojamentoOrigensFields.remove(tbIdade);
 
+				quantidadeOrigens--;
+				updateDadosAlojamento();
+			}
+		});
+		
 		
 		blocoDetalhamentoOrigem.add(row);
 		updateDadosAlojamento();
@@ -273,13 +333,13 @@ public class LoteView extends Composite {
 			modulosClient.porProdutor(produtorId, new RestCallback<List<Modulo>>() {
 				@Override
 				public void success(List<Modulo> modulos) {
-					ClientUtil.populateListBox(moduloField, modulos);
+					moduloField.setItems(modulos);
 					Set<TipoAnimal> tiposAnimais=new HashSet<>();
 					for(Modulo m:modulos){
 						tiposAnimais.add(m.getTipoAnimal());
 					}
 					if(tiposAnimais.size()==1){
-						loadOrigens(tiposAnimais.iterator().next());
+						loadOrigens(tiposAnimais.iterator().next(),null);
 					}
 				}
 
@@ -288,20 +348,27 @@ public class LoteView extends Composite {
 		}
 	}
 //	
-	private void loadOrigens(TipoAnimal tipo) {
+	private void loadOrigens(TipoAnimal tipo,final ListBox list) {
 		if(tipo==null){
 			return;
 		}
 		if(origens!=null && origens.size()>0){
 			if(origens.get(0).getAnimal().equals(tipo)){
 				//ja buscou e ta no cache
+				if(list!=null){
+					list.setItems(origens,true);
+				}
 				return;
 			}
 		}
 		origemClient.porTipo(tipo, new RestCallback<List<Origem>>() {
 			@Override
-			public void success(List<Origem> result) {
+			public void success(List<Origem> result) 
+			{
 				origens = result;
+				if(list!=null){
+					list.setItems(result,true);
+				}
 			}
 		});
 	}
@@ -311,19 +378,26 @@ public class LoteView extends Composite {
 			//Desabilita dados de alojamento ao mesmo tempo que sumariza os mesmos
 			Integer quantidadeTotal=0;
 			Integer idadeConsolidada=0;
+			Integer quantidadeComIdade=0;
 			SexoLote sexoFinal = null;
 			BigDecimal pesoTotal = BigDecimal.ZERO;
+			Set<Origem> origensDistintas = new HashSet<>();
 			for(int i=0;i<quantidadeOrigens;i++){
 				IntegerBox quantidadeOrigemBox = quantidadeAlojadaOrigensFields.get(i);
 				IntegerBox mortalidadeOrigemBox = mortosTransporteOrigensFields.get(i);
 				IntegerBox idadeOrigemBox =idadeAlojamentoOrigensFields.get(i);
 				ListBox origemBox = integradoOrigemOrigensFields.get(i);
+				if(origemBox.getSelectedObject()!=null){
+					origensDistintas.add((Origem) origemBox.getSelectedObject());
+					tipoOrigemField.setSelectedValue(((Origem)origemBox.getSelectedObject()).getTipo());
+				}
 				BigDecimalBox pesoTotalBox = pesoTotalOrigensFields.get(i);
 				ListBox sexoBox = sexoAlojamentoOrigensFields.get(i);
 				if(quantidadeOrigemBox.getValue()!=null){
 					quantidadeTotal+=quantidadeOrigemBox.getValue();
 					if(idadeOrigemBox.getValue()!=null){
 						idadeConsolidada += quantidadeTotal*idadeOrigemBox.getValue();
+						quantidadeComIdade+=quantidadeTotal;
 					}
 				}
 				if(pesoTotalBox.getValue()!=null){
@@ -349,6 +423,14 @@ public class LoteView extends Composite {
 			if(quantidadeTotal>0){
 				quantidadeAlojadaField.setValue(quantidadeTotal);
 			}
+			if(idadeConsolidada>0){
+				idadeMediaAlojadaField.setValue(idadeConsolidada/quantidadeComIdade);
+			}
+			if(pesoTotal.compareTo(BigDecimal.ZERO)>0){
+				BigDecimal pesoMedio = pesoTotal.divide(new BigDecimal(quantidadeTotal),2,BigDecimal.ROUND_HALF_DOWN);
+				pesoMedioAlojadoField.setValue(pesoMedio);
+			}
+			quantidadeOrigensField.setValue(origensDistintas.size());
 			if(sexoFinal!=null){
 				ClientUtil.selectListBox(sexoField, sexoFinal);
 			}

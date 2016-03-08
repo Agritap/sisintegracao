@@ -22,25 +22,25 @@
     					<b:Column size="XS_12">
 						    <b:FormGroup>
 						      <b:FormLabel for="formProdutor">Produtor</b:FormLabel>
-						      <b:ListBox ui:field="produtoresField"/>
+						      <ag:ListBox ui:field="produtoresField"/>
 					        </b:FormGroup>
     					</b:Column>
     					<b:Column size="SM_6">
 						    <b:FormGroup>
 						      <b:FormLabel for="moduloField">Módulo</b:FormLabel>
-						      <b:ListBox ui:field="moduloField" />
+						      <ag:ListBox ui:field="moduloField" />
 						    </b:FormGroup>
 						</b:Column>
     					<b:Column size="SM_6">
 						    <b:FormGroup>
 						      <b:FormLabel for="tecnicoField">Técnico</b:FormLabel>
-						      <b:ListBox ui:field="tecnicoField" />
+						      <ag:ListBox ui:field="tecnicoField" />
 						    </b:FormGroup>
 						</b:Column>
     					<b:Column size="SM_6">
 						    <b:FormGroup>
 						      <b:FormLabel for="granjeiroField">Granjeiro</b:FormLabel>
-						      <b:ListBox ui:field="granjeiroField" />
+						      <ag:ListBox ui:field="granjeiroField" />
 						    </b:FormGroup>
 						</b:Column>
     					<b:Column size="XS_6,SM_3">
@@ -112,13 +112,13 @@
     					<b:Column size="XS_6,MD_4">
 						    <b:FormGroup>
 						      <b:FormLabel for="sexoField">Sexo</b:FormLabel>
-						      <b:ListBox ui:field="sexoField"></b:ListBox>
+						      <ag:ListBox ui:field="sexoField"/>
 					        </b:FormGroup>
     					</b:Column>
     					<b:Column size="XS_6,MD_4">
 						    <b:FormGroup>
 						      <b:FormLabel for="tipoOrigemField">Tipo de Origem</b:FormLabel>
-						      <b:ListBox ui:field="tipoOrigemField"></b:ListBox>
+						      <ag:ListBox ui:field="tipoOrigemField"/>
 					        </b:FormGroup>
     					</b:Column>
     					<b:Column size="XS_6,MD_4">

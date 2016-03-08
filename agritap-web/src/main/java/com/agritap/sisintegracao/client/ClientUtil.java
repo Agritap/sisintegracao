@@ -154,7 +154,7 @@ public class ClientUtil {
 		}
 		for(Enum<?> enu:values){
 			if(enu instanceof Rotulavel){
-				listBox.addItem(enu.name(),((Rotulavel)enu).getRotulo());
+				listBox.addItem(((Rotulavel)enu).getRotulo(),enu.name());
 			}else{
 				listBox.addItem(enu.name());
 			}
