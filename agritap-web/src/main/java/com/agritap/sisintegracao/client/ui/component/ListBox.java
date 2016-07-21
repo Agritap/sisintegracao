@@ -6,17 +6,24 @@ import java.util.List;
 import com.agritap.sisintegracao.client.ClientUtil;
 import com.agritap.sisintegracao.model.Rotulavel;
 
-public class ListBox extends org.gwtbootstrap3.client.ui.ListBox{
+public class ListBox extends org.gwtbootstrap3.client.ui.ListBox {
 
 	@SuppressWarnings("rawtypes")
 	List itens;
 	public void setItems(List itens) {
-		setItems(itens,false);
+		setItems(itens,itens!=null && itens.size()>1);
 	}
 	public void setItems(Enum<?>[] itens) {
-		setItems(itens,false);
+		setItems(itens,itens!=null && itens.length>1);
 	}
-	
+
+	public int getSize() {
+		if(itens==null){
+			return 0;
+		}
+		return itens.size();
+	}
+
 	public void setSelectedValue(Object val) {
 		if(val==null){
 			setSelectedIndex(0);
@@ -92,5 +99,6 @@ public class ListBox extends org.gwtbootstrap3.client.ui.ListBox{
 		}
 		return null;
 	}
+	
 	
 }

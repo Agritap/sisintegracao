@@ -6,7 +6,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import com.agritap.sisintegracao.client.ValidacaoException;
-import com.agritap.sisintegracao.client.vo.ErrosTO;
+import com.agritap.sisintegracao.client.vo.ErrosValidacao;
 
 @Provider
 public class ValidationExceptionMapper  implements ExceptionMapper<ValidacaoException>{
@@ -14,7 +14,7 @@ public class ValidationExceptionMapper  implements ExceptionMapper<ValidacaoExce
 	@Override
 	public Response toResponse(ValidacaoException exception) {
 //		agritap-custom-type
-		ErrosTO to = new ErrosTO();
+		ErrosValidacao to = new ErrosValidacao();
 		to.setErrosFields(exception.getErrosFields());
 		to.setErrosGenericos(exception.getErrosGenericos());
 		//Conflict

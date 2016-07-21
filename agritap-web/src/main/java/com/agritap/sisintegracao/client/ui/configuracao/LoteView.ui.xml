@@ -8,7 +8,10 @@
 	xmlns:ag="urn:import:com.agritap.sisintegracao.client.ui.component">
 
 	<g:HTMLPanel>
-	
+	<b:BlockQuote visible="false" ui:field="erros">
+        <b:ListGroup ui:field="errosDescricao" >
+	    </b:ListGroup> 
+	    </b:BlockQuote>
 	<b:Row>
 		<b:Column size="XS_12">
 		<b:Heading size="H1" ui:field="loteTitulo" styleName="page-header" text="Lote" />
@@ -17,12 +20,12 @@
 					<b:Heading size="H3"  text="Dados Gerais" />
 				</b:PanelHeader>
 				<b:PanelBody>
-				    <b:Form>
+				    <b:Form ui:field="formEntrada">
 				    <b:Row>
     					<b:Column size="XS_12">
 						    <b:FormGroup>
-						      <b:FormLabel for="formProdutor">Produtor</b:FormLabel>
-						      <ag:ListBox ui:field="produtoresField"/>
+						      <b:FormLabel for="formProdutor" >Produtor</b:FormLabel>
+						      <ag:ListBox ui:field="produtoresField" />
 					        </b:FormGroup>
     					</b:Column>
     					<b:Column size="SM_6">
@@ -70,11 +73,11 @@
 				</b:PanelHeader>
 				<b:PanelBody>
 					<g:HTMLPanel>
-					<g:HTMLPanel ui:field="blockQuoteOrigens">
-					<blockquote>
-					  <p>Informe as origens do alojamento detalhadamente aqui OU apenas o resumo no painel abaixo</p>
-					</blockquote>
-					</g:HTMLPanel>
+						<g:HTMLPanel ui:field="blockQuoteOrigens">
+							<blockquote>
+							  <p>Informe as origens do alojamento detalhadamente aqui OU apenas o resumo no painel abaixo</p>
+							</blockquote>
+						</g:HTMLPanel>
 					</g:HTMLPanel>
 					<g:HTMLPanel ui:field="blocoDetalhamentoOrigem">
 					</g:HTMLPanel>
@@ -131,18 +134,30 @@
 					</b:Form>
   				</b:PanelBody>
 			</b:Panel>
-			<b:Panel >
+			<b:Panel>
 				<b:PanelHeader>
 					<b:Heading size="H3"  text="Dados do Abate" />
 				</b:PanelHeader>
 				<b:PanelBody>
+				   <g:HTMLPanel ui:field="blocoDetalhamentoAbate">
+				       <b:Form>
+				       		<b:Row>
+		    					<b:Column size="XS_6,MD_4">
+				   				</b:Column>
+			   				</b:Row>
+		   				</b:Form>
+					</g:HTMLPanel>
 				    <b:Form>
+				    	<b:Button type="PRIMARY" ui:field="addAbate">Informar Abate</b:Button>
 					</b:Form>
   				</b:PanelBody>
 			</b:Panel>
 
 		</b:Column>
 	</b:Row>
+	<g:HTMLPanel ui:field="salvarBtn" styleName="addButton">
+	 	<span><i class="fa fa-floppy-o" aria-hidden="true"></i></span>
+	</g:HTMLPanel>
 </g:HTMLPanel>
 
 </ui:UiBinder> 

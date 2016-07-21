@@ -14,46 +14,45 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Version;
 
 @Entity
-@NamedQueries(
-		{
-			@NamedQuery(name="pessoa.todos",query="select p from Pessoa p")
-			}
-		
-		)
-public class Pessoa implements Serializable,Rotulavel{
-	
+@NamedQueries({ @NamedQuery(name = "pessoa.todos", query = "select p from Pessoa p"),
+		@NamedQuery(name = "pessoa.tecnicos", query = "select p from Pessoa p where tecnico=true"),
+		@NamedQuery(name = "pessoa.granjeiros", query = "select p from Pessoa p where granjeiro=true") }
+
+)
+public class Pessoa implements Serializable, Rotulavel {
+
 	private static final long serialVersionUID = -3216625491090034548L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Enumerated(EnumType.STRING)
 	private Integradora integradora;
-	
-	@Column(length=14)
+
+	@Column(length = 14)
 	private String cpf;
 
-	@Column(length=255)
+	@Column(length = 255)
 	private String nome;
-	
-	@Column(length=30)
+
+	@Column(length = 30)
 	private String apelido;
-	
-	@Column(length=30)
+
+	@Column(length = 30)
 	private String codigoIntegradora;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String email;
-	
+
 	private Boolean ativo;
-	
+
 	private String telefone;
-	
+
 	private Boolean granjeiro;
-	
+
 	private Boolean tecnico;
-	
+
 	private Boolean produtor;
 
 	private Boolean administrador;
@@ -177,9 +176,9 @@ public class Pessoa implements Serializable,Rotulavel{
 	public String getRotulo() {
 		return getNome();
 	}
-	
-	public String getIdAsString(){
-		if(id!=null){
+
+	public String getIdAsString() {
+		if (id != null) {
 			return Integer.toString(id);
 		}
 		return null;

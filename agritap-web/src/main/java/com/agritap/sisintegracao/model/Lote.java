@@ -10,9 +10,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -47,8 +47,8 @@ public class Lote {
 	@ManyToOne
 	private Pessoa tecnico;
 	
-	@ManyToMany
-	private List<Pessoa> granjeirosResponsaveis;
+	@ManyToOne
+	private Pessoa granjeiroResponsavel;
 	
 	@OneToMany(mappedBy="lote")
 	private List<OrigemAlojamento> origens;
@@ -60,11 +60,20 @@ public class Lote {
 	 */
 	private Integer quantidadeAlojada;
 	
+
 	@JsonSerialize(using=BigDecimalSerializer.class)
-	private BigDecimal pesoMedioAlojado;
-	
+	private BigDecimal pesoTotalVivoAlojado;
+
 	@JsonSerialize(using=BigDecimalSerializer.class)
-	private BigDecimal idadeMediaAlojada;
+	private BigDecimal pesoTotalCarcacaAlojado;
+
+	@JsonSerialize(using=BigDecimalSerializer.class)
+	private BigDecimal pesoMedioVivoAlojado;
+
+	@JsonSerialize(using=BigDecimalSerializer.class)
+	private BigDecimal pesoMedioCarcacaAlojado;
+
+	private Integer idadeMediaAlojada;
 	
 	@Enumerated(EnumType.STRING)
 	private SexoLote sexo;
@@ -73,7 +82,13 @@ public class Lote {
 	private TipoOrigem tipoOrigem;
 
 	private Integer quantidadeOrigemDistinta;
+	
+	@OneToOne(mappedBy="lote")
+	private DadosEncerramentoLote encerramento;
 
+	@OneToMany
+	private List<LoteAnomalia> anomalias;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -106,14 +121,6 @@ public class Lote {
 		this.tecnico = tecnico;
 	}
 
-	public List<Pessoa> getGranjeirosResponsaveis() {
-		return granjeirosResponsaveis;
-	}
-
-	public void setGranjeirosResponsaveis(List<Pessoa> granjeirosResponsaveis) {
-		this.granjeirosResponsaveis = granjeirosResponsaveis;
-	}
-
 	public List<OrigemAlojamento> getOrigens() {
 		return origens;
 	}
@@ -128,22 +135,6 @@ public class Lote {
 
 	public void setQuantidadeAlojada(Integer quantidadeAlojada) {
 		this.quantidadeAlojada = quantidadeAlojada;
-	}
-
-	public BigDecimal getPesoMedioAlojado() {
-		return pesoMedioAlojado;
-	}
-
-	public void setPesoMedioAlojado(BigDecimal pesoMedioAlojado) {
-		this.pesoMedioAlojado = pesoMedioAlojado;
-	}
-
-	public BigDecimal getIdadeMediaAlojada() {
-		return idadeMediaAlojada;
-	}
-
-	public void setIdadeMediaAlojada(BigDecimal idadeMediaAlojada) {
-		this.idadeMediaAlojada = idadeMediaAlojada;
 	}
 
 	public SexoLote getSexo() {
@@ -192,5 +183,69 @@ public class Lote {
 
 	public void setDataMediaSaida(Date dataMediaSaida) {
 		this.dataMediaSaida = dataMediaSaida;
+	}
+
+	public BigDecimal getPesoMedioVivoAlojado() {
+		return pesoMedioVivoAlojado;
+	}
+
+	public void setPesoMedioVivoAlojado(BigDecimal pesoMedioVivoAlojado) {
+		this.pesoMedioVivoAlojado = pesoMedioVivoAlojado;
+	}
+
+	public BigDecimal getPesoMedioCarcacaAlojado() {
+		return pesoMedioCarcacaAlojado;
+	}
+
+	public void setPesoMedioCarcacaAlojado(BigDecimal pesoMedioCarcacaAlojado) {
+		this.pesoMedioCarcacaAlojado = pesoMedioCarcacaAlojado;
+	}
+
+	public DadosEncerramentoLote getEncerramento() {
+		return encerramento;
+	}
+
+	public void setEncerramento(DadosEncerramentoLote encerramento) {
+		this.encerramento = encerramento;
+	}
+
+	public BigDecimal getPesoTotalVivoAlojado() {
+		return pesoTotalVivoAlojado;
+	}
+
+	public void setPesoTotalVivoAlojado(BigDecimal pesoTotalVivoAlojado) {
+		this.pesoTotalVivoAlojado = pesoTotalVivoAlojado;
+	}
+
+	public BigDecimal getPesoTotalCarcacaAlojado() {
+		return pesoTotalCarcacaAlojado;
+	}
+
+	public void setPesoTotalCarcacaAlojado(BigDecimal pesoTotalCarcacaAlojado) {
+		this.pesoTotalCarcacaAlojado = pesoTotalCarcacaAlojado;
+	}
+
+	public List<LoteAnomalia> getAnomalias() {
+		return anomalias;
+	}
+
+	public void setAnomalias(List<LoteAnomalia> anomalias) {
+		this.anomalias = anomalias;
+	}
+
+	public Pessoa getGranjeiroResponsavel() {
+		return granjeiroResponsavel;
+	}
+
+	public void setGranjeiroResponsavel(Pessoa granjeiroResponsavel) {
+		this.granjeiroResponsavel = granjeiroResponsavel;
+	}
+
+	public Integer getIdadeMediaAlojada() {
+		return idadeMediaAlojada;
+	}
+
+	public void setIdadeMediaAlojada(Integer idadeMediaAlojada) {
+		this.idadeMediaAlojada = idadeMediaAlojada;
 	}
 }

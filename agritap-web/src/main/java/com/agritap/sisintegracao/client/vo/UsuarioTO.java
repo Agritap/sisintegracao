@@ -74,4 +74,8 @@ public class UsuarioTO {
 	public void setToken(String token) {
 		this.token = token;
 	}
+	
+	public boolean isProdutorUnico(){
+		return getProdutores()!=null && getProdutores().size()==1;
+	}
 }

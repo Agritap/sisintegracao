@@ -19,6 +19,8 @@
 		<gwtVersion>2.7.0</gwtVersion>
 		<guiceVersion>3.0</guiceVersion>
 		<ginVersion>2.1.2</ginVersion>
+	    <jacksonVersion>2.7.2</jacksonVersion>
+	    <gwtJacksonVersion>0.12.0</gwtJacksonVersion>
 		<!-- <jersey.version>2.22.1</jersey.version> -->
 		<hibernateVersion>5.0.2.Final</hibernateVersion>
 		<hibernateValidatorVersion>4.3.2.Final</hibernateValidatorVersion>
@@ -141,6 +143,46 @@
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>org.fusesource.restygwt</groupId>
+		    <artifactId>restygwt</artifactId>
+		    <version>2.1.2-SNAPSHOT</version>
+		    <!--
+		    <version>2.1.1</version>
+		    -->
+		    <exclusions>
+		    	<exclusion>
+		    		<groupId>com.fasterxml.jackson.core</groupId>
+		    		<artifactId>jackson-annotations</artifactId>
+		    	</exclusion>
+		    	<exclusion>
+		    		<groupId>com.fasterxml.jackson.core</groupId>
+		    		<artifactId>jackson-databind</artifactId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-annotations</artifactId>
+    		<version>${jacksonVersion}</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-annotations</artifactId>
+    		<classifier>sources</classifier>
+    		<version>${jacksonVersion}</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>${jacksonVersion}</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.github.nmorel.gwtjackson</groupId>
+		  <artifactId>gwt-jackson</artifactId>
+ 		  <version>${gwtJacksonVersion}</version>
+		</dependency>
 
 		<dependency>
 		    <groupId>com.googlecode.injectlet</groupId>
@@ -196,21 +238,6 @@
 
 
 		<!-- Biblioteca resty -->
-		<dependency>
-		    <groupId>org.fusesource.restygwt</groupId>
-		    <artifactId>restygwt</artifactId>
-		    <version>2.1.1</version>
-		    <exclusions>
-		    	<exclusion>
-		    		<groupId>com.fasterxml.jackson.core</groupId>
-		    		<artifactId>jackson-annotations</artifactId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<groupId>com.fasterxml.jackson.core</groupId>
-		    		<artifactId>jackson-databind</artifactId>
-		    	</exclusion>
-		    </exclusions>
-		</dependency>
 
 	</dependencies>
 

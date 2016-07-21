@@ -12,6 +12,7 @@ import com.agritap.sisintegracao.client.ClientUtil;
 import com.agritap.sisintegracao.client.ViewEnum;
 import com.agritap.sisintegracao.client.request.RestCallback;
 import com.agritap.sisintegracao.client.request.clients.PessoaClient;
+import com.agritap.sisintegracao.client.vo.ErrosValidacao;
 import com.agritap.sisintegracao.client.vo.UsuarioTO;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -113,15 +114,15 @@ public class LoginWindow extends Composite {
 			public void success(UsuarioTO to) {
 				login(to);
 			}
-			
-//			@Override
-//			public void onValidation(ErrosI erro) {
-//				mensagemErroBox.setVisible(true);
-//				for(String err:erro.getErrosGenericos()){
-//					Label l = new Label(err);
-//					mensagemErroBox.add(l);
-//				}
-//			}
+			@Override
+			public void onValidation(ErrosValidacao  erro) {
+				mensagemErroBox.setVisible(true);
+				mensagemErroBox.clear();
+				for(String err:erro.getErrosGenericos()){
+					Label l = new Label(err);
+					mensagemErroBox.add(l);
+				}
+			}
 		});
 	}
 

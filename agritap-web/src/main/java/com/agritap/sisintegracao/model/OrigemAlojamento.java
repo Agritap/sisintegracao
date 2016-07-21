@@ -31,6 +31,8 @@ public class OrigemAlojamento {
 	
 	private Integer quantidade;
 
+	private Integer mortosTransporte;
+
 	@Temporal(TemporalType.DATE)
 	private Date dataAlojamento;
 	
@@ -104,5 +106,13 @@ public class OrigemAlojamento {
 
 	public void setDataAlojamento(Date dataAlojamento) {
 		this.dataAlojamento = dataAlojamento;
+	}
+
+	public Integer getMortosTransporte() {
+		return mortosTransporte;
+	}
+
+	public void setMortosTransporte(Integer mortosTransporte) {
+		this.mortosTransporte = mortosTransporte;
 	}
 }

@@ -30,7 +30,6 @@ import com.google.web.bindery.autobean.shared.AutoBeanFactory;
 public abstract class Callback<T> implements RequestCallback {
 
 	Logger logger = Logger.getLogger(Callback.class.getName());
-
 	@Override
 	public void onResponseReceived(Request request, Response response) {
 		int statusCode = response.getStatusCode();
