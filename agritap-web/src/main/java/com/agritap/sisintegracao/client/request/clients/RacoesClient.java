@@ -21,6 +21,7 @@ public interface RacoesClient extends RestService {
 	@GET
 	@Path("/tipo/todos")
 	public void todosTipos(RestCallback<List<TipoRacao>> cb);
+	
 	@PUT
 	@Path("/tabela")
 	public void update(TabelaRacao tabelaRacao, RestCallback<TabelaRacao> cb) ;

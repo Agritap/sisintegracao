@@ -31,7 +31,7 @@ public class RacoesServiceImpl {
 	@GET
 	@Path("/tabela/todos")
 	public List<TabelaRacao> tabelaRacaoTodos() {
-		List<TabelaRacao>  resultado =  em.createQuery("select t from TabelaRacao t",TabelaRacao.class).getResultList();
+		List<TabelaRacao>  resultado =  em.createNamedQuery("tabelaRacao.todos",TabelaRacao.class).getResultList();
 		return resultado;
 	}
 	

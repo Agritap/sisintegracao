@@ -14,7 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@NamedQueries({@NamedQuery(name="tipoRacao.todos",query="select t from TipoRacao t"),
+@NamedQueries({
+	@NamedQuery(name="tipoRacao.todos",query="select t from TipoRacao t"),
 	
 	@NamedQuery(name="tipoRacao.porNome",query="select t from TipoRacao t where t.nome = :nome ")})
 
