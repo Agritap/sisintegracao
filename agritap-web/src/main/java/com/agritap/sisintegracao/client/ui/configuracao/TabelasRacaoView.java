@@ -22,12 +22,12 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class TabelaRacaoView extends Composite {
+public class TabelasRacaoView extends Composite {
 	
 	@UiField
 	CellTable resultTable;
 
-	Logger logger = Logger.getLogger(TabelaRacaoView.class.getName());
+	Logger logger = Logger.getLogger(TabelasRacaoView.class.getName());
 	
 	private static TabelaRacaoUiBinder uiBinder = GWT
 			.create(TabelaRacaoUiBinder.class);
@@ -36,10 +36,10 @@ public class TabelaRacaoView extends Composite {
 	
 	RacoesClient client = GWT.create(RacoesClient.class);
 
-	interface TabelaRacaoUiBinder extends UiBinder<Widget, TabelaRacaoView> {
+	interface TabelaRacaoUiBinder extends UiBinder<Widget, TabelasRacaoView> {
 	}
 
-	public TabelaRacaoView(ClientFactory factory) {
+	public TabelasRacaoView(ClientFactory factory) {
 		initWidget(uiBinder.createAndBindUi(this));
 		init();
 		this.factory = factory;
