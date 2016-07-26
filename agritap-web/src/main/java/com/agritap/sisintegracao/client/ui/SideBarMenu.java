@@ -31,7 +31,7 @@ public class SideBarMenu extends Composite {
 	
 	@UiHandler("tabelaRacao")
 	public void tabelaRacaoClick(ClickEvent evt){
-		factory.getAppController().goTo(ViewEnum.TABELA_RACAO);
+		factory.getAppController().goTo(ViewEnum.TABELAS_RACAO);
 	}
 	
 	@UiHandler("modulos")

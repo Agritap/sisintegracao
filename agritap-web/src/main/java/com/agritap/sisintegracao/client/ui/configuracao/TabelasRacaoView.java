@@ -9,23 +9,31 @@ import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
 
 import com.agritap.sisintegracao.client.ClientUtil;
+import com.agritap.sisintegracao.client.ViewEnum;
 import com.agritap.sisintegracao.client.request.RestCallback;
 import com.agritap.sisintegracao.client.request.clients.RacoesClient;
 import com.agritap.sisintegracao.client.ui.ClientFactory;
+import com.agritap.sisintegracao.client.ui.StateHistory;
 import com.agritap.sisintegracao.model.TabelaRacao;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class TabelasRacaoView extends Composite {
 	
 	@UiField
 	CellTable resultTable;
+	
+	@UiField
+	HTMLPanel addTabelaRacao;
 
 	Logger logger = Logger.getLogger(TabelasRacaoView.class.getName());
 	
@@ -41,8 +49,9 @@ public class TabelasRacaoView extends Composite {
 
 	public TabelasRacaoView(ClientFactory factory) {
 		initWidget(uiBinder.createAndBindUi(this));
-		init();
+		bindAddEvent();
 		this.factory = factory;
+		init();
 	}
 	
 	private void init() {
@@ -99,16 +108,29 @@ public class TabelasRacaoView extends Composite {
 			}
 		};
 
-		click.setFieldUpdater(new FieldUpdater<TabelaRacao, String>() {
+		click.setFieldUpdater(new FieldUpdater<TabelaRacao,String>() {
 			@Override
 			public void update(int index, TabelaRacao tipoRacao, String value) {
-
+				
+				StateHistory st = new StateHistory(ViewEnum.TABELA_RACAO);
+				st.addParam(StateHistory.ID, tipoRacao.getId().toString());
+				factory.getAppController().goTo(st);
 			}
 
 		});
 		resultTable.addColumn(click);
 		
 	}
+	
+	private void bindAddEvent() {
+		
+		addTabelaRacao.addDomHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				factory.getAppController().goTo(ViewEnum.TABELA_RACAO);
+			}
+		}, ClickEvent.getType());
+	}	
 	
 	
 	

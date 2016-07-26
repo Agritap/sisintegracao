@@ -19,9 +19,10 @@
 					hover="true" ui:field="resultTable" />
 			</b:Column>
 		</b:Row>
-
-		<!-- <g:HTMLPanel ui:field="addTipoRacao" styleName="addButton"><span>+</span> 
-			</g:HTMLPanel> -->
+		
+		<g:HTMLPanel ui:field="addTabelaRacao" styleName="addButton">
+			<span>+</span>
+		</g:HTMLPanel>
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

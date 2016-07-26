@@ -10,6 +10,8 @@ public class StateHistory {
 	ViewEnum view;
 	
 	Map<String,String> parameters;
+	
+	public static String ID="id";
 
 	public StateHistory(){}
 	
@@ -21,6 +23,7 @@ public class StateHistory {
 		this.view=view;
 		this.parameters=par;
 	}
+	
 	
 	public void addParam(String key,String value){
 		if(parameters==null){

@@ -12,6 +12,7 @@ import com.agritap.sisintegracao.client.ui.configuracao.ModuloView;
 import com.agritap.sisintegracao.client.ui.configuracao.ModulosView;
 import com.agritap.sisintegracao.client.ui.configuracao.PessoasView;
 import com.agritap.sisintegracao.client.ui.configuracao.ReposicaoLote;
+import com.agritap.sisintegracao.client.ui.configuracao.TabelaRacaoView;
 import com.agritap.sisintegracao.client.ui.configuracao.TabelasRacaoView;
 import com.agritap.sisintegracao.client.ui.configuracao.TipoRacaoView;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -108,7 +109,7 @@ public class AppController implements ValueChangeHandler<String>{
 				mw.addConteudo(new TipoRacaoView(factory));
 				return mw;
 			}
-			if(view.equals(ViewEnum.TABELA_RACAO)){
+			if(view.equals(ViewEnum.TABELAS_RACAO)){
 				mw.addConteudo(new TabelasRacaoView(factory));
 				return mw;
 			}
@@ -122,6 +123,10 @@ public class AppController implements ValueChangeHandler<String>{
 			}
 			if(view.equals(ViewEnum.MODULO)){
 				mw.addConteudo(new ModuloView(factory));
+				return mw;
+			}
+			if(view.equals(ViewEnum.TABELA_RACAO)){
+				mw.addConteudo(new TabelaRacaoView(factory/*,st*/));
 				return mw;
 			}
 			

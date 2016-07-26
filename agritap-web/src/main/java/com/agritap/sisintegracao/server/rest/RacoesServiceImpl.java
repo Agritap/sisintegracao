@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -22,20 +23,26 @@ public class RacoesServiceImpl {
 	transient EntityManager em;
 
 	@GET
-	@Path("/tipo/todos")
+	@Path("/tipo")
 	public List<TipoRacao> tipoRacaoTodos() {
 		List<TipoRacao>  resultado =  em.createNamedQuery("tipoRacao.todos", TipoRacao.class).getResultList(); 
 		return resultado;	
 	}
 	
 	@GET
-	@Path("/tabela/todos")
+	@Path("/tabela")
 	public List<TabelaRacao> tabelaRacaoTodos() {
 		List<TabelaRacao>  resultado =  em.createNamedQuery("tabelaRacao.todos",TabelaRacao.class).getResultList();
 		return resultado;
 	}
-	
+	@GET
+	@Path("/tabela/{id}")
+	public TabelaRacao getTabela(@PathParam("id")Integer id) {
+		return em.find(TabelaRacao.class,id);
+	}
 
+
+	
 	@PUT
 	@Path("/tabela")
 	@Transactional
